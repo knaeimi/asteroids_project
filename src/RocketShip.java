@@ -1,5 +1,5 @@
 import edu.macalester.graphics.*;
 
-public class AsteroidsGame {
+public class RocketShip {
 
 }
