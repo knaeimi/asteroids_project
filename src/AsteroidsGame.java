@@ -10,9 +10,16 @@ public class AsteroidsGame {
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
+    public void run() {
+        canvas.removeAll(); // Reset the canvas
+
+        rocketShip = new RocketShip(300, 300);
+        rocketShip.addToCanvas(canvas);
+    }
+
     public static void main(String[] args) {
-        new AsteroidsGame();
-        
+        AsteroidsGame game = new AsteroidsGame();
+        game.run();
     }
 
 

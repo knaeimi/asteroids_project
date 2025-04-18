@@ -2,15 +2,11 @@ import edu.macalester.graphics.*;
 
 
 public class RocketShip {
-    private double centerX;
-    private double centerY;
-    private static final double SIDE_LENGTH = 5;
+    private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
     private double x0, y0;
 
-    public RocketShip (double centerX, double centerY, double x0, double y0){
-        this.centerX = centerX;
-        this.centerY = centerY;
+    public RocketShip (double x0, double y0){
         this.x0 = x0;
         this.y0 = y0;
 
@@ -18,17 +14,15 @@ public class RocketShip {
     }
 
     public void setCenter(double newX, double newY){
-        this.centerX = newX;
-        this.centerY = newY;
         rocketShape.setCenter(newX, newY);
     }
 
     public double getCenterX(){
-        return centerX;
+        return rocketShape.getCenter().getX();
     }
 
     public double getCenterY(){
-        return centerY;
+        return rocketShape.getCenter().getY();
     }
 
     public void addToCanvas(CanvasWindow canvas){
