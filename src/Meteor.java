@@ -1,3 +1,43 @@
+import java.awt.Color;
+
+import edu.macalester.graphics.*;
+
 public class Meteor {
+
+    private double centerX;
+    private double centerY;
+    private double radius;
+
+    private Ellipse meteorShape;
+
+    public Meteor(double centerX, double centerY, double radius) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = radius;
+        meteorShape = new Ellipse(centerX-radius, centerY-radius, radius*2, radius*2);
+        meteorShape.setCenter(centerX, centerY);
+        meteorShape.setStrokeColor(Color.WHITE);
+        meteorShape.setFillColor(Color.GRAY);
+    }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public double getCenterX() {
+        return this.centerX;
+    }
+
+    public double getCenterY() {
+        return this.centerY;
+    }
+
+    public void addToCanvas(CanvasWindow canvas){
+        canvas.add(meteorShape);
+    }
+
+    public void removeFromCanvas(CanvasWindow canvas){
+        canvas.remove(meteorShape);
+    }
 
 }

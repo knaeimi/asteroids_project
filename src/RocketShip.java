@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import edu.macalester.graphics.*;
 
 
@@ -11,6 +13,7 @@ public class RocketShip {
         this.y0 = y0;
 
         rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 + SIDE_LENGTH);
+        rocketShape.setStrokeColor(Color.WHITE);
     }
 
     public void setCenter(double newX, double newY){
