@@ -5,7 +5,7 @@ import edu.macalester.graphics.*;
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 600;
-    private RocketShip rocketShip;
+    private PlayerShip playerShip;
     private CanvasWindow canvas;
 
     public AsteroidsGame(){
@@ -16,8 +16,8 @@ public class AsteroidsGame {
     public void run() {
         canvas.removeAll(); // Reset the canvas
 
-        rocketShip = new RocketShip(300, 300); // Initialize rocketShip
-        rocketShip.addToCanvas(canvas); // Add rocketShip to canvas
+        playerShip = new PlayerShip(300, 300); // Initialize playerShip
+        playerShip.addToCanvas(canvas); // Add playerShip to canvas
 
         Meteor meteor = new Meteor(150, 150, 50); // temporary
         meteor.addToCanvas(canvas);
