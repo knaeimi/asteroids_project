@@ -11,7 +11,8 @@ public class RocketShip {
     public RocketShip (double x0, double y0){
         this.x0 = x0;
         this.y0 = y0;
-       
+
+       // Calculate three points for triangle shape and generate triangle
         rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 - SIDE_LENGTH);
         rocketShape.setStrokeColor(Color.WHITE); 
     }
