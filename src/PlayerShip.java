@@ -6,12 +6,17 @@ import java.lang.Math;
 public class PlayerShip extends RocketShip{
     
     private double speed = 10;
-    private double angle, xVelocity, yVelocity; // May make sense to use a velocity-based system instead
+    private double angle = 0, xVelocity, yVelocity; // May make sense to use a velocity-based system instead
     private CanvasWindow canvas;
 
     public PlayerShip(double x0, double y0, CanvasWindow canvas){
         super(x0,y0);
         this.canvas = canvas;
+
+        double initialAngleRadians = Math.toRadians(angle);
+        xVelocity = speed * Math.cos(initialAngleRadians); // initial x velocity
+        yVelocity = speed * -Math.sin(initialAngleRadians);  // initial y velocity
+
     }
     
     public void move(KeyboardEvent event){
