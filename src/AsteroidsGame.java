@@ -13,11 +13,17 @@ public class AsteroidsGame {
         canvas.setBackground(Color.BLACK);
     }
 
+    
+
     public void run() {
         canvas.removeAll(); // Reset the canvas
 
-        playerShip = new PlayerShip(300, 300); // Initialize playerShip
+        playerShip = new PlayerShip(300, 300, canvas); // Initialize playerShip
         playerShip.addToCanvas(canvas); // Add playerShip to canvas
+        
+        canvas.onKeyDown(event -> {
+            playerShip.move(event);
+        });
 
         Meteor meteor = new Meteor(150, 150, 50); // temporary
         meteor.addToCanvas(canvas);

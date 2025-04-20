@@ -11,9 +11,9 @@ public class RocketShip {
     public RocketShip (double x0, double y0){
         this.x0 = x0;
         this.y0 = y0;
-
+       
         rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 - SIDE_LENGTH);
-        rocketShape.setStrokeColor(Color.WHITE);
+        rocketShape.setStrokeColor(Color.WHITE); 
     }
 
     public void setCenter(double newX, double newY){
@@ -36,7 +36,7 @@ public class RocketShip {
         canvas.remove(rocketShape);
     }
 
-    public GraphicsObject getShape(){ //don't need this keyword, no naming conflicts
+    public GraphicsObject getShape(){
         return rocketShape;
     }
 }
