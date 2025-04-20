@@ -51,7 +51,7 @@ public class MeteorManager {
         canvas.removeAll();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //TODO: Delete test window
         CanvasWindow canvas = new CanvasWindow("Test", 500, 500);
         MeteorManager mm = new MeteorManager(canvas);
         mm.generateMeteors();
