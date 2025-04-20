@@ -27,7 +27,7 @@ public class MeteorManager {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Random rnd = new Random();
+                Random rnd = new Random(); // Determines what side of screen meteor will spawn on
                 if(rnd.nextBoolean()){
                     Meteor meteor = new Meteor(0, 250, 50);
                     meteorList.add(meteor);
@@ -39,8 +39,7 @@ public class MeteorManager {
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                     System.out.println("Meteor");
-                }
-                
+                } 
             }
         };
         return task;
