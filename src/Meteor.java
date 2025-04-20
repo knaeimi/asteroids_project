@@ -7,6 +7,7 @@ public class Meteor {
     private double centerX;
     private double centerY;
     private double radius;
+    private static final double METEOR_SPEED = 10;
 
     private Ellipse meteorShape;
 
