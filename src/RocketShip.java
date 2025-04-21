@@ -7,16 +7,15 @@ import edu.macalester.graphics.Path;
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-    private double x0, y0, steering, rotationSpeed, speed = 10;
+    private double x0, y0, steering, rotationSpeed = 15, speed = 10;
 
-    public RocketShip (double x0, double y0){ //Will fix shitty movement, sorta works now
+    public RocketShip (double x0, double y0){ //Will fix input lag and implement inertia
         this.x0 = x0;
         this.y0 = y0;
        // Calculate three points for triangle shape and generate triangle
         rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 - SIDE_LENGTH);
         rocketShape.setStrokeColor(Color.WHITE); 
-        steering = Math.toRadians(90); //steering variable that tracks left/right rotation. set initial angle to 90 for correct angle (otherwise goes wrong way)
-        rotationSpeed = 10;
+        steering = Math.toRadians(90); //Steering variable that tracks left/right rotation. set initial angle to 90 for correct angle (otherwise goes wrong way)
     }
 
     public void up(){
@@ -57,5 +56,9 @@ public class RocketShip {
 
     public GraphicsObject getShape(){
         return rocketShape;
+    }
+
+    public double getSpeed(){
+        return speed;
     }
 }

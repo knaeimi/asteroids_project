@@ -3,7 +3,6 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.events.KeyboardEvent;
 
 public class PlayerShip extends RocketShip{
-    private double speed = 10;
     private CanvasWindow canvas;
 
     public PlayerShip(double x0, double y0, CanvasWindow canvas){
@@ -15,11 +14,19 @@ public class PlayerShip extends RocketShip{
         if (event.getKey() == Key.UP_ARROW){ //bound
             up();
     
-            if(getCenterY() == -10){ //spawning @ bottom/top
-                setCenter(getCenterX(), canvas.getHeight() + speed);
+            if(getCenterY() < 0){ //spawning @ bottom/top
+                setCenter(getCenterX(), canvas.getHeight());
             }
-            if(getCenterY() == canvas.getHeight() + 10){
-                setCenter(getCenterX(), 0 + speed);
+            if(getCenterY() > canvas.getHeight()){
+                setCenter(getCenterX(), getSpeed()); // 0 + getSpeed, simplifies to getSpeed
+            }
+
+            if(getCenterX() < 0){ //spawning @ right/left
+                setCenter(canvas.getWidth(), getCenterY());
+            }
+
+            if(getCenterX() > canvas.getWidth()){
+                setCenter(getSpeed(), getCenterY());
             }
         }
         
