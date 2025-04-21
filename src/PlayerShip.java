@@ -1,47 +1,42 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.events.KeyboardEvent;
-import java.lang.Math;
 
 public class PlayerShip extends RocketShip{
-    
-    private double speed = 10;
-    private double angle = 0, xVelocity, yVelocity; // May make sense to use a velocity-based system instead
     private CanvasWindow canvas;
 
     public PlayerShip(double x0, double y0, CanvasWindow canvas){
         super(x0,y0);
         this.canvas = canvas;
-
-        double initialAngleRadians = Math.toRadians(angle);
-        xVelocity = speed * Math.cos(initialAngleRadians); // initial x velocity
-        yVelocity = speed * -Math.sin(initialAngleRadians);  // initial y velocity
-
     }
     
     public void move(KeyboardEvent event){
-        if (event.getKey() == Key.UP_ARROW && getCenterY() != -10){ //bound
-            setCenter(getCenterX(), getCenterY() - speed);
-            
-            if(getCenterY() == -10){ //spawning @ bottom/top
-                setCenter(getCenterX(), canvas.getHeight() + speed);
+        if (event.getKey() == Key.UP_ARROW){ //bound
+            up();
+    
+            if(getCenterY() < 0){ //spawning @ bottom/top
+                setCenter(getCenterX(), canvas.getHeight());
+            }
+            if(getCenterY() > canvas.getHeight()){
+                setCenter(getCenterX(), getSpeed()); // 0 + getSpeed, simplifies to getSpeed
+            }
+
+            if(getCenterX() < 0){ //spawning @ right/left
+                setCenter(canvas.getWidth(), getCenterY());
+            }
+
+            if(getCenterX() > canvas.getWidth()){
+                setCenter(getSpeed(), getCenterY());
             }
         }
         
-        if (event.getKey() == Key.DOWN_ARROW && getCenterY() != canvas.getHeight() + 10){ 
-            setCenter(getCenterX(), getCenterY() + speed);
-
-            if(getCenterY() == canvas.getHeight() + 10){
-                setCenter(getCenterX(), 0 + speed);
-            }
-        }
-
-        if(event.getKey() == Key.LEFT_ARROW){ //rotating left/right
-            getShape().rotateBy(-speed);
+        if(event.getKey() == Key.LEFT_ARROW){ 
+            left();
+           
         }
 
         if(event.getKey() == Key.RIGHT_ARROW){
-            getShape().rotateBy(speed);
+            right();
         }
     }
 }
