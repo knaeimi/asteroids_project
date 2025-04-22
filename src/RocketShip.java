@@ -9,7 +9,7 @@ import edu.macalester.graphics.Path;
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-    private double rotationAngle, velocity = 7, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
+    private double rotationAngle, velocity = 8, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
     
     /*
      * To construct our rocketship, we take in an initial x and y position for the ship, and use them to calculate the other two points 

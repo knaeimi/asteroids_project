@@ -21,14 +21,14 @@ public class PlayerShip extends RocketShip{
     public void forward(){
         up();
            
-        if(getCenterY() < 0){ //spawning @ bottom/top
+        if(getCenterY() < 0){ 
             setCenter(getCenterX(), canvas.getHeight());
         }
         if(getCenterY() > canvas.getHeight()){
-            setCenter(getCenterX(), getSpeed()); // 0 + getSpeed, simplifies to getSpeed
+            setCenter(getCenterX(), getSpeed()); 
         }
 
-        if(getCenterX() < 0){ //spawning @ right/left
+        if(getCenterX() < 0){ 
             setCenter(canvas.getWidth(), getCenterY());
         }
 
