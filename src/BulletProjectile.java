@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 
@@ -21,7 +23,8 @@ public class BulletProjectile implements Projectile {
         this.dx = VELOCITY * Math.cos(AngleRadians);
         this.dy = -VELOCITY * Math.sin(AngleRadians);
 
-        bulletShape = new Ellipse(x,y,3,3);
+        bulletShape = new Ellipse(x,y,10,10);
+        bulletShape.setFillColor(Color.WHITE);
     }
 
     public boolean updatePosition() {
