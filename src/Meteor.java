@@ -11,7 +11,7 @@ public class Meteor {
 
     private Ellipse meteorShape;
 
-    public Meteor(double centerX, double centerY, double radius) {
+    public Meteor(double centerX, double centerY, double radius, double angle) {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
@@ -39,6 +39,10 @@ public class Meteor {
 
     public void removeFromCanvas(CanvasWindow canvas){
         canvas.remove(meteorShape);
+    }
+
+    public void updatePosition() {
+        // Unimplemented
     }
 
 }

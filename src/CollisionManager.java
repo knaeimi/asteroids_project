@@ -11,7 +11,7 @@ public class CollisionManager {
     }
 
     public void projectileCollision(Projectile projectile) {
-        
+        // Add projectile removeFromCanvas method
     }
 
     public void shipCollision(PlayerShip playerShip) {

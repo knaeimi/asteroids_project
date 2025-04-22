@@ -21,7 +21,7 @@ public class AsteroidsGame {
         playerShip = new PlayerShip(300, 300, canvas); 
         playerShip.addToCanvas(canvas); 
 
-        Meteor meteor = new Meteor(150, 150, 50); // temporary
+        Meteor meteor = new Meteor(150, 150, 50, 0); // temporary
         meteor.addToCanvas(canvas);
     }
 
