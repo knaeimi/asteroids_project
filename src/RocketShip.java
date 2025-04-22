@@ -1,33 +1,54 @@
 import java.awt.Color;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Path;
 
+/*
+ * This class handles the creation of the RocketShip object, along with the math behind movement.
+ */
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-    private double rotationAngle, rotationSpeed = 5;
-    double speed = 7;
-
-    public RocketShip (double x0, double y0){ 
-        rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 - SIDE_LENGTH);
+    private double rotationAngle, velocity = 7, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
+    
+    /*
+     * To construct our rocketship, we take in an initial x and y position for the ship, and use them to calculate the other two points 
+     * for the triangle. We also have a rotation angle variable (initially 90 for the ship to travel in the correct direction) that tracks
+     * left/right rotation of the ship.
+     */
+    public RocketShip (double initialX, double initialY){ 
+        rocketShape = Path.makeTriangle(initialX, initialY, initialX + SIDE_LENGTH, initialY, initialX + (SIDE_LENGTH/2), initialY - SIDE_LENGTH);
         rocketShape.setStrokeColor(Color.WHITE); 
-        rotationAngle = Math.toRadians(90); //Rotation variable that tracks left/right rotation. Initially 90 for expected behavior.
+        rotationAngle = Math.toRadians(90);
     }
 
+    /*
+     * We get the current x and y position of the rocket's coordinates (have to get graphics object first, then use the getters for x and y),
+     * so that we can set the position of the x and y coordinates of the ship accordingly. We use the sin/cos functions, the current velocity
+     * of the ship, and the ship's angle to place the ship in the correct direction based off of it's angle.
+     * 
+     */
     public void up(){ //TODO: Implement acceleration/deacceleration
         double x = getShape().getX();
         double y = getShape().getY();
-        getShape().setX(x += speed * Math.cos(rotationAngle));
-        getShape().setY(y -= speed * Math.sin(rotationAngle));
+        getShape().setX(x += velocity * Math.cos(rotationAngle));
+        getShape().setY(y -= velocity * Math.sin(rotationAngle));
     }
 
-    void right(){
+    /*
+     * Similar idea to the up method. We update the ship's current angle by the rotation speed, and then actually rotate the graphics object
+     * by that number using the rotateBy method. To go right, we have to reduce this angle. 
+     */
+    public void right(){
         rotationAngle -= Math.toRadians(rotationSpeed);
         rocketShape.rotateBy(rotationSpeed);
     }
-      void left(){
+    
+    /*
+     * Same concept as the right method, except to go left we have add to the angle. To rotate in the opposite direction, we reverse the rotation
+     * speed by negating it.
+     */
+    public void left(){
         rotationAngle += Math.toRadians(rotationSpeed);
         rocketShape.rotateBy(-rotationSpeed);
     } 
@@ -57,6 +78,6 @@ public class RocketShip {
     }
 
     public double getSpeed(){
-        return speed;
+        return velocity;
     }
 }
