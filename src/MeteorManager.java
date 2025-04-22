@@ -17,6 +17,10 @@ public class MeteorManager {
         this.canvas = canvas;
     }
 
+    public List<Meteor> getMeteorList() {
+        return meteorList;
+    }
+
     public void generateMeteors() { // Generate meteors for canvas
         for(int i = 1; i < 16; i ++) {
             new Timer().schedule(spawnMeteor(), i*3000);
@@ -38,14 +42,13 @@ public class MeteorManager {
                     Meteor meteor = new Meteor(canvas.getWidth(), 250, 50);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
-                    System.out.println("Meteor");
                 } 
             }
         };
         return task;
     }
 
-    public void removeAllMeteors(){ // Remove all meteors from list and canvas
+    public void removeAllMeteors(){ // Removes all meteors from list and canvas
         meteorList.clear();
         canvas.removeAll();
     }
