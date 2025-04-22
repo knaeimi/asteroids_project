@@ -7,30 +7,30 @@ import edu.macalester.graphics.Path;
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-    private double steering, rotationSpeed = 15;
-    int speed = 10;
+    private double rotationAngle, rotationSpeed = 5;
+    double speed = 7;
 
     public RocketShip (double x0, double y0){ 
         rocketShape = Path.makeTriangle(x0, y0, x0 + SIDE_LENGTH, y0, x0 + (SIDE_LENGTH/2), y0 - SIDE_LENGTH);
         rocketShape.setStrokeColor(Color.WHITE); 
-        steering = Math.toRadians(90); //Steering variable that tracks left/right rotation. Initially 90 for expected behavior.
+        rotationAngle = Math.toRadians(90); //Rotation variable that tracks left/right rotation. Initially 90 for expected behavior.
     }
 
-    public void up(){
+    public void up(){ //TODO: Implement acceleration/deacceleration
         double x = getShape().getX();
         double y = getShape().getY();
-        getShape().setX(x += speed * Math.cos(steering));
-        getShape().setY(y -= speed * Math.sin(steering));
+        getShape().setX(x += speed * Math.cos(rotationAngle));
+        getShape().setY(y -= speed * Math.sin(rotationAngle));
     }
 
     void right(){
-        steering -= Math.toRadians(rotationSpeed);
+        rotationAngle -= Math.toRadians(rotationSpeed);
         rocketShape.rotateBy(rotationSpeed);
-      }
+    }
       void left(){
-        steering += Math.toRadians(rotationSpeed);
+        rotationAngle += Math.toRadians(rotationSpeed);
         rocketShape.rotateBy(-rotationSpeed);
-      } 
+    } 
 
     public void setCenter(double newX, double newY){
         rocketShape.setCenter(newX, newY);
