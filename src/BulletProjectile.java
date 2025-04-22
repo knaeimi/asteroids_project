@@ -7,7 +7,7 @@ public class BulletProjectile implements Projectile {
     private double x;
     private double y;
     private double angle;
-    private final double VELOCITY = 10;
+    private final double VELOCITY = 0.1;
     private final double maxX = 600;
     private final double maxY = 600;
     private double dx;

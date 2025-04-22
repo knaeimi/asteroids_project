@@ -1,5 +1,6 @@
 import java.awt.Color;
 import edu.macalester.graphics.*;
+import edu.macalester.graphics.events.Key;
 
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 600;
@@ -21,6 +22,8 @@ public class AsteroidsGame {
         playerShip = new PlayerShip(300, 300, canvas); 
         playerShip.addToCanvas(canvas); 
 
+        animateBullet();
+
         // Meteor meteor = new Meteor(150, 150, 50); // temporary
         // meteor.addToCanvas(canvas);
     }
@@ -37,6 +40,24 @@ public class AsteroidsGame {
             }
             if(keyHandler.rightKey()){
                 playerShip.rotateRight();
+            }
+        });
+    }
+
+    public void animateBullet() { // Temporary method to test bullet animation
+        canvas.onKeyDown(event -> {
+            if (event.getKey().equals(Key.SPACE)) {  
+                Projectile bullet = new BulletProjectile(
+                    playerShip.getCenterX(),
+                    playerShip.getCenterY(),
+                    90
+                );
+                bullet.addToCanvas(canvas);
+                while (bullet.updatePosition()){
+                    bullet.updatePosition();
+                    canvas.draw();
+                }
+                bullet.removeFromCanvas(canvas);
             }
         });
     }
