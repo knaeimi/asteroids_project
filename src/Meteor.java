@@ -33,6 +33,10 @@ public class Meteor {
         return this.centerY;
     }
 
+    public GraphicsObject getShape() {
+        return this.meteorShape;
+    }
+
     public void addToCanvas(CanvasWindow canvas){
         canvas.add(meteorShape);
     }

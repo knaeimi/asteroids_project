@@ -47,4 +47,12 @@ public class BulletProjectile implements Projectile {
     public boolean boundsCheck(){
         return (initialX < canvas.getWidth() || initialX > 0 || initialY < canvas.getHeight() || initialY > 0);
     }
+
+    public double getCenterX() {
+        return bulletShape.getCenter().getX();
+    }
+
+    public double getCenterY() {
+        return bulletShape.getCenter().getY();
+    }
 }
