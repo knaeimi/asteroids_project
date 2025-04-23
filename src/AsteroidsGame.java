@@ -4,7 +4,7 @@ import edu.macalester.graphics.*;
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 600;
-    private final long milisecBetweenShots = 500; // 500msec between shots
+    private final long milisecBetweenShots = 500; // 500ms between shots
     private PlayerShip playerShip;
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
@@ -40,7 +40,7 @@ public class AsteroidsGame {
                 playerShip.rotateRight();
             }
            
-            if(keyHandler.spaceKey()){ 
+            if(keyHandler.spaceKey()){ //handles bullet spacing 
                  long currentTime = System.currentTimeMillis();
                  if (currentTime - lastShotTime > milisecBetweenShots){
                     projectileManager.addBulletProjectile(playerShip.getCenterX(), playerShip.getCenterY() - playerShip.getSideLength()/2, 

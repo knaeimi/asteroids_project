@@ -21,20 +21,20 @@ public class Meteor {
         meteorShape.setFillColor(Color.GRAY);
     }
 
-    public double getRadius() {
-        return this.radius;
+    public double getRadius() { //Let's reserve 'this.' for when an instance variable is shadowed by a local variable
+        return radius;
     }
 
     public double getCenterX() {
-        return this.centerX;
+        return centerX;
     }
 
     public double getCenterY() {
-        return this.centerY;
+        return centerY;
     }
 
     public GraphicsObject getShape() {
-        return this.meteorShape;
+        return meteorShape;
     }
 
     public void addToCanvas(CanvasWindow canvas){
