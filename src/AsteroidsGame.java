@@ -4,13 +4,11 @@ import edu.macalester.graphics.*;
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 600;
-    private final long milisecBetweenShots = 500; // 500ms between shots
     private PlayerShip playerShip;
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
     private ProjectileManager projectileManager;
     private MeteorManager meteorManager;
-    private long lastShotTime = System.currentTimeMillis(); 
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -23,7 +21,7 @@ public class AsteroidsGame {
 
     public void run() {
         canvas.removeAll();
-        playerShip = new PlayerShip(300, 300, canvas); 
+        playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
         playerShip.addToCanvas(canvas); 
         meteorManager.generateMeteors();
     }
@@ -32,8 +30,9 @@ public class AsteroidsGame {
         canvas.onKeyDown(keyHandler::keyPressed);
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
-            projectileManager.updateProjectiles(); //moves bullets
+            projectileManager.updateProjectiles(); 
             meteorManager.updateMeteors();
+            
             if(keyHandler.upKey()){
                 playerShip.forward();
             }
@@ -44,13 +43,8 @@ public class AsteroidsGame {
                 playerShip.rotateRight();
             }
            
-            if(keyHandler.spaceKey()){ //handles bullet spacing 
-                 long currentTime = System.currentTimeMillis();
-                 if (currentTime - lastShotTime > milisecBetweenShots){
-                    projectileManager.addBulletProjectile(playerShip.getCenterX(), playerShip.getCenterY() - playerShip.getSideLength()/2, 
-                    playerShip.getRotationAngle());
-                    lastShotTime = currentTime;
-                }
+            if(keyHandler.spaceKey()){ 
+                playerShip.fireBulletProjectile();
             }
         });
     }

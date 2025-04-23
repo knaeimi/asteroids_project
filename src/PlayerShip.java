@@ -9,15 +9,18 @@ public class PlayerShip extends RocketShip{
     private double rotationAngle, currentVelocity = 2, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
     private long time = System.currentTimeMillis(); 
     private final long timeBetweenAccelerations = 500; // 500msec between accelerations
+    private final long milisecBetweenShots = 500; // 500ms between shots
+    private ProjectileManager projectileManager;
    
     /*
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
      * for the triangle. We also have a rotation angle variable (initially 90 for the ship to travel in the correct direction) that tracks
      * left/right rotation of the ship.
      */
-    public PlayerShip(double initialX, double initialY, CanvasWindow canvas){
+    public PlayerShip(double initialX, double initialY, CanvasWindow canvas, ProjectileManager projectileManager){
         super(initialX, initialY);
         this.canvas = canvas;
+        this.projectileManager = projectileManager;
         rotationAngle = Math.toRadians(90);
     }
     
@@ -51,6 +54,15 @@ public class PlayerShip extends RocketShip{
         getShape().rotateBy(rotationSpeed);
     }
 
+    public void fireBulletProjectile(){
+        long currentTime = System.currentTimeMillis();
+            if (currentTime - time > milisecBetweenShots){
+                projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
+                getRotationAngle());
+                time = currentTime;
+            }
+    }
+
     private void checkShipBounds(){
         if(getCenterY() < 0){ 
             setCenter(getCenterX(), canvas.getHeight());
@@ -77,7 +89,6 @@ public class PlayerShip extends RocketShip{
                 }
             }
         }
-
     }
 
     public void updatePosition(){
@@ -93,8 +104,5 @@ public class PlayerShip extends RocketShip{
     }
     public double getSpeed(){
         return currentVelocity;
-    }
-    public void resetSpeed(){//For deacceleration later
-        currentVelocity = 0;
     }
 }

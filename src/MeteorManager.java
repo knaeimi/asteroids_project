@@ -40,7 +40,7 @@ public class MeteorManager {
             public void run() {
                 Random rnd = new Random();
                 if(rnd.nextBoolean()){
-                    Meteor meteor = new Meteor(0, rnd.nextDouble(100, 500), 40,0, true, canvas);
+                    Meteor meteor = new Meteor(rnd.nextDouble(0,500), rnd.nextDouble(100, 500), 40,0, true, canvas);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                 }
