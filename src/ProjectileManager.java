@@ -20,17 +20,18 @@ public class ProjectileManager {
         for (Projectile projectile : projList){
             if(!projectile.updatePosition()){
                 projList.remove(projectile);
-            } 
+            }
         }
     }
 
-    /*
-     * This method is used in the main class to animate a bullet projectile using an x, y, and angle. We just take those values from the player
-     * in the main class though. Also, we add the bullet to the list of projectiles for updating/removal from the screen.
-     */
+    public void removeAllProjectiles(){
+        for (Projectile projectile : projList){
+            projectile.removeFromCanvas();
+        }
+    }
+
     public void addBulletProjectile(double x, double y, double angle){
         BulletProjectile bulletProjectile = new BulletProjectile(x, y, angle, canvas);
         projList.add(bulletProjectile);
-        }
     }
-
+}

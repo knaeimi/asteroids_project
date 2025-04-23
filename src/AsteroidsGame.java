@@ -8,6 +8,8 @@ public class AsteroidsGame {
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
     private ProjectileManager projectileManager;
+    private long lastShotTime = System.currentTimeMillis(); //
+    private final long milisecBetweenShots = 500; // 500msec between shots
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -37,9 +39,14 @@ public class AsteroidsGame {
             if(keyHandler.rightKey()){
                 playerShip.rotateRight();
             }
+           
             if(keyHandler.spaceKey()){ 
-                projectileManager.addBulletProjectile(playerShip.getCenterX(), playerShip.getCenterY() - playerShip.getSideLength()/2, 
-                playerShip.getRotationAngle());
+                 long currentTime = System.currentTimeMillis();
+                 if (currentTime - lastShotTime > milisecBetweenShots){
+                    projectileManager.addBulletProjectile(playerShip.getCenterX(), playerShip.getCenterY() - playerShip.getSideLength()/2, 
+                    playerShip.getRotationAngle());
+                    lastShotTime = currentTime;
+                }
             }
         });
     }
