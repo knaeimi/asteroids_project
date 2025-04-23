@@ -57,6 +57,10 @@ public class RocketShip {
         rocketShape.setCenter(newX, newY);
     }
 
+    public double getSideLength(){
+        return SIDE_LENGTH;
+    }
+
     public double getCenterX(){
         return rocketShape.getCenter().getX();
     }
@@ -77,6 +81,9 @@ public class RocketShip {
         return rocketShape;
     }
 
+    public double getRotationAngle(){
+        return rotationAngle;
+    }
     public double getSpeed(){
         return velocity;
     }
