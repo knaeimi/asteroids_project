@@ -42,7 +42,7 @@ public class Meteor {
     }
 
     public void updatePosition() {
-        // Unimplemented
+        // TODO: Implement Meteor movement
     }
 
 }

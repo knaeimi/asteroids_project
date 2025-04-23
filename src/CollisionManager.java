@@ -11,10 +11,12 @@ public class CollisionManager {
     }
 
     public void projectileCollision(Projectile projectile) {
-        // Add projectile removeFromCanvas method
+        projectile.removeFromCanvas(canvas);
     }
 
     public void shipCollision(PlayerShip playerShip) {
+        
         playerShip.removeFromCanvas(canvas);
+        // Modify livesCount
     }
 }
