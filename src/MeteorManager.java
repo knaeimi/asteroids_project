@@ -40,13 +40,12 @@ public class MeteorManager {
             public void run() {
                 Random rnd = new Random();
                 if(rnd.nextBoolean()){
-                    Meteor meteor = new Meteor(0, 250, 50,0);
-                    //TODO: define what direction the Meteor will move in
+                    Meteor meteor = new Meteor(0, rnd.nextDouble(100, 500), 40,0, true, canvas);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                 }
                 else{
-                    Meteor meteor = new Meteor(canvas.getWidth(), 250, 50,0);
+                    Meteor meteor = new Meteor(500, rnd.nextDouble(100, 500), 40,0, false, canvas);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                 } 
@@ -61,21 +60,37 @@ public class MeteorManager {
      * as a result of the split. Those new meteors are then created, set at opposite angles, and added to the Canvas.
      */
     public void split(Meteor meteor) {
+        List<Meteor> removeList = new ArrayList<>();
+        Random rnd = new Random();
         double nRadius = 0;
-        if(meteor.getRadius() == 50) {
+
+        if(meteor.getRadius() == 40) {
         nRadius = 25;
         meteor.removeFromCanvas(canvas);
+        removeList.add(meteor);
         }
         else if(meteor.getRadius() == 25) {
         nRadius = 10;
         meteor.removeFromCanvas(canvas);
+        removeList.add(meteor);
         }
-        Meteor m1 = new Meteor(meteor.getCenterX()-30, meteor.getCenterY()-10, nRadius, 45);
+
+        Meteor m1 = new Meteor(meteor.getCenterX()-30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 20), false, canvas);
         meteorList.add(m1);
         m1.addToCanvas(canvas);
-        Meteor m2 = new Meteor(meteor.getCenterX()+30, meteor.getCenterY()-10, nRadius, -45);
+        Meteor m2 = new Meteor(meteor.getCenterX()+30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 20), true, canvas);
         meteorList.add(m2);
         m2.addToCanvas(canvas);
+
+        meteorList.removeAll(removeList);
+    }
+
+    public void updateMeteors(){
+        for (Meteor m : meteorList){
+            if(!m.updatePosition()){
+                continue;
+            }
+        }
     }
 
     /**
@@ -84,11 +99,5 @@ public class MeteorManager {
     public void removeAllMeteors(){
         meteorList.clear();
         canvas.removeAll();
-    }
-
-    public static void main(String[] args) { //TODO: Delete test window
-        CanvasWindow canvas = new CanvasWindow("Test", 500, 500);
-        MeteorManager mm = new MeteorManager(canvas);
-        mm.generateMeteors();
     }
 }
