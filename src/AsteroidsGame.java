@@ -4,12 +4,12 @@ import edu.macalester.graphics.*;
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 600;
+    private final long milisecBetweenShots = 500; // 500msec between shots
     private PlayerShip playerShip;
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
     private ProjectileManager projectileManager;
-    private long lastShotTime = System.currentTimeMillis(); //
-    private final long milisecBetweenShots = 500; // 500msec between shots
+    private long lastShotTime = System.currentTimeMillis(); 
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);

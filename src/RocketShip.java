@@ -9,7 +9,9 @@ import edu.macalester.graphics.Path;
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-    private double rotationAngle, velocity = 8, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
+    private double rotationAngle, currentVelocity = 2, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
+    private long time = System.currentTimeMillis(); 
+    private final long timeBetweenAccelerations = 500; // 500msec between accelerations
     
     /*
      * To construct our rocketship, we take in an initial x and y position for the ship, and use them to calculate the other two points 
@@ -28,11 +30,20 @@ public class RocketShip {
      * of the ship, and the ship's angle to place the ship in the correct direction based off of it's angle.
      * 
      */
-    public void up(){ //TODO: Implement acceleration/deacceleration
+    public void up(){ //TODO: Implement deacceleration
+        long currentTime = System.currentTimeMillis();
         double x = getShape().getX();
         double y = getShape().getY();
-        getShape().setX(x += velocity * Math.cos(rotationAngle));
-        getShape().setY(y -= velocity * Math.sin(rotationAngle));
+        
+        for(int i = 0; i <8; i++){
+            if (currentTime - time > timeBetweenAccelerations){
+                if(currentVelocity <= 8){
+                    currentVelocity +=0.01;
+                }
+            }
+        }
+        getShape().setX(x += currentVelocity * Math.cos(rotationAngle));
+        getShape().setY(y -= currentVelocity * Math.sin(rotationAngle));
     }
 
     /*
@@ -85,6 +96,9 @@ public class RocketShip {
         return rotationAngle;
     }
     public double getSpeed(){
-        return velocity;
+        return currentVelocity;
+    }
+    public void resetSpeed(){//For deacceleration
+        currentVelocity = 0;
     }
 }
