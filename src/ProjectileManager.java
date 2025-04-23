@@ -41,4 +41,9 @@ public class ProjectileManager {
         BulletProjectile bulletProjectile = new BulletProjectile(x, y, angle, canvas);
         projList.add(bulletProjectile);
     }
+
+    public void addBeamProjectile(double x, double y, double angle){
+        BeamProjectile beamProjectile = new BeamProjectile(x, y, angle, canvas);
+        projList.add(beamProjectile);
+    }
 }

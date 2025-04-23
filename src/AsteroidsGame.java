@@ -45,6 +45,13 @@ public class AsteroidsGame {
            
             if(keyHandler.spaceKey()){ 
                 playerShip.fireBulletProjectile();
+<<<<<<< Updated upstream
+=======
+            }
+
+            if (keyHandler.fKey()){
+                playerShip.fireBeamProjectile();
+>>>>>>> Stashed changes
             }
         });
     }

@@ -10,6 +10,7 @@ public class PlayerShip extends RocketShip{
     private long time = System.currentTimeMillis(); 
     private final long timeBetweenAccelerations = 500; // 500msec between accelerations
     private final long milisecBetweenShots = 500; // 500ms between shots
+    private final long milisecBetweenBeams = 500;
     private ProjectileManager projectileManager;
    
     /*
@@ -61,6 +62,14 @@ public class PlayerShip extends RocketShip{
                 getRotationAngle());
                 time = currentTime;
             }
+    }
+
+    public void fireBeamProjectile(){
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - time > milisecBetweenBeams){
+            projectileManager.addBeamProjectile(getCenterX(), getCenterY() - getSideLength()/2, getRotationAngle());
+            time = currentTime;
+        }
     }
 
     private void checkShipBounds(){
