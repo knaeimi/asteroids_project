@@ -1,15 +1,16 @@
-import edu.macalester.graphics.CanvasWindow;
 
 public class BeamProjectile implements Projectile {
+    
     public boolean updatePosition(){
-        return true; //Temporary method to avoid interface errors
+        return true;
+         //Temporary method to avoid interface errors
     }
 
-    public void addToCanvas(CanvasWindow canvas){
+    public void addToCanvas(){
 
     }
 
-    public void removeFromCanvas(CanvasWindow canvas){
+    public void removeFromCanvas(){
         
     }
 }

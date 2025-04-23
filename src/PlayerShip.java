@@ -6,7 +6,7 @@ import edu.macalester.graphics.CanvasWindow;
  */
 public class PlayerShip extends RocketShip{
     private CanvasWindow canvas;
-    
+   
     public PlayerShip(double initialX, double initialY, CanvasWindow canvas){
         super(initialX, initialY);
         this.canvas = canvas;
@@ -46,5 +46,5 @@ public class PlayerShip extends RocketShip{
     
     public void rotateRight(){
         right();
-    }     
+    }
 }
