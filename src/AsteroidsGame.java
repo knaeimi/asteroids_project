@@ -35,6 +35,7 @@ public class AsteroidsGame {
         canvas.animate(event ->{
             projectileManager.updateProjectiles(); 
             meteorManager.updateMeteors();
+            collisionManager.shipCollision(playerShip);
             
             if(keyHandler.upKey()){
                 playerShip.forward();

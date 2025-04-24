@@ -41,7 +41,6 @@ public class CollisionManager {
                 GraphicsObject mShape = m.getShape();
                 if (mShape == centerObj) {
                     playerShip.setCenter(300, 300);
-                    canvas.pause(500);
                     // Modify livesCount
                 }
             } 

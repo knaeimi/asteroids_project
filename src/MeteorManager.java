@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -9,10 +10,12 @@ import edu.macalester.graphics.*;
 public class MeteorManager {
 
     private CanvasWindow canvas;
-    private List<Meteor> meteorList;
+    private CopyOnWriteArrayList<Meteor> meteorList;
+
+    Timer t = new Timer();
 
     public MeteorManager(CanvasWindow canvas) {
-        meteorList = new ArrayList<>();
+        meteorList = new CopyOnWriteArrayList<>();
         this.canvas = canvas;
     }
 
@@ -25,10 +28,8 @@ public class MeteorManager {
      */
 
     public void generateMeteors() {
-        Timer t = new Timer();
         for(int i = 1; i < 16; i ++) {
             t.schedule(spawnMeteor(), i*3000);
-
         }
     }
 
@@ -38,12 +39,12 @@ public class MeteorManager {
      * to meteorList and the Canvas.
      */
     public TimerTask spawnMeteor() {
-        TimerTask task = new TimerTask() {
+        TimerTask task = new CustomTimerTask(meteorList) {
             @Override
             public void run() {
                 Random rnd = new Random();
                 if(rnd.nextBoolean()){
-                    Meteor meteor = new Meteor(rnd.nextDouble(0,500), rnd.nextDouble(100, 500), 40,0, true, canvas);
+                    Meteor meteor = new Meteor(1, rnd.nextDouble(100, 500), 40,0, true, canvas);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                 }
