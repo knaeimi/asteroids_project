@@ -7,7 +7,7 @@ import edu.macalester.graphics.events.KeyboardEvent;
  * you need registered 
  */
 public class KeyHandler{
-    private boolean upPressed, leftPressed, rightPressed, spacePressed;
+    private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed;
     private Key pressedKey, releasedKey;
     
     public boolean upKey(){
@@ -26,6 +26,10 @@ public class KeyHandler{
         return spacePressed;
     }
 
+    public boolean fKey(){
+        return fPressed;
+    }
+
     public void keyPressed(KeyboardEvent event) {
         pressedKey = event.getKey();
         if (pressedKey == Key.UP_ARROW){
@@ -39,6 +43,9 @@ public class KeyHandler{
         }
         if (pressedKey == Key.SPACE){
             spacePressed = true;
+        }
+        if (pressedKey == Key.F){
+            fPressed = true;
         }
     }
 
@@ -56,5 +63,8 @@ public class KeyHandler{
         if (releasedKey == Key.SPACE){
             spacePressed = false;
         }  
+        if (releasedKey == Key.F){
+            fPressed = false;
+        }
     }
 }

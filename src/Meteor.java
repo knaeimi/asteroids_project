@@ -3,7 +3,6 @@ import java.awt.Color;
 import edu.macalester.graphics.*;
 
 public class Meteor {
-
     private double centerX;
     private double centerY;
     private double radius;
@@ -11,7 +10,7 @@ public class Meteor {
     private boolean moveLeft;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 5;
-
+  
     private Ellipse meteorShape;
 
     public Meteor(double centerX, double centerY, double radius, double angle, boolean moveLeft, CanvasWindow canvas) {
@@ -52,6 +51,7 @@ public class Meteor {
     }
 
     public boolean updatePosition() {
+        
         if(moveLeft){
             meteorShape.setX(centerX += METEOR_SPEED * Math.cos(angle));
             meteorShape.setY(centerY -= METEOR_SPEED * Math.sin(angle));

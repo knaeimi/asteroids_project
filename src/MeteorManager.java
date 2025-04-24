@@ -23,10 +23,12 @@ public class MeteorManager {
     /**
      *  This method contains a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
      */
+
     public void generateMeteors() {
         Timer t = new Timer();
         for(int i = 1; i < 16; i ++) {
             t.schedule(spawnMeteor(), i*3000);
+
         }
     }
 
@@ -41,7 +43,7 @@ public class MeteorManager {
             public void run() {
                 Random rnd = new Random();
                 if(rnd.nextBoolean()){
-                    Meteor meteor = new Meteor(0, rnd.nextDouble(100, 500), 40,0, true, canvas);
+                    Meteor meteor = new Meteor(rnd.nextDouble(0,500), rnd.nextDouble(100, 500), 40,0, true, canvas);
                     meteorList.add(meteor);
                     meteor.addToCanvas(canvas);
                 }
