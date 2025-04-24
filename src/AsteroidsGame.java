@@ -23,7 +23,7 @@ public class AsteroidsGame {
         canvas.removeAll();
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
         playerShip.addToCanvas(canvas); 
-        meteorManager.generateMeteors();
+        meteorManager.generateMeteors(); //TODO: Sam, whatever you're doing with the timer in this method is crashing the game
     }
 
     public void animate(){
@@ -36,6 +36,7 @@ public class AsteroidsGame {
             if(keyHandler.upKey()){
                 playerShip.forward();
             }
+
             if(keyHandler.leftKey()){
                 playerShip.rotateLeft();
             }

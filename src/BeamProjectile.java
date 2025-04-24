@@ -3,34 +3,35 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Rectangle;
 
 public class BeamProjectile implements Projectile {
-    private double frontX;
-    private double frontY;
-    private double angle;
-    private double length = 300;
-    private Rectangle beamShape;
-    private final double BEAM_WIDTH = 10;
-    private CanvasWindow canvas;
-    private double backX;
-    private double backY;
     private final double VELOCITY = 5;
+    private double initialX;
+    private double initialY;
+    private double angle;
+    private double beamWidth, beamLength;
+    private CanvasWindow canvas;
+    private Rectangle beamShape;
         
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
-            this.frontX = initialX;
-            this.frontY = initialY;
-            this.angle = angle;
-            this.canvas = canvas;
-            backX = frontX - length;
-            backY = frontY - length;
-
-        beamShape = new Rectangle(backX, backY, BEAM_WIDTH, length);
-        beamShape.setFillColor(Color.WHITE);
-        beamShape.rotateBy(angle);
+        this.canvas = canvas;
+        this.initialX = initialX;
+        this.initialY = initialY;
+        this.angle = angle;
+        
+        beamLength = canvas.getHeight()/2;
+        beamWidth = 10;
+      
+        beamShape = new Rectangle(initialX, initialY, beamWidth, beamLength);
+        beamShape.setFillColor(Color.MAGENTA);
         addToCanvas();
     }
 
+    public double getBeamLength(){
+        return beamLength;
+    }
+
     public boolean updatePosition(){
-        beamShape.setX(frontX += VELOCITY * Math.cos(angle));
-        beamShape.setY(frontY -= VELOCITY * Math.sin(angle));
+        beamShape.setX(initialX += VELOCITY * Math.cos(angle));
+        beamShape.setY(initialY -= VELOCITY * Math.sin(angle));
         return boundsCheck();
     }
 
@@ -43,14 +44,17 @@ public class BeamProjectile implements Projectile {
     }
 
     public double getCenterX(){
-        return backX;
+        return beamShape.getCenter().getX();
     }
 
     public double getCenterY(){
-        return backY;
+        return beamShape.getCenter().getY();
     }
 
-    public boolean boundsCheck(){
-        return (backX < canvas.getWidth() || backX > 0 || backY < canvas.getHeight() || backY > 0);
+    /*
+     *  TODO: Sean, this is the exact same logic and name as the method from bullet: Is there a more efficient way to do this?
+     */
+    public boolean boundsCheck(){ 
+        return (initialX < canvas.getWidth() || initialX > 0 || initialY < canvas.getHeight() || initialY > 0);
     }
 }

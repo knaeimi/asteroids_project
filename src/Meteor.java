@@ -3,7 +3,6 @@ import java.awt.Color;
 import edu.macalester.graphics.*;
 
 public class Meteor {
-
     private double centerX;
     private double centerY;
     private double radius;

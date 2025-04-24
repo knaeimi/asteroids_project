@@ -22,7 +22,7 @@ public class BulletProjectile implements Projectile {
         this.angle = angle;
     
         bulletShape = new Ellipse(initialX,initialY,RADIUS * 2,RADIUS * 2);
-        bulletShape.setFillColor(Color.WHITE);
+        bulletShape.setFillColor(new Color(150,0,255));
         addToCanvas();
     }
 

@@ -5,12 +5,12 @@ import edu.macalester.graphics.CanvasWindow;
  * This subclass provides bounds logic along with the math behind movement.
  */
 public class PlayerShip extends RocketShip{
-    private CanvasWindow canvas;
-    private double rotationAngle, currentVelocity = 2, rotationSpeed = 5; //Good values until acceleration/deacceleration implemented.
+    private double rotationAngle, currentVelocity, rotationSpeed = 8; 
+    private final long milisecBetweenShots = 500; // 500ms between shots. Also, if we're just going to use the same value we don't need another variable.
+    private final long timeToFinalVel = 150;
+    private final long finalVel = 12;
     private long time = System.currentTimeMillis(); 
-    private final long timeBetweenAccelerations = 500; // 500msec between accelerations
-    private final long milisecBetweenShots = 500; // 500ms between shots
-    private final long milisecBetweenBeams = 500;
+    private CanvasWindow canvas;
     private ProjectileManager projectileManager;
    
     /*
@@ -31,9 +31,9 @@ public class PlayerShip extends RocketShip{
      * Note: We set the x/y position where the ship went out of bounds to getSpeed as shorthand for adding the starting position of the axis we want to 
      * respawn + current speed (which would just be 0 + getSpeed).
      */
-    public void forward(){ //TODO: Implement deacceleration
-        updatePosition();
+    public void forward(){ //TODO: Kian: Implement deacceleration by tomorow night
         accelerate();
+        updatePosition();
         checkShipBounds();
     }
 
@@ -54,52 +54,7 @@ public class PlayerShip extends RocketShip{
         rotationAngle -= Math.toRadians(rotationSpeed);
         getShape().rotateBy(rotationSpeed);
     }
-
-    public void fireBulletProjectile(){
-        long currentTime = System.currentTimeMillis();
-            if (currentTime - time > milisecBetweenShots){
-                projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
-                getRotationAngle());
-                time = currentTime;
-            }
-    }
-
-    public void fireBeamProjectile(){
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - time > milisecBetweenBeams){
-            projectileManager.addBeamProjectile(getCenterX(), getCenterY() - getSideLength()/2, getRotationAngle());
-            time = currentTime;
-        }
-    }
-
-    private void checkShipBounds(){
-        if(getCenterY() < 0){ 
-            setCenter(getCenterX(), canvas.getHeight());
-        }
-        if(getCenterY() > canvas.getHeight()){
-            setCenter(getCenterX(), getSpeed()); 
-        }
-
-        if(getCenterX() < 0){ 
-            setCenter(canvas.getWidth(), getCenterY());
-        }
-
-        if(getCenterX() > canvas.getWidth()){
-            setCenter(getSpeed(), getCenterY());
-        }
-    }
-
-    public void accelerate(){
-        long currentTime = System.currentTimeMillis();
-        for(int i = 0; i <8; i++){
-            if (currentTime - time > timeBetweenAccelerations){
-                if(currentVelocity <= 8){
-                    currentVelocity +=0.01;
-                }
-            }
-        }
-    }
-
+    
     public void updatePosition(){
         double x = getShape().getX();
         double y = getShape().getY();
@@ -108,10 +63,51 @@ public class PlayerShip extends RocketShip{
         getShape().setY(y -= currentVelocity * Math.sin(rotationAngle));
     }
     
-    public double getRotationAngle(){
-        return rotationAngle;
+    /*
+     * Here, we use the basic acceleration formula and a conditional to give the ship some weight.
+     */
+    public void accelerate(){
+        double acceleration = (finalVel - currentVelocity) / timeToFinalVel;
+        if(currentVelocity != finalVel){
+            currentVelocity += acceleration;
+        }
     }
-    public double getSpeed(){
-        return currentVelocity;
+    
+    private void checkShipBounds(){
+        if(getCenterY() < 0){ 
+            setCenter(getCenterX(), canvas.getHeight());
+        }
+        if(getCenterY() > canvas.getHeight()){
+            setCenter(getCenterX(), currentVelocity); 
+        }
+
+        if(getCenterX() < 0){ 
+            setCenter(canvas.getWidth(), getCenterY());
+        }
+
+        if(getCenterX() > canvas.getWidth()){
+            setCenter(currentVelocity, getCenterY());
+        }
+    }
+
+    /*
+     * The main function of this method is just to call the addBulletProjectile method, but I also went ahead and added some tricky math to
+     * mitigate bullet spamming.
+     */
+    public void fireBulletProjectile(){
+        long currentTime = System.currentTimeMillis();
+            if (currentTime - time > milisecBetweenShots){
+                projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
+                rotationAngle);
+                time = currentTime;
+            }
+    }
+
+    public void fireBeamProjectile(){ //TODO: Sean, this is the exact same logic as the method above, can we refactor this somehow?
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - time > milisecBetweenShots){
+            projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
+            time = currentTime;
+        }
     }
 }
