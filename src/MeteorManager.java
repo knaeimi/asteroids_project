@@ -91,7 +91,7 @@ public class MeteorManager {
 
     public void updateMeteors(){
         for (Meteor m : meteorList){
-            if(!m.updatePosition()){
+            if(m.updatePosition()){
                 continue;
             }
         }
