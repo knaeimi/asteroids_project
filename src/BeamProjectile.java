@@ -13,4 +13,13 @@ public class BeamProjectile implements Projectile {
     public void removeFromCanvas(){
         
     }
+
+    public double getCenterX(){
+        return 0;
+    }
+
+    public double getCenterY(){
+        return 0;
+    }
 }
+

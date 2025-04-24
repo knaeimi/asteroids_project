@@ -10,6 +10,7 @@ public class AsteroidsGame {
     private KeyHandler keyHandler;
     private ProjectileManager projectileManager;
     private MeteorManager meteorManager;
+    private CollisionManager collisionManager;
     private long lastShotTime = System.currentTimeMillis(); 
 
     public AsteroidsGame(){
@@ -18,13 +19,14 @@ public class AsteroidsGame {
         keyHandler = new KeyHandler();
         projectileManager = new ProjectileManager(canvas);
         meteorManager = new MeteorManager(canvas);
+        collisionManager = new CollisionManager(canvas, meteorManager);
         animate();
     }
 
     public void run() {
         canvas.removeAll();
         playerShip = new PlayerShip(300, 300, canvas); 
-        playerShip.addToCanvas(canvas); 
+        playerShip.addToCanvas(canvas);
         meteorManager.generateMeteors();
     }
 
@@ -33,7 +35,8 @@ public class AsteroidsGame {
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
             projectileManager.updateProjectiles(); //moves bullets
-            meteorManager.updateMeteors();
+            meteorManager.updateMeteors(); //moves meteors
+            collisionManager.shipCollision(playerShip);
             if(keyHandler.upKey()){
                 playerShip.forward();
             }

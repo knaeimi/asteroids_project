@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
@@ -15,12 +17,8 @@ public class CollisionManager {
     }
 
     public void projectileCollision(Projectile projectile) {
-        
-    }
-
-    public void shipCollision(PlayerShip playerShip) {
         List<Meteor> removeList = new ArrayList<>();
-        GraphicsObject centerObj = canvas.getElementAt(playerShip.getCenterX(), playerShip.getCenterY());
+        GraphicsObject centerObj = canvas.getElementAt(projectile.getCenterX(), projectile.getCenterY());
         if(centerObj != null){
             for(Meteor m : meteorManager.getMeteorList()){
                 GraphicsObject mShape = m.getShape();
@@ -32,7 +30,21 @@ public class CollisionManager {
             meteorManager.getMeteorList().removeAll(removeList);
         }
 
-        playerShip.removeFromCanvas(canvas);
-        // Modify livesCount
+        projectile.removeFromCanvas();
+        //Modify score
+    }
+
+    public void shipCollision(PlayerShip playerShip) {
+        GraphicsObject centerObj = canvas.getElementAt(playerShip.getCenterX(), playerShip.getCenterY());
+        if(centerObj != null){
+            for(Meteor m : meteorManager.getMeteorList()){
+                GraphicsObject mShape = m.getShape();
+                if (mShape == centerObj) {
+                    playerShip.setCenter(300, 300);
+                    canvas.pause(500);
+                    // Modify livesCount
+                }
+            } 
+        }  
     }
 }
