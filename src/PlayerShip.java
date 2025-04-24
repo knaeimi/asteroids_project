@@ -7,6 +7,7 @@ import edu.macalester.graphics.CanvasWindow;
 public class PlayerShip extends RocketShip{
     private double rotationAngle, currentVelocity, rotationSpeed = 8; 
     private final long milisecBetweenShots = 500; // 500ms between shots. Also, if we're just going to use the same value we don't need another variable.
+    private final long milisecBetweenBeams = 2000;
     private final long timeToFinalVel = 150;
     private final long finalVel = 12;
     private long time = System.currentTimeMillis(); 
@@ -105,7 +106,7 @@ public class PlayerShip extends RocketShip{
 
     public void fireBeamProjectile(){ //TODO: Sean, this is the exact same logic as the method above, can we refactor this somehow?
         long currentTime = System.currentTimeMillis();
-        if (currentTime - time > milisecBetweenShots){
+        if (currentTime - time > milisecBetweenBeams){
             projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
             time = currentTime;
         }

@@ -46,6 +46,7 @@ public class KeyHandler{
         }
         if (pressedKey == Key.F){
             fPressed = true;
+            upPressed = false;
         }
     }
 
