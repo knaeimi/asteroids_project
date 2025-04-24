@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Rectangle;
 
@@ -10,19 +13,36 @@ public class BeamProjectile implements Projectile {
     private double beamWidth, beamLength;
     private CanvasWindow canvas;
     private Rectangle beamShape;
+    private double backX;
+    private double backY;
         
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;
         this.initialY = initialY;
         this.angle = angle;
+        backX = initialX - beamLength;
+        backY = initialY - beamLength;
         
         beamLength = canvas.getHeight()/2;
         beamWidth = 10;
-      
-        beamShape = new Rectangle(initialX, initialY, beamWidth, beamLength);
+        double topLeftX = initialX - beamWidth / 2;
+        double topLeftY = initialY - beamLength;
+        
+        beamShape = new Rectangle(topLeftX, topLeftY, beamWidth, beamLength);
+        beamShape.setAnchor(beamWidth / 2, beamLength);
+        beamShape.setRotation(-Math.toDegrees(angle)+90);
         beamShape.setFillColor(Color.MAGENTA);
         addToCanvas();
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                removeFromCanvas();
+                timer.cancel();
+            }
+        }, 2000);
     }
 
     public double getBeamLength(){
@@ -30,9 +50,9 @@ public class BeamProjectile implements Projectile {
     }
 
     public boolean updatePosition(){
-        beamShape.setX(initialX += VELOCITY * Math.cos(angle));
-        beamShape.setY(initialY -= VELOCITY * Math.sin(angle));
-        return boundsCheck();
+        // beamShape.setX(initialX += VELOCITY * Math.cos(angle));
+        // beamShape.setY(initialY -= VELOCITY * Math.sin(angle));
+        return true;
     }
 
     public void addToCanvas(){
@@ -49,12 +69,5 @@ public class BeamProjectile implements Projectile {
 
     public double getCenterY(){
         return beamShape.getCenter().getY();
-    }
-
-    /*
-     *  TODO: Sean, this is the exact same logic and name as the method from bullet: Is there a more efficient way to do this?
-     */
-    public boolean boundsCheck(){ 
-        return (initialX < canvas.getWidth() || initialX > 0 || initialY < canvas.getHeight() || initialY > 0);
     }
 }
