@@ -28,7 +28,7 @@ public class MeteorManager {
      */
 
     public void generateMeteors() {
-        for(int i = 1; i < 16; i ++) {
+        for(int i = 1; ; i ++) {
             t.schedule(spawnMeteor(), i*3000);
         }
     }
@@ -79,10 +79,10 @@ public class MeteorManager {
         removeList.add(meteor);
         }
 
-        Meteor m1 = new Meteor(meteor.getCenterX()-30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 20), false, canvas);
+        Meteor m1 = new Meteor(meteor.getCenterX()-30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 30), false, canvas);
         meteorList.add(m1);
         m1.addToCanvas(canvas);
-        Meteor m2 = new Meteor(meteor.getCenterX()+30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 20), true, canvas);
+        Meteor m2 = new Meteor(meteor.getCenterX()+30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 30), true, canvas);
         meteorList.add(m2);
         m2.addToCanvas(canvas);
 

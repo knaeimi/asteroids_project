@@ -21,7 +21,7 @@ public class AsteroidsGame {
         collisionManager = new CollisionManager(canvas, meteorManager);
         animate();
     }
-
+    
     public void run() {
         canvas.removeAll();
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
@@ -36,6 +36,9 @@ public class AsteroidsGame {
             projectileManager.updateProjectiles(); 
             meteorManager.updateMeteors();
             collisionManager.shipCollision(playerShip);
+            // for(Projectile p : projectileManager.getProjList()){
+            //     collisionManager.projectileCollision(p);
+            // }
             
             if(keyHandler.upKey()){
                 playerShip.forward();

@@ -7,6 +7,7 @@ import edu.macalester.graphics.CanvasWindow;
 public class ProjectileManager {
     private ArrayList<Projectile> projList = new ArrayList<Projectile>();
     private CanvasWindow canvas;
+    private CollisionManager colManage;
     
     public ProjectileManager(CanvasWindow canvas){
         this.canvas = canvas;
@@ -22,6 +23,10 @@ public class ProjectileManager {
                 projList.remove(projectile);
             }
         }
+    }
+
+    public ArrayList<Projectile> getProjList() {
+        return projList;
     }
 
     /*

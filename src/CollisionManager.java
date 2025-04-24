@@ -17,21 +17,17 @@ public class CollisionManager {
     }
 
     public void projectileCollision(Projectile projectile) {
-        List<Meteor> removeList = new ArrayList<>();
         GraphicsObject centerObj = canvas.getElementAt(projectile.getCenterX(), projectile.getCenterY());
         if(centerObj != null){
             for(Meteor m : meteorManager.getMeteorList()){
                 GraphicsObject mShape = m.getShape();
                 if (mShape == centerObj) {
-                    removeList.add(m);
-                    canvas.remove(mShape);
+                    meteorManager.split(m);
+                    projectile.removeFromCanvas();
+                    // Modify score
                 }
-            } 
-            meteorManager.getMeteorList().removeAll(removeList);
+            }  
         }
-
-        projectile.removeFromCanvas();
-        //Modify score
     }
 
     public void shipCollision(PlayerShip playerShip) {
