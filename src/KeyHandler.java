@@ -45,7 +45,7 @@ public class KeyHandler{
         }
         if (pressedKey == Key.F){
             fPressed = true;
-            upPressed = false; //Stopping player movement for game balancing
+            // upPressed = false; //Stopping player movement for game balancing
         }
     }
 
