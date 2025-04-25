@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
 
 import edu.macalester.graphics.*;
 
@@ -8,11 +9,12 @@ public class Meteor {
     private double radius;
     private double angle;
     private boolean moveLeft;
+    private Image meteorImage; //TODO: Kian and Sam: Finish conversion to meteor pngs with Marvin tomorow
+    // private Rectangle2D boundingBox = meteorImage.getBounds(); //was causing errors when uncommented 
+    // private Rectangle boundingBox1 = new Rectangle(boundingBox.getX(), boundingBox.getY(), boundingBox.getWidth(), boundingBox.getHeight());
+    private Ellipse meteorShape;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 5;
-    
-  
-    private Ellipse meteorShape;
 
     public Meteor(double centerX, double centerY, double radius, double angle, boolean moveLeft, CanvasWindow canvas) {
         this.centerX = centerX;

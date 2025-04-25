@@ -106,7 +106,7 @@ public class PlayerShip extends RocketShip{
 
     public void fireBeamProjectile(){ //TODO: Sean, this is the exact same logic as the method above, can we refactor this somehow?
         long currentTime = System.currentTimeMillis();
-        if (currentTime - time > milisecBetweenBeams){
+        if (currentTime - time > milisecBetweenBeams){ //Two seconds between beam shots for balancing
             projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
             time = currentTime;
         }

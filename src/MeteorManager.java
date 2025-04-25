@@ -37,7 +37,7 @@ public class MeteorManager {
      * A Random condition determines what side of the screen the Meteor spawns on. The Meteor is then added
      * to meteorList and the Canvas.
      */
-    public TimerTask spawnMeteor() {
+    public TimerTask spawnMeteor() { //TODO: Figure out why timer is causing crashes (something to do with Swing/kilt graphics being angry?)
         TimerTask task = new CustomTimerTask(meteorList) {
             @Override
             public void run() {

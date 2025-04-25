@@ -8,8 +8,8 @@ import edu.macalester.graphics.Ellipse;
  */
 public class BulletProjectile implements Projectile {
     private CanvasWindow canvas;
-    private final double VELOCITY = 5;
-    public final double RADIUS = 5; //This can be public because it's a constant, and it will be easier to access later on for collisions.
+    private final double VELOCITY = 20;
+    public final double RADIUS = 10; //This can be public because it's a constant, and it will be easier to access later on for collisions.
     private Ellipse bulletShape;
     private double initialX;
     private double initialY;
