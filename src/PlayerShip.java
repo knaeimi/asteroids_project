@@ -32,10 +32,19 @@ public class PlayerShip extends RocketShip{
      * Note: We set the x/y position where the ship went out of bounds to getSpeed as shorthand for adding the starting position of the axis we want to 
      * respawn + current speed (which would just be 0 + getSpeed).
      */
-    public void forward(){ //TODO: Kian: Implement deacceleration by tomorow night
+    public void forward(){ 
         accelerate();
         updatePosition();
         checkShipBounds();
+    }
+
+    /*
+     * This method just makes for a clean call in the main class. We call forward and decrementSpeed at the same time to achieve an affect similar to 
+     * drag. 
+     */
+    public void deaccelerate(){
+        forward();
+        decrementSpeed();
     }
 
      /*
@@ -73,7 +82,18 @@ public class PlayerShip extends RocketShip{
             currentVelocity += acceleration;
         }
     }
-    
+
+    /*
+     * This is the heart of deacceleration. We simply make sure that currentVelocity is greater than 0, and then whenever you let go of the up key,
+     * speed slows down to a crawl. This took so long to figure out, but we now have fully realistic movement. Genuinely so happy with the whole 
+     * movement system I've built here.
+     */
+    public void decrementSpeed(){
+        if(currentVelocity > 0){
+            currentVelocity -= 0.1;
+        }
+    }
+
     private void checkShipBounds(){
         if(getCenterY() < 0){ 
             setCenter(getCenterX(), canvas.getHeight());

@@ -37,19 +37,19 @@ public class MeteorManager {
      * A Random condition determines what side of the screen the Meteor spawns on. The Meteor is then added
      * to meteorList and the Canvas.
      */
-    public TimerTask spawnMeteor() { //TODO: Figure out why timer is causing crashes (something to do with Swing/kilt graphics being angry?)
+    public TimerTask spawnMeteor() { //TODO: Debug conflicting updateMeteors/spawnMeteor list modification logic
         TimerTask task = new CustomTimerTask(meteorList) {
             @Override
             public void run() {
                 Random rnd = new Random();
                 if(rnd.nextBoolean()){
                     Meteor meteor = new Meteor(1, rnd.nextDouble(100, 500), 40,0, true, canvas);
-                    meteorList.add(meteor);
+                    meteorList.add(meteor);  //TODO: Heart of the issue: Mutating list while attempting to iterate through it in updateMeteors
                     meteor.addToCanvas(canvas);
                 }
                 else{
                     Meteor meteor = new Meteor(500, rnd.nextDouble(100, 500), 40,0, false, canvas);
-                    meteorList.add(meteor);
+                    meteorList.add(meteor); //TODO: Same thing. Can't iterate through a constantly changing list. 
                     meteor.addToCanvas(canvas);
                 } 
             }
@@ -89,7 +89,7 @@ public class MeteorManager {
     }
 
     public void updateMeteors(){
-        for (Meteor m : meteorList){
+        for (Meteor m : meteorList){ //TODO: Iterating through a constantly modified list... how else can we do this?
             if(m.updatePosition()){
                 continue;
             }

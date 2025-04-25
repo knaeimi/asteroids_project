@@ -32,7 +32,7 @@ public class AsteroidsGame {
         canvas.onKeyDown(keyHandler::keyPressed);
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
-            projectileManager.updateProjectiles(); 
+            projectileManager.updateProjectiles(); //TODO: What else is causing these crashes? Both updateProjectiles and generateMeteors somehow crash independently?!
             meteorManager.updateMeteors();
             collisionManager.shipCollision(playerShip);
             for(Projectile p : projectileManager.getProjList()){
@@ -41,6 +41,10 @@ public class AsteroidsGame {
             
             if(keyHandler.upKey()){
                 playerShip.forward();
+            }
+
+            if (!keyHandler.upKey()){
+                playerShip.deaccelerate();
             }
 
             if(keyHandler.leftKey()){

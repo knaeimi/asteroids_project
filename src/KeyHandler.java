@@ -3,8 +3,7 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.events.KeyboardEvent;
 
 /*
- * This class handles taking in inputs for keys. We use booleans to represent whether a key is currently pressed or not. If you have an input
- * you need registered 
+ * This class handles taking in inputs for keys. We use booleans to represent whether a key is currently pressed or not. 
  */
 public class KeyHandler{
     private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed;
