@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -10,13 +9,18 @@ import edu.macalester.graphics.*;
 public class MeteorManager {
 
     private CanvasWindow canvas;
-    private CopyOnWriteArrayList<Meteor> meteorList;
+    private List<Meteor> meteorList = new ArrayList<>();
 
     Timer t = new Timer();
+    Random rnd = new Random();
 
     public MeteorManager(CanvasWindow canvas) {
-        meteorList = new CopyOnWriteArrayList<>();
         this.canvas = canvas;
+        for(int i = 0; i < 20; i ++){
+            meteorList.add(new Meteor(0, rnd.nextDouble(100, 500), 0, canvas));
+        }
+        
+        System.out.println(meteorList);
     }
 
     public List<Meteor> getMeteorList() {
@@ -24,77 +28,37 @@ public class MeteorManager {
     }
 
     /**
-     *  This method contains a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
+     *  This method uses a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
      */
     public void generateMeteors() {
-        for(int i = 1; i < 16; i ++) {
-            t.schedule(spawnMeteor(), i*3000);
+        for(int i = 1; i < meteorList.size()+1; i++) {
+            System.out.println(i);
+            t.schedule(spawnMeteor(i-1), i*3000);
         }
     }
 
     /**
-     * This method defines the TimerTask that runs every interval through the Timer in the generateMeteors() method.
-     * A Random condition determines what side of the screen the Meteor spawns on. The Meteor is then added
-     * to meteorList and the Canvas.
+     * TODO: REWRITE JAVADOC for spawnMeteor.md
      */
-    public TimerTask spawnMeteor() { //TODO: Debug conflicting updateMeteors/spawnMeteor list modification logic
-        TimerTask task = new CustomTimerTask(meteorList) {
+    public TimerTask spawnMeteor(int n) { //TODO: Debug conflicting updateMeteors/spawnMeteor list modification logic
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Random rnd = new Random();
-                if(rnd.nextBoolean()){
-                    Meteor meteor = new Meteor(1, rnd.nextDouble(100, 500), 40,0, true, canvas);
-                    meteorList.add(meteor);  //TODO: Heart of the issue: Mutating list while attempting to iterate through it in updateMeteors
-                    meteor.addToCanvas(canvas);
-                }
-                else{
-                    Meteor meteor = new Meteor(500, rnd.nextDouble(100, 500), 40,0, false, canvas);
-                    meteorList.add(meteor); //TODO: Same thing. Can't iterate through a constantly changing list. 
-                    meteor.addToCanvas(canvas);
-                } 
+                System.out.println(meteorList);
+                System.out.println(n);
+                Meteor m = meteorList.get(n);
+                m.addToCanvas(canvas);
             }
         };
         return task;
     }
 
-    /**
-     * This method defines how a Meteor object should split once it is destroyed by a Projectile. 
-     * We get the radius of the Meteor, then use that to determine the radii of the new Meteors created
-     * as a result of the split. Those new meteors are then created, set at opposite angles, and added to the Canvas.
-     */
-    public void split(Meteor meteor) {
-        List<Meteor> removeList = new ArrayList<>();
-        Random rnd = new Random();
-        double nRadius = 0;
-
-        if(meteor.getRadius() == 40) {
-        nRadius = 25;
-        meteor.removeFromCanvas(canvas);
-        removeList.add(meteor);
-        }
-        else if(meteor.getRadius() == 25) {
-        nRadius = 10;
-        meteor.removeFromCanvas(canvas);
-        removeList.add(meteor);
-        }
-
-        Meteor m1 = new Meteor(meteor.getCenterX()-30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 30), false, canvas);
-        meteorList.add(m1);
-        m1.addToCanvas(canvas);
-        Meteor m2 = new Meteor(meteor.getCenterX()+30, meteor.getCenterY()-10, nRadius, rnd.nextDouble(20, 30), true, canvas);
-        meteorList.add(m2);
-        m2.addToCanvas(canvas);
-
-        meteorList.removeAll(removeList);
-    }
-
     public void updateMeteors(){
-        for (Meteor m : meteorList){ //TODO: Iterating through a constantly modified list... how else can we do this?
-            if(m.updatePosition()){
-                continue;
+        List<Meteor> updateList = new ArrayList<>(meteorList);
+        for (int i = 0; i < meteorList.size(); i++){ //TODO: Iterating through a constantly modified list... how else can we do this?
+            updateList.get(i).updatePosition();
             }
         }
-    }
 
     /**
      * This method removes all Meteor objects from meteorList and Canvas.

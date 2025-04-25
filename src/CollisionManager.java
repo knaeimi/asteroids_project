@@ -22,8 +22,7 @@ public class CollisionManager {
             for(Meteor m : meteorManager.getMeteorList()){
                 GraphicsObject mShape = m.getShape();
                 if (mShape == centerObj) {
-                    meteorManager.split(m);
-                    projectile.removeFromCanvas();
+                    m.removeFromCanvas(canvas);
                     // Modify score
                 }
             }  
