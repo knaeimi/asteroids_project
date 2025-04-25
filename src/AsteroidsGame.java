@@ -33,11 +33,11 @@ public class AsteroidsGame {
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
             projectileManager.updateProjectiles(); 
-            // meteorManager.updateMeteors();
-            // collisionManager.shipCollision(playerShip);
-            // for(Projectile p : projectileManager.getProjList()){
-            //     collisionManager.projectileCollision(p);
-            // }
+            meteorManager.updateMeteors();
+            collisionManager.shipCollision(playerShip);
+            for(Projectile p : projectileManager.getProjList()){
+                collisionManager.projectileCollision(p);
+            }
             
             if(keyHandler.upKey()){
                 playerShip.forward();
@@ -54,9 +54,9 @@ public class AsteroidsGame {
                 playerShip.fireBulletProjectile();
             }
 
-            // if(keyHandler.fKey()){ 
-            //     playerShip.fireBeamProjectile();
-            // }
+            if(keyHandler.fKey()){ 
+                playerShip.fireBeamProjectile();
+            }
         });
     }
 
