@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 
+/*
+ * Sets UI and manages score/game over text.
+ */
 public class UI {
    private ArrayList<RocketShip> rocketList;
    private RocketShip rocket1, rocket2, rocket3;
@@ -14,6 +17,11 @@ public class UI {
 
    public UI(CanvasWindow canvas){
       this.canvas = canvas;
+      createRockets();
+      addRockets();
+   }
+
+   public void createRockets(){
       rocket1 = new RocketShip(50, 75);
       rocket2 = new RocketShip(80, 75);
       rocket3 = new RocketShip(110, 75);
@@ -21,14 +29,17 @@ public class UI {
       rocketList.add(rocket1);
       rocketList.add(rocket2);
       rocketList.add(rocket3);
+   }
+
+   public void addRockets(){
       for (RocketShip rocket: rocketList){
          rocket.setStroke(Color.GREEN);
       }
       addToCanvas(canvas);
       scoreText = new GraphicsText();
       setScoreText();
-   }
 
+   }
    public void addToCanvas(CanvasWindow canvas){
       for (RocketShip rocket: rocketList){
          rocket.addToCanvas(canvas);
@@ -50,7 +61,6 @@ public class UI {
 
    public void removeLife(){
       //TODO: Once we get collision working, make a method that removes a life when the rocketship gets hit.
-
    }
 
 }
