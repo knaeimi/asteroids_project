@@ -60,7 +60,10 @@ public class UI {
    }
 
    public void removeLife(){
-      //TODO: Once we get collision working, make a method that removes a life when the rocketship gets hit.
+      //TODO: Once we get collision working, change this method so that the implementation works.
+      RocketShip lifeLost = rocketList.get(rocketList.size()-1);
+      rocketList.remove(rocketList.size()-1);
+      lifeLost.removeFromCanvas(canvas);
    }
 
 }
