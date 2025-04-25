@@ -56,7 +56,7 @@ public class PlayerShip extends RocketShip{
         getShape().rotateBy(rotationSpeed);
     }
     
-    public void updatePosition(){
+    public void updatePosition(){  
         double x = getShape().getX();
         double y = getShape().getY();
         

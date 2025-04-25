@@ -10,6 +10,7 @@ public class Meteor {
     private boolean moveLeft;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 5;
+    
   
     private Ellipse meteorShape;
 
@@ -66,5 +67,4 @@ public class Meteor {
     public boolean boundsCheck(){
         return (centerX < canvas.getWidth() || centerX > 0 || centerY < canvas.getHeight() || centerY > 0);
     }
-
 }

@@ -18,8 +18,8 @@ public class RocketShip {
         rocketShape = Path.makeTriangle(initialX, initialY, initialX + SIDE_LENGTH, initialY, initialX + (SIDE_LENGTH/2), initialY - SIDE_LENGTH);
         rocketShape.setStrokeColor(Color.WHITE); 
         rocketShape.setStrokeWidth(2);
-
     }
+    
     public void setCenter(double newX, double newY){
         rocketShape.setCenter(newX, newY);
     }

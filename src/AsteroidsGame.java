@@ -10,7 +10,6 @@ public class AsteroidsGame {
     private ProjectileManager projectileManager;
     private MeteorManager meteorManager;
     private CollisionManager collisionManager;
-    private long lastShotTime = System.currentTimeMillis(); 
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -34,8 +33,8 @@ public class AsteroidsGame {
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
             projectileManager.updateProjectiles(); 
-            meteorManager.updateMeteors();
-            collisionManager.shipCollision(playerShip);
+            // meteorManager.updateMeteors();
+            // collisionManager.shipCollision(playerShip);
             // for(Projectile p : projectileManager.getProjList()){
             //     collisionManager.projectileCollision(p);
             // }
@@ -55,9 +54,9 @@ public class AsteroidsGame {
                 playerShip.fireBulletProjectile();
             }
 
-            if(keyHandler.fKey()){ 
-                playerShip.fireBeamProjectile();
-            }
+            // if(keyHandler.fKey()){ 
+            //     playerShip.fireBeamProjectile();
+            // }
         });
     }
 

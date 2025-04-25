@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import edu.macalester.graphics.CanvasWindow;
 
 /*
@@ -18,9 +20,11 @@ public class ProjectileManager {
      * bounds)
      */
     public void updateProjectiles(){
-        for (Projectile projectile : projList){
-            if(!projectile.updatePosition()){
-                projList.remove(projectile);
+        Iterator<Projectile> iterator = projList.listIterator();
+        
+        while(iterator.hasNext()){
+            if(!iterator.next().updatePosition()){
+                iterator.remove();
             }
         }
     }

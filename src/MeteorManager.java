@@ -26,9 +26,8 @@ public class MeteorManager {
     /**
      *  This method contains a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
      */
-
     public void generateMeteors() {
-        for(int i = 1; ; i ++) {
+        for(int i = 1; i < 16; i ++) {
             t.schedule(spawnMeteor(), i*3000);
         }
     }
