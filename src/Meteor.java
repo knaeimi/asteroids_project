@@ -8,6 +8,10 @@ public class Meteor {
     private double centerY;
     private double radius;
     private double angle;
+    private Image meteorImage; //TODO: Kian and Sam: Finish conversion to meteor pngs with Marvin tomorow
+    // private Rectangle2D boundingBox = meteorImage.getBounds();   //commented out for now because of null errors
+    // private Rectangle boundingBox1 = new Rectangle(boundingBox.getX(), boundingBox.getY(), boundingBox.getWidth(), boundingBox.getHeight());
+    private Ellipse meteorShape;
     private boolean moveLeft;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 5;
