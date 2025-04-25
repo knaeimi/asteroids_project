@@ -24,6 +24,10 @@ public class RocketShip {
         rocketShape.setCenter(newX, newY);
     }
 
+    public void setStroke(Color color){
+        rocketShape.setStrokeColor(color);
+    }
+
     public double getSideLength(){
         return SIDE_LENGTH;
     }

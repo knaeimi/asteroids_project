@@ -26,6 +26,7 @@ public class AsteroidsGame {
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
         playerShip.addToCanvas(canvas); 
         meteorManager.generateMeteors();
+        UI ui = new UI(canvas);
     }
 
     public void animate(){
