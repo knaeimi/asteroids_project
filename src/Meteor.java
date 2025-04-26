@@ -7,7 +7,7 @@ public class Meteor {
     private Image meteorImage;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 2;
-    private static final double RADIUS = 20;
+    private static final double RADIUS = 10;
 
     public Meteor(double centerX, double centerY, double angle, CanvasWindow canvas) {
         this.centerX = centerX;
@@ -47,6 +47,10 @@ public class Meteor {
     public CanvasWindow getCanvas(){
         return canvas;
     }
+
+    /**
+     * Checks the distance between playerShip and the Meteor object
+     */
 
     public boolean isCollidingWith(PlayerShip playerShip) {
 

@@ -41,7 +41,7 @@ public class MeteorManager {
     /**
      * TODO: REWRITE JAVADOC for spawnMeteor.md
      */
-    public TimerTask spawnMeteor(int n) { //TODO: Debug conflicting updateMeteors/spawnMeteor list modification logic
+    public TimerTask spawnMeteor(int n) { 
         List<Meteor> spawnList = new ArrayList<>(meteorList);
         TimerTask task = new TimerTask() {
             @Override
@@ -57,7 +57,7 @@ public class MeteorManager {
 
     public void updateMeteors(){
         List<Meteor> updateList = new ArrayList<>(meteorList);
-        for (int i = 0; i < meteorList.size(); i++){ //TODO: Iterating through a constantly modified list... how else can we do this?
+        for (int i = 0; i < updateList.size(); i++){ 
             updateList.get(i).updatePosition();
         }
     }

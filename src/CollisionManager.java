@@ -29,6 +29,10 @@ public class CollisionManager {
         }
     }
 
+
+    /*
+     * OLD COLLISION LOGIC -- KEEPING FOR REFERENCE -Sam
+     */
     // public void shipCollision(PlayerShip playerShip) {
     //     GraphicsObject centerObj = canvas.getElementAt(playerShip.getCenterX(), playerShip.getCenterY());
     //     if(centerObj != null){
@@ -42,6 +46,9 @@ public class CollisionManager {
     //     }  
     // }
 
+    /**
+     * New shipCollision method. Uses the Meteor method isCollidingWith to check if any meteor is colliding with the PlayerShip.
+     */
     public void shipCollision(PlayerShip playerShip, MeteorManager meteorManager) {
         synchronized (meteorManager) {
             for (Meteor meteor : meteorManager.getMeteorList()) {
