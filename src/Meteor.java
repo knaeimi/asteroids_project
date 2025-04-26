@@ -16,8 +16,7 @@ public class Meteor {
     
         meteorImage = new Image("meteor.png");
         meteorImage.setScale(0.3);
-
-
+        meteorImage.setCenter(centerX, centerY);
     }
 
     public double getCenterX() {
@@ -45,7 +44,6 @@ public class Meteor {
     }
 
     public void updatePosition() {
-
         meteorImage.setX(centerX += METEOR_SPEED * Math.cos(angle));
         meteorImage.setY(centerY -= METEOR_SPEED * Math.sin(angle));
     }
