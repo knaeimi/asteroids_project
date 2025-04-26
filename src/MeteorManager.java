@@ -3,13 +3,15 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 
 import edu.macalester.graphics.*;
 
 public class MeteorManager {
 
     private CanvasWindow canvas;
-    private List<Meteor> meteorList = new ArrayList<>();
+    private CopyOnWriteArrayList<Meteor> meteorList = new CopyOnWriteArrayList<>();
     Timer t = new Timer();
     Random rnd = new Random();
 
