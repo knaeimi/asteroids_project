@@ -17,7 +17,7 @@ public class AsteroidsGame {
         keyHandler = new KeyHandler();
         projectileManager = new ProjectileManager(canvas);
         meteorManager = new MeteorManager(canvas);
-        collisionManager = new CollisionManager(canvas, meteorManager);
+        collisionManager = new CollisionManager(canvas);
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
     }
     

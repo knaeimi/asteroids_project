@@ -64,10 +64,6 @@ public class MeteorManager {
         }
     }
 
-    public void removeMeteor(Meteor meteor){
-       canvas.remove(meteor.getShape());
-    }
-
     /**
      * This method removes all Meteor objects from meteorList and Canvas.
      */
