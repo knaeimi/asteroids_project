@@ -6,7 +6,7 @@ public class Meteor {
     private double angle;
     private Image meteorImage;
     private CanvasWindow canvas;
-    private static final double METEOR_SPEED = 5;
+    private static final double METEOR_SPEED = 2;
 
     public Meteor(double centerX, double centerY, double angle, CanvasWindow canvas) {
         this.centerX = centerX;
@@ -26,6 +26,10 @@ public class Meteor {
 
     public double getCenterY() {
         return centerY;
+    }
+
+    public void setPosition(double newX, double newY){
+        meteorImage.setCenter(newX, newY);
     }
 
     public GraphicsObject getShape() {
