@@ -5,4 +5,5 @@ public interface Projectile {
     public void removeFromCanvas();
     public double getCenterX();
     public double getCenterY();
+    public boolean isCollidingWithMeteor(MeteorManager meteorManager);
 }

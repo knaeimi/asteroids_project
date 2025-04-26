@@ -9,23 +9,18 @@ import edu.macalester.graphics.GraphicsObject;
 public class CollisionManager {
 
     private CanvasWindow canvas;
-    private MeteorManager meteorManager;
 
-    public CollisionManager(CanvasWindow canvas, MeteorManager meteorManager) {
+    public CollisionManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        this.meteorManager = meteorManager;
     }
 
-    public void projectileCollision(Projectile projectile) {
-        GraphicsObject centerObj = canvas.getElementAt(projectile.getCenterX(), projectile.getCenterY());
-        if(centerObj != null){
-            for(Meteor m : meteorManager.getMeteorList()){
-                GraphicsObject mShape = m.getShape();
-                if (mShape == centerObj) {
-                    m.removeFromCanvas(canvas);
-                    // Modify score
+    public void projectileCollision(ProjectileManager projectileManager, MeteorManager meteorManager) {
+        synchronized (projectileManager) {
+            for (Projectile projectile : projectileManager.getProjList()) {
+                if (projectile.isCollidingWithMeteor(meteorManager)) {
+                    System.out.println("Collision detected!");
                 }
-            }  
+            }
         }
     }
 
@@ -47,12 +42,12 @@ public class CollisionManager {
     // }
 
     /**
-     * New shipCollision method. Uses the Meteor method isCollidingWith to check if any meteor is colliding with the PlayerShip.
+     * New shipCollision method. Uses the Meteor method isCollidingWithShip to check if any meteor is colliding with the PlayerShip.
      */
     public void shipCollision(PlayerShip playerShip, MeteorManager meteorManager) {
         synchronized (meteorManager) {
             for (Meteor meteor : meteorManager.getMeteorList()) {
-                if (meteor.isCollidingWith(playerShip)) {
+                if (meteor.isCollidingWithShip(playerShip)) {
                     System.out.println("Collision detected!");
                     playerShip.setCenter(300, 50);
                 }

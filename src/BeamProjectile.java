@@ -69,5 +69,10 @@ public class BeamProjectile implements Projectile {
             }
         }, 100);
     }
+
+    public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
+        return false; //Temporary
+    }
 }
 
+ 

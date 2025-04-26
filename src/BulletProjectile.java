@@ -55,4 +55,19 @@ public class BulletProjectile implements Projectile {
     public double getCenterY() {
         return bulletShape.getCenter().getY();
     }
+
+    public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
+        synchronized (meteorManager) {
+            for(Meteor m : meteorManager.getMeteorList()){
+                double dx = this.getCenterX() - m.getCenterX();
+                double dy = this.getCenterY() - m.getCenterY();
+                double distance = Math.sqrt(dx * dx + dy * dy);
+                if(distance < (RADIUS + m.getRadius())){
+                    m.removeFromCanvas(canvas);
+                    return true;
+                };
+            }
+            return false;
+        }
+    }
 }
