@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import edu.macalester.graphics.*;
 
 public class Meteor {
@@ -5,6 +7,7 @@ public class Meteor {
     private double centerY;
     private double angle;
     private Image meteorImage;
+    private Random random = new Random();
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 2;
     private static final double RADIUS = 10;
@@ -16,7 +19,7 @@ public class Meteor {
         this.canvas = canvas;
     
         meteorImage = new Image("meteor.png");
-        meteorImage.setScale(0.3);
+        meteorImage.setScale(random.nextDouble(0.1,0.3));
         meteorImage.setCenter(centerX, centerY);
     }
 

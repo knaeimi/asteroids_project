@@ -22,7 +22,7 @@ public class ProjectileManager {
     public void updateProjectiles(){
         Iterator<Projectile> iterator = projList.listIterator();
         
-        while(iterator.hasNext()){
+        while(iterator.hasNext()){ 
             if(!iterator.next().updatePosition()){
                 iterator.remove();
             }
@@ -53,6 +53,5 @@ public class ProjectileManager {
 
     public void addBeamProjectile(double x, double y, double angle){
         BeamProjectile beamProjectile = new BeamProjectile(x, y, angle, canvas);
-        projList.add(beamProjectile);
     }
 }

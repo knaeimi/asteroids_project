@@ -3,29 +3,27 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 
 import edu.macalester.graphics.*;
 
 public class MeteorManager {
 
     private CanvasWindow canvas;
-    private CopyOnWriteArrayList<Meteor> meteorList = new CopyOnWriteArrayList<>();
+    private ArrayList<Meteor> meteorList = new ArrayList<>();
     Timer t = new Timer();
     Random rnd = new Random();
 
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        for(int i = 1; i < 21; i ++){
-            meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150), 0, canvas));
+        for(int i = 1; i < 100; i ++){
+            meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150),0 , canvas));
         }
         
-        System.out.println(meteorList);
+        // System.out.println(meteorList);
     }
 
     public List<Meteor> getMeteorList() {
-        return meteorList;
+        return new ArrayList<Meteor>(meteorList);
     }
 
     /**
@@ -33,9 +31,12 @@ public class MeteorManager {
      */
     public void generateMeteors() {
         List<Meteor> generateList = new ArrayList<>(meteorList);
-        for(int i = 1; i < generateList.size()+1; i++) {
-            System.out.println(i);
-            t.schedule(spawnMeteor(i-1), i*1000);
+        // for(int i = 1; i < generateList.size()+1; i++) {
+        //     // System.out.println(i);
+        //     t.schedule(spawnMeteor(i-1), i*1000);
+        // }
+        for (Meteor m : generateList) {
+            m.addToCanvas(canvas);
         }
     }
 
@@ -47,8 +48,8 @@ public class MeteorManager {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                System.out.println(spawnList);
-                System.out.println(n);
+                // System.out.println(spawnList);
+                // System.out.println(n);
                 Meteor m = spawnList.get(n);
                 m.addToCanvas(canvas);    
             }
