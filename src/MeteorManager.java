@@ -31,8 +31,8 @@ public class MeteorManager {
      *  This method uses a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
      */
     public void generateMeteors() {
-        List<Meteor> nList = new ArrayList<>(meteorList);
-        for(int i = 1; i < nList.size()+1; i++) {
+        List<Meteor> generateList = new ArrayList<>(meteorList);
+        for(int i = 1; i < generateList.size()+1; i++) {
             System.out.println(i);
             t.schedule(spawnMeteor(i-1), i*1000);
         }
@@ -42,13 +42,13 @@ public class MeteorManager {
      * TODO: REWRITE JAVADOC for spawnMeteor.md
      */
     public TimerTask spawnMeteor(int n) { //TODO: Debug conflicting updateMeteors/spawnMeteor list modification logic
-        List<Meteor> sList = new ArrayList<>(meteorList);
+        List<Meteor> spawnList = new ArrayList<>(meteorList);
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                System.out.println(sList);
+                System.out.println(spawnList);
                 System.out.println(n);
-                Meteor m = sList.get(n);
+                Meteor m = spawnList.get(n);
                 m.addToCanvas(canvas);    
             }
         };
@@ -60,6 +60,10 @@ public class MeteorManager {
         for (int i = 0; i < meteorList.size(); i++){ //TODO: Iterating through a constantly modified list... how else can we do this?
             updateList.get(i).updatePosition();
         }
+    }
+
+    public void removeMeteor(Meteor meteor){
+       canvas.remove(meteor.getShape());
     }
 
     /**

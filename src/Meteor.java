@@ -7,6 +7,7 @@ public class Meteor {
     private Image meteorImage;
     private CanvasWindow canvas;
     private static final double METEOR_SPEED = 2;
+    private static final double RADIUS = 20;
 
     public Meteor(double centerX, double centerY, double angle, CanvasWindow canvas) {
         this.centerX = centerX;
@@ -41,6 +42,19 @@ public class Meteor {
 
     public void removeFromCanvas(CanvasWindow canvas){
         canvas.remove(meteorImage);
+    }
+
+    public CanvasWindow getCanvas(){
+        return canvas;
+    }
+
+    public boolean isCollidingWith(PlayerShip playerShip) {
+
+        double dx = this.centerX + 250 - playerShip.getCenterX();
+        double dy = this.centerY + 250 - playerShip.getCenterY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+    
+        return distance < (RADIUS + playerShip.getRadius());
     }
 
     public void updatePosition() {

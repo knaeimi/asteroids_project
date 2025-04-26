@@ -13,6 +13,7 @@ public class PlayerShip extends RocketShip{
     private long time = System.currentTimeMillis(); 
     private CanvasWindow canvas;
     private ProjectileManager projectileManager;
+    private final double RADIUS = 30;
    
     /*
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
@@ -135,5 +136,9 @@ public class PlayerShip extends RocketShip{
             projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
             time = currentTime;
         }
+    }
+
+    public double getRadius() {
+        return RADIUS;
     }
 }

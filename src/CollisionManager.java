@@ -29,16 +29,27 @@ public class CollisionManager {
         }
     }
 
-    public void shipCollision(PlayerShip playerShip) {
-        GraphicsObject centerObj = canvas.getElementAt(playerShip.getCenterX(), playerShip.getCenterY());
-        if(centerObj != null){
-            for(Meteor m : meteorManager.getMeteorList()){
-                GraphicsObject mShape = m.getShape();
-                if (mShape == centerObj) {
-                    playerShip.setCenter(300, 300);
-                    // Modify livesCount
+    // public void shipCollision(PlayerShip playerShip) {
+    //     GraphicsObject centerObj = canvas.getElementAt(playerShip.getCenterX(), playerShip.getCenterY());
+    //     if(centerObj != null){
+    //         for(Meteor m : meteorManager.getMeteorList()){
+    //             GraphicsObject mShape = m.getShape();
+    //             if (mShape == centerObj) {
+    //                 playerShip.setCenter(300, 300);
+    //                 // Modify livesCount
+    //             }
+    //         } 
+    //     }  
+    // }
+
+    public void shipCollision(PlayerShip playerShip, MeteorManager meteorManager) {
+        synchronized (meteorManager) {
+            for (Meteor meteor : meteorManager.getMeteorList()) {
+                if (meteor.isCollidingWith(playerShip)) {
+                    System.out.println("Collision detected!");
+                    playerShip.setCenter(300, 50);
                 }
-            } 
-        }  
+            }
+        }
     }
 }
