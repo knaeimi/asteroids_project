@@ -10,14 +10,13 @@ public class MeteorManager {
 
     private CanvasWindow canvas;
     private List<Meteor> meteorList = new ArrayList<>();
-
     Timer t = new Timer();
     Random rnd = new Random();
 
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        for(int i = 0; i < 20; i ++){
-            meteorList.add(new Meteor(-300, rnd.nextDouble(-150, 150), 0, canvas));
+        for(int i = 1; i < 21; i ++){
+            meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150), 0, canvas));
         }
         
         System.out.println(meteorList);
