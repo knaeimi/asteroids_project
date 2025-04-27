@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Rectangle;
@@ -11,6 +9,8 @@ public class BeamProjectile implements Projectile {
     private CanvasWindow canvas;
     private Rectangle beamShape;
     private double initialX, initialY, angle;
+    private final long BEAM_DURATION = 100; //100 ms duration
+    private long timeSinceSpawn = System.currentTimeMillis(); 
     
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
@@ -27,7 +27,20 @@ public class BeamProjectile implements Projectile {
         return beamLength;
     }
 
-    public boolean updatePosition(){ //for now until we figure out how to refactor.. only bullet needs update so how do we do this
+    /*
+     * Stupid fix. Basically we use the same system for mitigating bullet/beam spamming with the time stuff, but the subtle part here is returning
+     * false in this method implementation so that in ProjectileManager's updateProjectile method, it's marked for removal. No more timers here to 
+     * cause crashes.
+     * 
+     */
+    public boolean updatePosition(){ 
+       long currentTime = System.currentTimeMillis();
+
+       if(currentTime - timeSinceSpawn > BEAM_DURATION){
+            removeFromCanvas();
+            timeSinceSpawn = currentTime;
+            return false;
+        }
         return true;
     }
 
@@ -56,21 +69,10 @@ public class BeamProjectile implements Projectile {
         beamShape.setRotation(-Math.toDegrees(angle)+90);
         beamShape.setFillColor(Color.MAGENTA);
         addToCanvas();
-        removeBeam();
     }
 
-    public void removeBeam(){
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                removeFromCanvas();
-                timer.cancel();
-            }
-        }, 100);
-    }
 
-    public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
+    public boolean isCollidingWithMeteor(MeteorManager meteorManager) { 
         return false; //Temporary
     }
 }
