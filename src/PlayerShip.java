@@ -100,18 +100,18 @@ public class PlayerShip extends RocketShip{
     }
 
     private void checkShipBounds(){
-        if(getCenterY() < 0){ 
+        if(getCenterY() < -30){ 
             setCenter(getCenterX(), canvas.getHeight());
         }
-        if(getCenterY() > canvas.getHeight()){
+        if(getCenterY() > canvas.getHeight() + 30){
             setCenter(getCenterX(), currentVelocity); 
         }
 
-        if(getCenterX() < 0){ 
+        if(getCenterX() < -30){ 
             setCenter(canvas.getWidth(), getCenterY());
         }
 
-        if(getCenterX() > canvas.getWidth()){
+        if(getCenterX() > canvas.getWidth() + 30){
             setCenter(currentVelocity, getCenterY());
         }
     }

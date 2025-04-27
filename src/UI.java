@@ -1,7 +1,9 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 
 /*
@@ -23,8 +25,8 @@ public class UI {
 
    public void createRockets(){
       rocket1 = new RocketShip(50, 75);
-      rocket2 = new RocketShip(80, 75);
-      rocket3 = new RocketShip(110, 75);
+      rocket2 = new RocketShip(100, 75);
+      rocket3 = new RocketShip(150, 75);
       rocketList = new ArrayList<>();
       rocketList.add(rocket1);
       rocketList.add(rocket2);
@@ -34,6 +36,8 @@ public class UI {
    public void addRockets(){
       for (RocketShip rocket: rocketList){
          rocket.setStroke(Color.GREEN);
+         rocket.getShape().rotateBy(-15);
+         rocket.getShape().setScale(1.5);
       }
       addToCanvas(canvas);
       scoreText = new GraphicsText();
@@ -48,8 +52,10 @@ public class UI {
 
    public void setScoreText(){
       scoreText.setText(String.valueOf("Score: " + score));
-      scoreText.setCenter(90,25);
+      scoreText.setCenter(112,25);
       scoreText.setFillColor(Color.GREEN);
+      
+      scoreText.setFontStyle(FontStyle.BOLD_ITALIC);
       scoreText.setScale(2);
       canvas.add(scoreText);
    }
