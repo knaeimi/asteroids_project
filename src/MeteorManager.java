@@ -35,22 +35,23 @@ public class MeteorManager {
 
     public void generateMeteors(){ //TODO: Kian, go to Bret's office hours for help with meteor spawning/collisions on Wednesday
             
-        caseNumber = rnd.nextInt(1,4);
+        caseNumber = rnd.nextInt(1,5);
                 
             if(caseNumber == 1){ //top side
-                meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-60,60), canvas));
+                meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-97,-95), canvas));
             }
 
             if(caseNumber == 2){ //bottom side
-                meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, rnd.nextDouble(-60,60), canvas));
+                meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, rnd.nextDouble(-12,-10), canvas));
             }
 
-            if(caseNumber == 3){
-                meteorList.add(new Meteor(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+            if(caseNumber == 3){//left side
+                meteorList.add(new Meteor(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(24,26), canvas));
             }
 
-            if(caseNumber == 4){
-                meteorList.add(new Meteor(canvas.getWidth() + 30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+            if(caseNumber == 4){//right side
+                meteorList.add(new Meteor(canvas.getWidth() + 30, (rnd.nextDouble(0,canvas.getHeight())),(rnd.nextDouble(-42,-40)), canvas));
+                
             }
         
             addMeteors();
