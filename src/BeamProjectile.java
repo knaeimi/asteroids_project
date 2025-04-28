@@ -80,11 +80,6 @@ public class BeamProjectile implements Projectile {
         beamShape.setFillColor(Color.MAGENTA);
         addToCanvas();
     }
-
-
-    public boolean isCollidingWithMeteor(MeteorManager meteorManager) { 
-        return false; //Temporary
-    }
 }
 
  

@@ -60,23 +60,4 @@ public class BulletProjectile implements Projectile {
     public GraphicsObject getProjectileShape(){
         return bulletShape;
     }
-
-    public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
-        synchronized (meteorManager) {
-            for(Meteor m : meteorManager.getMeteorList()){
-                if(!m.getIsActive()){
-                    double dx = this.getCenterX() - (m.getCenterX() + 200);
-                    double dy = this.getCenterY() - m.getCenterY();
-                    double distance = Math.sqrt(dx * dx + dy * dy);
-                    // System.out.println("Distance to meteor: " + distance);
-                    // System.out.println("Sum of radii: " + (BULLET_RADIUS + m.getRadius()));
-                    if(distance < (BULLET_RADIUS + m.getRadius())){
-                        m.setPosition(1000, 1000); //Temporary fix, because removeFromCanvas is causing crashes
-                        return true;
-                    };
-                }
-            }
-            return false;
-        }
-    }
 }
