@@ -26,6 +26,7 @@ public class PlayerShip extends RocketShip{
         this.canvas = canvas;
         this.projectileManager = projectileManager;
         rotationAngle = Math.toRadians(90);
+        setRocketSize(1.3);
     }
     
     /*

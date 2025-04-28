@@ -18,8 +18,8 @@ public class BeamProjectile implements Projectile {
         this.initialY = initialY;
         this.angle = angle;
         
-        beamLength = canvas.getHeight();
-        beamWidth = 10;
+        beamLength = canvas.getWidth();
+        beamWidth = 20;
         createBeam();
     }
 

@@ -2,8 +2,8 @@ import java.awt.Color;
 import edu.macalester.graphics.*;
 
 public class AsteroidsGame {
-    private static final int CANVAS_WIDTH = 600;
-    private static final int CANVAS_HEIGHT = 600;
+    private static final int CANVAS_WIDTH = 1920;
+    private static final int CANVAS_HEIGHT = 1080;
     private PlayerShip playerShip;
     private CanvasWindow canvas;
     private KeyHandler keyHandler;

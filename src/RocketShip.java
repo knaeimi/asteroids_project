@@ -28,6 +28,10 @@ public class RocketShip {
         rocketShape.setStrokeColor(color);
     }
 
+    public void setRocketSize(double size){
+        rocketShape.setScale(size);
+    }
+
     public double getSideLength(){
         return SIDE_LENGTH;
     }
