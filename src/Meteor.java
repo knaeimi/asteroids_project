@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 import edu.macalester.graphics.*;
@@ -6,7 +7,8 @@ public class Meteor {
     private double centerX;
     private double centerY;
     private double angle;
-    private Image meteorImage;
+    // private Image meteorImage;
+    private Ellipse meteorShape;
     private Random random = new Random();
     private CanvasWindow canvas;
     private boolean isActive;
@@ -19,9 +21,9 @@ public class Meteor {
         this.angle = angle;
         this.canvas = canvas;
     
-        meteorImage = new Image("meteor.png");
-        meteorImage.setScale(random.nextDouble(0.1,0.3));
-        meteorImage.setCenter(centerX, centerY);
+        meteorShape = new Ellipse(centerX, centerY, METEOR_RADIUS * 2, METEOR_RADIUS * 2);
+        meteorShape.setScale(random.nextDouble(2,3));
+        meteorShape.setFillColor(Color.gray);
     }
 
     public double getCenterX() {
@@ -33,19 +35,19 @@ public class Meteor {
     }
 
     public void setPosition(double newX, double newY){
-        meteorImage.setCenter(newX, newY);
+        meteorShape.setCenter(newX, newY);
     }
 
     public GraphicsObject getShape() {
-        return meteorImage;
+        return meteorShape;
     }
 
     public void addToCanvas(CanvasWindow canvas){
-        canvas.add(meteorImage);
+        canvas.add(meteorShape);
     }
 
     public void removeFromCanvas(CanvasWindow canvas){
-        canvas.remove(meteorImage);
+        canvas.remove(meteorShape);
     }
 
     public CanvasWindow getCanvas(){
@@ -82,19 +84,19 @@ public class Meteor {
     }
 
     public void updatePosition() {
-        meteorImage.setX(centerX += METEOR_SPEED * Math.cos(angle));
-        meteorImage.setY(centerY -= METEOR_SPEED * Math.sin(angle));
-        boundsCheck();
+        meteorShape.setX(centerX += METEOR_SPEED * Math.cos(angle));
+        meteorShape.setY(centerY -= METEOR_SPEED * Math.sin(angle));
+        // boundsCheck();
     }
 
-    public void boundsCheck(){
-        if(this.centerX < 0 || this.centerX > canvas.getWidth() || this.centerY < 0 || this.centerY > canvas.getHeight()){
-            isActive = false;
-        }
-        else{
-            isActive = true;
-        }
-    }
+    // public void boundsCheck(){
+    //     if(this.centerX < 0 || this.centerX > canvas.getWidth() || this.centerY < 0 || this.centerY > canvas.getHeight()){
+    //         isActive = false;
+    //     }
+    //     else{
+    //         isActive = true;
+    //     }
+    // }
 
     public double getRadius() {
         return METEOR_RADIUS;
