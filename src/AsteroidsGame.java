@@ -29,7 +29,7 @@ public class AsteroidsGame {
         animate();
     }
 
-    public void animate(){
+    public void animate(){ //change name to animateObjects for safety 
         canvas.onKeyDown(keyHandler::keyPressed);
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{

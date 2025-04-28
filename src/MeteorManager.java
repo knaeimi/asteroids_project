@@ -16,8 +16,12 @@ public class MeteorManager {
 
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        generateMeteors();
+        // generateMeteors();
         
+
+        for(int i = 1; i < 99; i ++){
+            meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150),0 , canvas));
+        }
        
     }
 
@@ -36,60 +40,34 @@ public class MeteorManager {
         }
     }
 
-    // public void generateMeteors(){    //original implementation
-    //     for (Meteor m : generateList) {
-    //         m.addToCanvas(canvas);
-    //     }
-    // }
-
-    public void generateMeteors(){ //a start on new implementation using all 4 sides w/ random angles
-            long currentTime = System.currentTimeMillis();
+    // public void generateMeteors(){ //a start on new implementation using all 4 sides w/ random angles
+    //         long currentTime = System.currentTimeMillis();
             
-            for(int i = 0; i < 100; i ++){
-                caseNumber = rnd.nextInt(1,4);
+    //         for(int i = 0; i < 100; i ++){
+    //             caseNumber = rnd.nextInt(1,4);
                 
-                // if (currentTime - time >= METEOR_DELAY){
+    //             // if (currentTime - time >= METEOR_DELAY){
                     
-                    if(caseNumber == 1){
-                        meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-60,60), canvas));
-                    }
+    //                 if(caseNumber == 1){
+    //                     meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-60,60), canvas));
+    //                 }
 
-                    if(caseNumber == 2){
-                        meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), 30, rnd.nextDouble(-60,60), canvas));
-                    }
+    //                 if(caseNumber == 2){
+    //                     meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), 30, rnd.nextDouble(-60,60), canvas));
+    //                 }
 
-                    if(caseNumber == 3){
-                        meteorList.add(new Meteor(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
-                    }
+    //                 if(caseNumber == 3){
+    //                     meteorList.add(new Meteor(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+    //                 }
 
-                    if(caseNumber == 4){
-                        meteorList.add(new Meteor(30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
-                    }
-                    time = currentTime;
-                }
-                addMeteors();
-            }
-        // }
-        
-    
-
-
-    /**
-     * DEFUNCT TIMERTASK
-     */
-    // public TimerTask spawnMeteor(int n) { 
-    //     List<Meteor> spawnList = new ArrayList<>(meteorList);
-    //     TimerTask task = new TimerTask() {
-    //         @Override
-    //         public void run() {
-    //             // System.out.println(spawnList);
-    //             // System.out.println(n);
-    //             Meteor m = spawnList.get(n);
-    //             m.addToCanvas(canvas);    
+    //                 if(caseNumber == 4){
+    //                     meteorList.add(new Meteor(30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+    //                 }
+    //                 time = currentTime;
+    //             }
+    //             addMeteors();
     //         }
-    //     };
-    //     return task;
-    // }
+        // }
 
     public void updateMeteors(){
         List<Meteor> updateList = new ArrayList<>(meteorList);
