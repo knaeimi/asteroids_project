@@ -5,15 +5,16 @@ import edu.macalester.graphics.CanvasWindow;
  * This subclass provides bounds logic along with the math behind movement.
  */
 public class PlayerShip extends RocketShip{
-    private double rotationAngle, currentVelocity, rotationSpeed = 8; 
-    private final long milisecBetweenShots = 500; // 500ms between shots. Also, if we're just going to use the same value we don't need another variable.
-    private final long milisecBetweenBeams = 2000;
-    private final long timeToFinalVel = 150;
-    private final long finalVel = 12;
+    private double rotationAngle, xVel, yVel, rotationSpeed = 5; 
+    private final long SHOT_DELAY = 500; 
+    private final long BEAM_DELAY = 2000;
+    private final double THRUST = 0.1; //for a slow build up instead of instant speed
+    private final double DRAG = 0.99; //for 1% reduction in speed 
+    private final double SHIP_RADIUS = 20;
     private long time = System.currentTimeMillis(); 
     private CanvasWindow canvas;
     private ProjectileManager projectileManager;
-    private final double SHIP_RADIUS = 20;
+  
    
     /*
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
@@ -28,24 +29,21 @@ public class PlayerShip extends RocketShip{
     }
     
     /*
-     * This method, along with rotateLeft and rotateRight, are what is called in the main class. We call up from RocketShip, and then check if
-     * the ship is out of bounds; if they are, we respawn them on the opposite side of the canvas (preserving the mechanic in the original game).
-     * Note: We set the x/y position where the ship went out of bounds to getSpeed as shorthand for adding the starting position of the axis we want to 
-     * respawn + current speed (which would just be 0 + getSpeed).
+     * This method, along with rotateLeft, rotateRight, and updatePosition are what is called in the main class. This just 
+     * applies a forward vector that depends on the ship's current angle. We clamp the speed for both velocities at 15 with a conditional.
      */
     public void forward(){ 
+        if(Math.abs(xVel) < 15 && Math.abs(yVel) < 15){
         accelerate();
-        updatePosition();
-        checkShipBounds();
+        }
     }
 
     /*
-     * This method just makes for a clean call in the main class. We call forward and decrementSpeed at the same time to achieve an affect similar to 
-     * drag. 
+     * To slow down the ship on key up, we just multiply x and y velocity by 99% over time to slow down gradualy.
      */
     public void deaccelerate(){
-        forward();
-        decrementSpeed();
+        xVel *= DRAG;
+        yVel *= DRAG;
     }
 
      /*
@@ -66,45 +64,46 @@ public class PlayerShip extends RocketShip{
         getShape().rotateBy(rotationSpeed);
     }
     
+    /*
+     * First we check if we're out of bounds, then update the ships current x/y positions by their coresponding velocities.
+     */
     public void updatePosition(){  
+        checkShipBounds();
+        
         double x = getShape().getX();
         double y = getShape().getY();
         
-        getShape().setX(x += currentVelocity * Math.cos(rotationAngle));
-        getShape().setY(y -= currentVelocity * Math.sin(rotationAngle));
+        getShape().setX(x += xVel);
+        getShape().setY(y += yVel);
     }
     
     /*
-     * Here, we use the basic acceleration formula and a conditional to give the ship some weight.
+     * Here, we just add thrust (which is a small number for proper speed increase. Without this thrust constant we go like all the way across the screen
+     * in half a second)
      */
     public void accelerate(){
-        double acceleration = (finalVel - currentVelocity) / timeToFinalVel;
-        if(currentVelocity != finalVel){
-            currentVelocity += acceleration;
-        }
+       xVel += THRUST * Math.cos(rotationAngle);
+       yVel -= THRUST * Math.sin(rotationAngle);
     }
 
     /*
-     * This is the heart of deacceleration. We simply make sure that currentVelocity is greater than 0, and then whenever you let go of the up key,
-     * speed slows down to a crawl. This took so long to figure out, but we now have fully realistic movement. Genuinely so happy with the whole 
-     * movement system I've built here.
+     * This is for when we shoot the beam projectile for game balancing. We just set both x/y velocities to 0 to stop the ship.
      */
-    public void decrementSpeed(){
-        if(currentVelocity > 0){
-            currentVelocity -= 0.1;
-        }
-    }
-
     public void stopShip(){
-        currentVelocity = 0;
+        xVel = 0;
+        yVel = 0;
     }
 
+    /*
+     * We check if the ship is out of bounds for both axes, and then set position according to what axis you went out of bounds on. We set the position
+     * of the axis you didn't go out of bounds as the corresponding current velocity to maintain speed.
+     */
     private void checkShipBounds(){
         if(getCenterY() < -30){ 
             setCenter(getCenterX(), canvas.getHeight());
         }
         if(getCenterY() > canvas.getHeight() + 30){
-            setCenter(getCenterX(), currentVelocity); 
+            setCenter(getCenterX(), yVel); 
         }
 
         if(getCenterX() < -30){ 
@@ -112,7 +111,7 @@ public class PlayerShip extends RocketShip{
         }
 
         if(getCenterX() > canvas.getWidth() + 30){
-            setCenter(currentVelocity, getCenterY());
+            setCenter(xVel, getCenterY());
         }
     }
 
@@ -122,16 +121,16 @@ public class PlayerShip extends RocketShip{
      */
     public void fireBulletProjectile(){
         long currentTime = System.currentTimeMillis();
-            if (currentTime - time > milisecBetweenShots){
+            if (currentTime - time > SHOT_DELAY){
                 projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
                 rotationAngle);
                 time = currentTime;
             }
     }
 
-    public void fireBeamProjectile(){ //TODO: Sean, this is the exact same logic as the method above, can we refactor this somehow?
+    public void fireBeamProjectile(){ 
         long currentTime = System.currentTimeMillis();
-        if (currentTime - time > milisecBetweenBeams){ //Two seconds between beam shots for balancing
+        if (currentTime - time > BEAM_DELAY){ 
             stopShip();
             projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
             time = currentTime;

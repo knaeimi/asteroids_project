@@ -33,6 +33,7 @@ public class AsteroidsGame {
         canvas.onKeyDown(keyHandler::keyPressed);
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
+            playerShip.updatePosition();
             projectileManager.updateProjectiles();
             meteorManager.updateMeteors();
             collisionManager.shipCollision(playerShip, meteorManager);
