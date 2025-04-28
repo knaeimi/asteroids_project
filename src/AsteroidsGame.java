@@ -10,6 +10,7 @@ public class AsteroidsGame {
     private ProjectileManager projectileManager;
     private MeteorManager meteorManager;
     private CollisionManager collisionManager;
+    private UI ui;
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -36,7 +37,7 @@ public class AsteroidsGame {
             playerShip.updatePosition();
             projectileManager.updateProjectiles();
             meteorManager.updateMeteors();
-            // collisionManager.shipCollision(playerShip, meteorManager);
+            collisionManager.shipCollision(playerShip, meteorManager, ui);
             //collisionManager.projectileCollision(projectileManager, meteorManager);
             //TODO: Fix issues with projectileCollision
 

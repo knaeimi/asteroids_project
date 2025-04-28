@@ -59,7 +59,6 @@ public class Meteor {
     /**
      * Checks the distance between playerShip and the Meteor object
      */
-
     public boolean isCollidingWithShip(PlayerShip playerShip) {
 
         double dx = this.centerX + 250 - playerShip.getCenterX();
@@ -67,6 +66,19 @@ public class Meteor {
         double distance = Math.sqrt(dx * dx + dy * dy);
     
         return distance < (METEOR_RADIUS + playerShip.getRadius());
+    }
+
+    public boolean isCollidingWithProjectile(ProjectileManager projectileManager) {
+        GraphicsObject centerObj = canvas.getElementAt(this.getCenterX(), this.getCenterY());
+        if(centerObj != null){
+            for(Projectile p : projectileManager.getProjList()){
+                GraphicsObject pShape = p.getProjectileShape();
+                if (pShape == centerObj) {
+                    return true;
+                }
+            }    
+        }
+        return false;  
     }
 
     public void updatePosition() {
