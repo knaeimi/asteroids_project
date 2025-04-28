@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 
-public class CollisionManager {
+public class CollisionManager { //TODO: Refactor collisions system
 
     private CanvasWindow canvas;
 

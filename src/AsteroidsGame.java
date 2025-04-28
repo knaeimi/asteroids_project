@@ -4,7 +4,6 @@ import edu.macalester.graphics.*;
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 1920;
     private static final int CANVAS_HEIGHT = 1080;
-    private final long SPAWN_DELAY = 500;
     private PlayerShip playerShip;
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
@@ -28,10 +27,10 @@ public class AsteroidsGame {
         canvas.removeAll();
         playerShip.addToCanvas(canvas); 
         UI ui = new UI(canvas);
-        animate();
+        animateObjects();
     }
 
-    public void animate(){ //change name to animateObjects for safety 
+    public void animateObjects(){ 
         canvas.onKeyDown(keyHandler::keyPressed);
         canvas.onKeyUp(keyHandler::keyReleased);
         canvas.animate(event ->{
@@ -39,7 +38,8 @@ public class AsteroidsGame {
             projectileManager.updateProjectiles();
             meteorManager.updateMeteors();
             meteorManager.populateMeteors();
-            collisionManager.shipCollision(playerShip, meteorManager, ui);
+            //TODO: Kian: Get correct meteor spawning/movement behavior ironed out before collision
+            // collisionManager.shipCollision(playerShip, meteorManager, ui);
             //collisionManager.projectileCollision(projectileManager, meteorManager);
             //TODO: Fix issues with projectileCollision
 

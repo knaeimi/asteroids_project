@@ -33,7 +33,7 @@ public class MeteorManager {
         }
     }
 
-    public void generateMeteors(){ //a start on new implementation using all 4 sides w/ random angles
+    public void generateMeteors(){ //TODO: Kian, go to Bret's office hours for help with meteor spawning/collisions on Wednesday
             
         caseNumber = rnd.nextInt(1,4);
                 
@@ -59,7 +59,7 @@ public class MeteorManager {
         public void populateMeteors(){
             long currentTime = System.currentTimeMillis();
             
-            for(int i = 0; i < 50; i++){
+            for(int i = 0; i < 1000; i++){
             
                 if(currentTime - time > SPAWN_DELAY){
                     if(getMeteorList().size() < 50){
