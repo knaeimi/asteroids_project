@@ -7,7 +7,6 @@ public class Meteor {
     private double centerX;
     private double centerY;
     private double angle;
-    // private Image meteorImage;
     private Ellipse meteorShape;
     private Random random = new Random();
     private CanvasWindow canvas;
@@ -50,10 +49,6 @@ public class Meteor {
         canvas.remove(meteorShape);
     }
 
-    public CanvasWindow getCanvas(){
-        return canvas;
-    }
-
     public boolean getIsActive() {
         return isActive;
     }
@@ -61,7 +56,7 @@ public class Meteor {
     /**
      * Checks the distance between playerShip and the Meteor object
      */
-    public boolean isCollidingWithShip(PlayerShip playerShip) {
+    public boolean isCollidingWithShip(PlayerShip playerShip) { //TODO: Refactor
 
         double dx = this.centerX + 250 - playerShip.getCenterX();
         double dy = this.centerY + 250 - playerShip.getCenterY();
@@ -70,7 +65,7 @@ public class Meteor {
         return distance < (METEOR_RADIUS + playerShip.getRadius());
     }
 
-    public boolean isCollidingWithProjectile(ProjectileManager projectileManager) {
+    public boolean isCollidingWithProjectile(ProjectileManager projectileManager) { //TODO: Refactor
         GraphicsObject centerObj = canvas.getElementAt(this.getCenterX(), this.getCenterY());
         if(centerObj != null){
             for(Projectile p : projectileManager.getProjList()){
@@ -86,10 +81,10 @@ public class Meteor {
     public void updatePosition() {
         meteorShape.setX(centerX += METEOR_SPEED * Math.cos(angle));
         meteorShape.setY(centerY -= METEOR_SPEED * Math.sin(angle));
-        // boundsCheck();
+        // boundsCheck(); //TODO: Will use once meteors respawn on other side like ship
     }
 
-    // public void boundsCheck(){
+    // public void boundsCheck(){ //TODO: Refactor
     //     if(this.centerX < 0 || this.centerX > canvas.getWidth() || this.centerY < 0 || this.centerY > canvas.getHeight()){
     //         isActive = false;
     //     }

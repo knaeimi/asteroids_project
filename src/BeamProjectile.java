@@ -10,7 +10,7 @@ public class BeamProjectile implements Projectile {
     private CanvasWindow canvas;
     private Rectangle beamShape;
     private double initialX, initialY, angle;
-    private final long BEAM_DURATION = 100; //100 ms duration
+    private final long BEAM_DURATION = 100; 
     private long timeSinceSpawn = System.currentTimeMillis(); 
     
 

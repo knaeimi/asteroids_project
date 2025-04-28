@@ -13,7 +13,6 @@ public class MeteorManager {
     private ArrayList<Meteor> meteorList = new ArrayList<>();
     Random rnd = new Random();
     
-
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
     }
@@ -53,21 +52,17 @@ public class MeteorManager {
                 meteorList.add(new Meteor(canvas.getWidth() + 30, (rnd.nextDouble(0,canvas.getHeight())),(rnd.nextDouble(-42,-40)), canvas));
                 
             }
-        
             addMeteors();
         }
 
         public void populateMeteors(){
             long currentTime = System.currentTimeMillis();
             
-            for(int i = 0; i < 1000; i++){
-            
-                if(currentTime - time > SPAWN_DELAY){
-                    if(getMeteorList().size() < 50){
+            if(currentTime - time > SPAWN_DELAY){
+                if(getMeteorList().size() < 50){
                         generateMeteors();
                     }
-                    time = currentTime;  
-                }
+                time = currentTime;  
             }
         }
         

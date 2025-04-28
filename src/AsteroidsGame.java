@@ -11,7 +11,6 @@ public class AsteroidsGame {
     private MeteorManager meteorManager;
     private CollisionManager collisionManager;
     private UI ui;
-    private long time = System.currentTimeMillis();
 
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -38,10 +37,9 @@ public class AsteroidsGame {
             projectileManager.updateProjectiles();
             meteorManager.updateMeteors();
             meteorManager.populateMeteors();
-            //TODO: Kian: Get correct meteor spawning/movement behavior ironed out before collision
+            //TODO: Get correct meteor spawning/movement behavior ironed out before collision
             // collisionManager.shipCollision(playerShip, meteorManager, ui);
             //collisionManager.projectileCollision(projectileManager, meteorManager);
-            //TODO: Fix issues with projectileCollision
 
             if(keyHandler.upKey()){
                 playerShip.forward();
