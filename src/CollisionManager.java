@@ -18,7 +18,7 @@ public class CollisionManager {
         synchronized (projectileManager) {
             for (Projectile projectile : projectileManager.getProjList()) {
                 if (projectile.isCollidingWithMeteor(meteorManager)) {
-                    System.out.println("Collision detected!");
+                    System.out.println("Meteor collision detected!");
                 }
             }
         }
@@ -48,7 +48,7 @@ public class CollisionManager {
         synchronized (meteorManager) {
             for (Meteor meteor : meteorManager.getMeteorList()) {
                 if (meteor.isCollidingWithShip(playerShip)) {
-                    System.out.println("Collision detected!");
+                    System.out.println("Ship collision detected!");
                     playerShip.setCenter(300, 50);
                 }
             }

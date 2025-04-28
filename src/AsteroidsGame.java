@@ -36,7 +36,9 @@ public class AsteroidsGame {
             projectileManager.updateProjectiles();
             meteorManager.updateMeteors();
             collisionManager.shipCollision(playerShip, meteorManager);
-            
+            //collisionManager.projectileCollision(projectileManager, meteorManager);
+            //TODO: Fix issues with projectileCollision
+
             if(keyHandler.upKey()){
                 playerShip.forward();
             }

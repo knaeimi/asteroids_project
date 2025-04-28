@@ -15,7 +15,7 @@ public class MeteorManager {
 
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        for(int i = 1; i < 100; i ++){
+        for(int i = 1; i < 99; i ++){
             meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150),0 , canvas));
         }
         
@@ -40,22 +40,23 @@ public class MeteorManager {
         }
     }
 
+
     /**
-     * TODO: REWRITE JAVADOC for spawnMeteor.md
+     * DEFUNCT TIMERTASK
      */
-    public TimerTask spawnMeteor(int n) { 
-        List<Meteor> spawnList = new ArrayList<>(meteorList);
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                // System.out.println(spawnList);
-                // System.out.println(n);
-                Meteor m = spawnList.get(n);
-                m.addToCanvas(canvas);    
-            }
-        };
-        return task;
-    }
+    // public TimerTask spawnMeteor(int n) { 
+    //     List<Meteor> spawnList = new ArrayList<>(meteorList);
+    //     TimerTask task = new TimerTask() {
+    //         @Override
+    //         public void run() {
+    //             // System.out.println(spawnList);
+    //             // System.out.println(n);
+    //             Meteor m = spawnList.get(n);
+    //             m.addToCanvas(canvas);    
+    //         }
+    //     };
+    //     return task;
+    // }
 
     public void updateMeteors(){
         List<Meteor> updateList = new ArrayList<>(meteorList);

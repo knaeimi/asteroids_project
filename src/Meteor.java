@@ -9,8 +9,9 @@ public class Meteor {
     private Image meteorImage;
     private Random random = new Random();
     private CanvasWindow canvas;
+    private boolean isActive;
     private static final double METEOR_SPEED = 2;
-    private static final double RADIUS = 15;
+    private static final double METEOR_RADIUS = 15;
 
     public Meteor(double centerX, double centerY, double angle, CanvasWindow canvas) {
         this.centerX = centerX;
@@ -51,6 +52,10 @@ public class Meteor {
         return canvas;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
     /**
      * Checks the distance between playerShip and the Meteor object
      */
@@ -61,15 +66,25 @@ public class Meteor {
         double dy = this.centerY + 250 - playerShip.getCenterY();
         double distance = Math.sqrt(dx * dx + dy * dy);
     
-        return distance < (RADIUS + playerShip.getRadius());
+        return distance < (METEOR_RADIUS + playerShip.getRadius());
     }
 
     public void updatePosition() {
         meteorImage.setX(centerX += METEOR_SPEED * Math.cos(angle));
         meteorImage.setY(centerY -= METEOR_SPEED * Math.sin(angle));
+        boundsCheck();
+    }
+
+    public void boundsCheck(){
+        if(this.centerX < 0 || this.centerX > canvas.getWidth() || this.centerY < 0 || this.centerY > canvas.getHeight()){
+            isActive = false;
+        }
+        else{
+            isActive = true;
+        }
     }
 
     public double getRadius() {
-        return RADIUS;
+        return METEOR_RADIUS;
     }
 }

@@ -9,7 +9,7 @@ import edu.macalester.graphics.Ellipse;
 public class BulletProjectile implements Projectile {
     private CanvasWindow canvas;
     private final double VELOCITY = 20;
-    public final double RADIUS = 10; //This can be public because it's a constant, and it will be easier to access later on for collisions.
+    private final double BULLET_RADIUS = 10;
     private Ellipse bulletShape;
     private double initialX;
     private double initialY;
@@ -21,7 +21,7 @@ public class BulletProjectile implements Projectile {
         this.initialY = initialY;
         this.angle = angle;
     
-        bulletShape = new Ellipse(initialX,initialY,RADIUS * 2,RADIUS * 2);
+        bulletShape = new Ellipse(initialX,initialY,BULLET_RADIUS * 2,BULLET_RADIUS * 2);
         bulletShape.setFillColor(new Color(150,0,255));
         addToCanvas();
     }
@@ -59,13 +59,17 @@ public class BulletProjectile implements Projectile {
     public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
         synchronized (meteorManager) {
             for(Meteor m : meteorManager.getMeteorList()){
-                double dx = this.getCenterX() - m.getCenterX();
-                double dy = this.getCenterY() - m.getCenterY();
-                double distance = Math.sqrt(dx * dx + dy * dy);
-                if(distance < (RADIUS + m.getRadius())){
-                    m.removeFromCanvas(canvas);
-                    return true;
-                };
+                if(!m.getIsActive()){
+                    double dx = this.getCenterX() - (m.getCenterX() + 200);
+                    double dy = this.getCenterY() - m.getCenterY();
+                    double distance = Math.sqrt(dx * dx + dy * dy);
+                    // System.out.println("Distance to meteor: " + distance);
+                    // System.out.println("Sum of radii: " + (BULLET_RADIUS + m.getRadius()));
+                    if(distance < (BULLET_RADIUS + m.getRadius())){
+                        m.setPosition(1000, 1000); //Temporary fix, because removeFromCanvas is causing crashes
+                        return true;
+                    };
+                }
             }
             return false;
         }
