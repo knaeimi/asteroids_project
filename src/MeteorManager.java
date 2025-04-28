@@ -1,25 +1,24 @@
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import edu.macalester.graphics.*;
 
 public class MeteorManager {
 
+    private int caseNumber;
+    private long time = System.currentTimeMillis();
+    private final long METEOR_DELAY = 500;
+    private long lastTime = time - METEOR_DELAY;
     private CanvasWindow canvas;
     private ArrayList<Meteor> meteorList = new ArrayList<>();
-    Timer t = new Timer();
     Random rnd = new Random();
+    
 
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
-        for(int i = 1; i < 99; i ++){
-            meteorList.add(new Meteor(-300 * i, rnd.nextDouble(-200, 150),0 , canvas));
-        }
-        
-        // System.out.println(meteorList);
+        generateMeteors();
+       
     }
 
     public List<Meteor> getMeteorList() {
@@ -29,16 +28,50 @@ public class MeteorManager {
     /**
      *  This method uses a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
      */
-    public void generateMeteors() {
+    public void addMeteors() {
         List<Meteor> generateList = new ArrayList<>(meteorList);
-        // for(int i = 1; i < generateList.size()+1; i++) {
-        //     // System.out.println(i);
-        //     t.schedule(spawnMeteor(i-1), i*1000);
-        // }
+        
         for (Meteor m : generateList) {
             m.addToCanvas(canvas);
         }
     }
+
+    // public void generateMeteors(){    //original implementation
+    //     for (Meteor m : generateList) {
+    //         m.addToCanvas(canvas);
+    //     }
+    // }
+
+    public void generateMeteors(){ //a start on new implementation using all 4 sides w/ random angles
+            long currentTime = System.currentTimeMillis();
+            caseNumber = rnd.nextInt(1,4);
+
+            for(int i = 0; i < 100; i ++){
+            
+                // if (currentTime - lastTime >= METEOR_DELAY){
+                    
+                    if(caseNumber == 1){
+                        meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-60,60), canvas));
+                    }
+
+                    if(caseNumber == 2){
+                        meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), 30, rnd.nextDouble(-60,60), canvas));
+                    }
+
+                    if(caseNumber == 3){
+                        meteorList.add(new Meteor(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+                    }
+
+                    if(caseNumber == 4){
+                        meteorList.add(new Meteor(30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
+                    }
+                    
+                    lastTime = currentTime;
+                // }
+            }
+        }
+        
+    
 
 
     /**
