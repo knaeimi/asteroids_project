@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Rectangle;
 
 public class BeamProjectile implements Projectile {
@@ -12,6 +13,10 @@ public class BeamProjectile implements Projectile {
     private final long BEAM_DURATION = 100; //100 ms duration
     private long timeSinceSpawn = System.currentTimeMillis(); 
     
+
+    /*
+     * BeamProjectile constructor method.
+     */
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;
@@ -25,6 +30,11 @@ public class BeamProjectile implements Projectile {
 
     public double getBeamLength(){
         return beamLength;
+    }
+
+    
+    public GraphicsObject getProjectileShape(){
+        return beamShape;
     }
 
     /*

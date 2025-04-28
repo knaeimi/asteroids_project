@@ -2,6 +2,7 @@ import java.awt.Color;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
+import edu.macalester.graphics.GraphicsObject;
 
 /*
  * This class handles creating the BulletProjectile objects, and provides an update method 
@@ -54,6 +55,10 @@ public class BulletProjectile implements Projectile {
 
     public double getCenterY() {
         return bulletShape.getCenter().getY();
+    }
+
+    public GraphicsObject getProjectileShape(){
+        return bulletShape;
     }
 
     public boolean isCollidingWithMeteor(MeteorManager meteorManager) {
