@@ -9,7 +9,6 @@ public class MeteorManager {
     private int caseNumber;
     private long time = System.currentTimeMillis();
     private final long METEOR_DELAY = 500;
-    private long lastTime = time - METEOR_DELAY;
     private CanvasWindow canvas;
     private ArrayList<Meteor> meteorList = new ArrayList<>();
     Random rnd = new Random();
@@ -18,6 +17,7 @@ public class MeteorManager {
     public MeteorManager(CanvasWindow canvas) {
         this.canvas = canvas;
         generateMeteors();
+        
        
     }
 
@@ -44,11 +44,11 @@ public class MeteorManager {
 
     public void generateMeteors(){ //a start on new implementation using all 4 sides w/ random angles
             long currentTime = System.currentTimeMillis();
-            caseNumber = rnd.nextInt(1,4);
-
-            for(int i = 0; i < 100; i ++){
             
-                // if (currentTime - lastTime >= METEOR_DELAY){
+            for(int i = 0; i < 100; i ++){
+                caseNumber = rnd.nextInt(1,4);
+                
+                // if (currentTime - time >= METEOR_DELAY){
                     
                     if(caseNumber == 1){
                         meteorList.add(new Meteor((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-60,60), canvas));
@@ -65,11 +65,11 @@ public class MeteorManager {
                     if(caseNumber == 4){
                         meteorList.add(new Meteor(30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(-60,60), canvas));
                     }
-                    
-                    lastTime = currentTime;
-                // }
+                    time = currentTime;
+                }
+                addMeteors();
             }
-        }
+        // }
         
     
 

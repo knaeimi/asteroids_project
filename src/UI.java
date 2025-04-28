@@ -72,4 +72,8 @@ public class UI {
       lifeLost.removeFromCanvas(canvas);
    }
 
+   public int getLives(){
+      return rocketList.size() - 1;
+   }
+
 }
