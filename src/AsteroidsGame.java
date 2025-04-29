@@ -12,6 +12,7 @@ public class AsteroidsGame {
     private CollisionManager collisionManager;
     private UI ui;
 
+    // TODO: Complete "Known Issues" section in README.md
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK); 
