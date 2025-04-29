@@ -59,9 +59,13 @@ public class MeteorManager {
             long currentTime = System.currentTimeMillis();
             
             if(currentTime - time > SPAWN_DELAY){
-                if(getMeteorList().size() < 50){
-                        generateMeteors();
+                if(getMeteorList().size() < 50){ //limits the amount we can spawn; 50 for now.
+                    generateMeteors();
+                    
+                    if(getMeteorList().isEmpty()) { 
+                    generateMeteors(); // if player shot (removed from the list) all meteors, then run it again. won't work for now.
                     }
+                }
                 time = currentTime;  
             }
         }
