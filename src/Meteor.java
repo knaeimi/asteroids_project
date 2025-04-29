@@ -58,11 +58,12 @@ public class Meteor {
      */
     public boolean isCollidingWithShip(PlayerShip playerShip) { //TODO: Refactor
 
-        double dx = this.centerX + 250 - playerShip.getCenterX();
-        double dy = this.centerY + 250 - playerShip.getCenterY();
-        double distance = Math.sqrt(dx * dx + dy * dy);
+        // double dx = this.centerX + 250 - playerShip.getCenterX();
+        // double dy = this.centerY + 250 - playerShip.getCenterY();
+        // double distance = Math.sqrt(dx * dx + dy * dy);
     
-        return distance < (METEOR_RADIUS + playerShip.getRadius());
+        // return distance < (METEOR_RADIUS + playerShip.getRadius());
+        return true; // until refactored: (playerShip doesn't have a radius- we'll check the 4 compass points similar to the Breakout implementation)
     }
 
     public boolean isCollidingWithProjectile(ProjectileManager projectileManager) { //TODO: Refactor

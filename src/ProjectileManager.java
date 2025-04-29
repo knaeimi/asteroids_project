@@ -9,7 +9,6 @@ import edu.macalester.graphics.CanvasWindow;
 public class ProjectileManager {
     private ArrayList<Projectile> projList = new ArrayList<Projectile>();
     private CanvasWindow canvas;
-    private CollisionManager colManage;
     
     public ProjectileManager(CanvasWindow canvas){
         this.canvas = canvas;
@@ -50,7 +49,10 @@ public class ProjectileManager {
         BulletProjectile bulletProjectile = new BulletProjectile(x, y, angle, canvas);
         projList.add(bulletProjectile);
     }
-
+    
+    /*
+     * Same as above- the implementation of beam is just different. Polymorphism!
+     */
     public void addBeamProjectile(double x, double y, double angle){
         BeamProjectile beamProjectile = new BeamProjectile(x, y, angle, canvas);
         projList.add(beamProjectile);

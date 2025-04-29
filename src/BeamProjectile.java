@@ -13,10 +13,6 @@ public class BeamProjectile implements Projectile {
     private final long BEAM_DURATION = 100; 
     private long timeSinceSpawn = System.currentTimeMillis(); 
     
-
-    /*
-     * BeamProjectile constructor method.
-     */
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;
@@ -32,16 +28,13 @@ public class BeamProjectile implements Projectile {
         return beamLength;
     }
 
-    
     public GraphicsObject getProjectileShape(){
         return beamShape;
     }
 
     /*
-     * Stupid fix. Basically we use the same system for mitigating bullet/beam spamming with the time stuff, but the subtle part here is returning
-     * false in this method implementation so that in ProjectileManager's updateProjectile method, it's marked for removal. No more timers here to 
-     * cause crashes.
-     * 
+     * We use the same system for mitigating bullet/beam spamming with the time stuff, but the subtle part here is returning
+     * false in this method implementation so that in ProjectileManager's updateProjectile method, it's marked for removal. 
      */
     public boolean updatePosition(){ 
        long currentTime = System.currentTimeMillis();
@@ -70,6 +63,9 @@ public class BeamProjectile implements Projectile {
         return beamShape.getCenter().getY();
     }
 
+    /*
+     * We take the initialX/Y positions of the ship and do a bit of math to maintain the correct angle. 
+     */
     public void createBeam(){
         double topLeftX = initialX - beamWidth / 2;
         double topLeftY = initialY - beamLength;

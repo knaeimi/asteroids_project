@@ -129,6 +129,11 @@ public class PlayerShip extends RocketShip{
             }
     }
 
+    /*
+     * Same concept as the fireBulletProjectile method, but we have a two second delay here instead because of how powerful the beam is. For
+     * additional game balancing, we stop the ship if a successful shot happens (but we don't punish the user for simply pressing f- only when they
+     * have the beam available)
+     */
     public void fireBeamProjectile(){ 
         long currentTime = System.currentTimeMillis();
         if (currentTime - time > BEAM_DELAY){ 
@@ -136,9 +141,5 @@ public class PlayerShip extends RocketShip{
             projectileManager.addBeamProjectile(getCenterX(), getCenterY(), rotationAngle);
             time = currentTime;
         }
-    }
-
-    public double getRadius() {
-        return SHIP_RADIUS;
     }
 }

@@ -26,7 +26,6 @@ public class CollisionManager { //TODO: Refactor collisions system
         }
     }
 
-
     /**
      * Uses the Meteor method isCollidingWithShip to check if any meteor is colliding with the PlayerShip.
      * //TODO: Refactor this too

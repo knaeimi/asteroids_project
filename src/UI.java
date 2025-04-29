@@ -1,7 +1,5 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.util.ArrayList;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
@@ -24,9 +22,9 @@ public class UI {
    }
 
    public void createRockets(){
-      rocket1 = new RocketShip(50, 100);
-      rocket2 = new RocketShip(125, 100);
-      rocket3 = new RocketShip(200, 100);
+      rocket1 = new RocketShip(50, 125);
+      rocket2 = new RocketShip(125, 125);
+      rocket3 = new RocketShip(200, 125);
       rocketList = new ArrayList<>();
       rocketList.add(rocket1);
       rocketList.add(rocket2);
