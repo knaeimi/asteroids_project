@@ -7,7 +7,7 @@ import edu.macalester.graphics.CanvasWindow;
  * This class handles (currently only the BulletProjectile) the management of bullets on the screen. 
  */
 public class ProjectileManager {
-    private ArrayList<Projectile> projList = new ArrayList<Projectile>();
+    private ArrayList<Projectile> projectileList = new ArrayList<Projectile>();
     private CanvasWindow canvas;
     
     public ProjectileManager(CanvasWindow canvas){
@@ -19,7 +19,7 @@ public class ProjectileManager {
      * bounds)
      */
     public void updateProjectiles(){
-        Iterator<Projectile> iterator = projList.listIterator();
+        Iterator<Projectile> iterator = projectileList.listIterator();
     
         while(iterator.hasNext()){
             Projectile currentProj = iterator.next();
@@ -30,17 +30,16 @@ public class ProjectileManager {
         }
     }
 
-    public ArrayList<Projectile> getProjList() {
-        return projList;
+    public ArrayList<Projectile> getProjectileList() {
+        return new ArrayList<>(projectileList);
     }
 
     /*
      * Not sure if we'll need this method but here just in case.
      */
-    public void removeAllProjectiles(){
-        for (Projectile projectile : projList){
-            projectile.removeFromCanvas();
-        }
+    public void removeProjectile(Projectile projectile){
+        canvas.remove(projectile.getProjectileShape());
+        projectileList.remove(projectile);
     }
 
     /*
@@ -49,7 +48,7 @@ public class ProjectileManager {
      */
     public void addBulletProjectile(double x, double y, double angle){
         BulletProjectile bulletProjectile = new BulletProjectile(x, y, angle, canvas);
-        projList.add(bulletProjectile);
+        projectileList.add(bulletProjectile);
     }
     
     /*
@@ -57,6 +56,6 @@ public class ProjectileManager {
      */
     public void addBeamProjectile(double x, double y, double angle){
         BeamProjectile beamProjectile = new BeamProjectile(x, y, angle, canvas);
-        projList.add(beamProjectile);
+        projectileList.add(beamProjectile);
     }
 }

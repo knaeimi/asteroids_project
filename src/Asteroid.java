@@ -52,4 +52,8 @@ public class Asteroid {
         asteroidShape.setX(centerX += ASTEROID_SPEED * Math.cos(angle));
         asteroidShape.setY(centerY -= ASTEROID_SPEED * Math.sin(angle));
     }
+
+    public double getRadius(){
+        return ASTEROID_RADIUS;
+    }
 }

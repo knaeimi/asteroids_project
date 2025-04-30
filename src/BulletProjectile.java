@@ -32,6 +32,14 @@ public class BulletProjectile implements Projectile {
       bulletShape.setY(initialY -= VELOCITY * Math.sin(angle));
       return boundsCheck();
     }
+    public boolean intersects(Asteroid asteroid) {
+        double distance = Math.hypot(initialX  - asteroid.getCenterX(), initialY - asteroid.getCenterY());
+        
+        if (distance <=  BULLET_RADIUS + asteroid.getRadius()) {
+            return true;
+        }
+        return false;
+    }
 
     public void addToCanvas() {
         canvas.add(bulletShape);
@@ -59,5 +67,9 @@ public class BulletProjectile implements Projectile {
 
     public GraphicsObject getProjectileShape(){
         return bulletShape;
+    }
+
+    public double getRadius(){
+        return BULLET_RADIUS;
     }
 }

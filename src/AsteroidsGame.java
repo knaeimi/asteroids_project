@@ -12,14 +12,13 @@ public class AsteroidsGame {
     private CollisionManager collisionManager;
     private UI ui;
 
-    // TODO: Complete "Known Issues" section in README.md
     public AsteroidsGame(){
         canvas = new CanvasWindow("Asteroids", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK); 
         keyHandler = new KeyHandler();
         projectileManager = new ProjectileManager(canvas);
         asteroidManager = new AsteroidManager(canvas);
-        collisionManager = new CollisionManager(canvas);
+        collisionManager = new CollisionManager(asteroidManager, projectileManager, canvas);
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
     }
     
@@ -36,11 +35,9 @@ public class AsteroidsGame {
         canvas.animate(event ->{
             playerShip.updatePosition();
             projectileManager.updateProjectiles();
-            asteroidManager.updateMeteors();
-            asteroidManager.populateAsteroids();();
-            //TODO: Get correct meteor spawning/movement behavior ironed out before collision
-            // collisionManager.shipCollision(playerShip, meteorManager, ui);
-            //collisionManager.projectileCollision(projectileManager, meteorManager);
+            asteroidManager.updateAsteroids();
+            asteroidManager.populateAsteroids();
+            collisionManager.checkBulletCollisions();
 
             if(keyHandler.upKey()){
                 playerShip.forward();

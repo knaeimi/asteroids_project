@@ -11,14 +11,14 @@ public class AsteroidManager {
     private final long SPAWN_DELAY = 1000;
     private CanvasWindow canvas;
     private ArrayList<Asteroid> asteroidList = new ArrayList<>();
-    Random rnd = new Random();
+    Random random = new Random();
     
     public AsteroidManager(CanvasWindow canvas) {
         this.canvas = canvas;
     }
 
     public List<Asteroid> getAsteroidList() {
-        return new ArrayList<Asteroid>(asteroidList);
+        return new ArrayList<>(asteroidList);
     }
 
     /**
@@ -27,29 +27,29 @@ public class AsteroidManager {
     public void addAsteroids() {
         List<Asteroid> generateList = new ArrayList<>(asteroidList);
         
-        for (Asteroid m : generateList) {
-            m.addToCanvas(canvas);
+        for (Asteroid asteroid : generateList) {
+            asteroid.addToCanvas(canvas);
         }
     }
 
     public void generateAsteroids(){ //TODO: Kian, go to Bret's office hours for help with meteor spawning/collisions on Wednesday
             
-        caseNumber = rnd.nextInt(1,5);
+        caseNumber = random.nextInt(1,5);
                 
             if(caseNumber == 1){ //top side
-                asteroidList.add(new Asteroid((rnd.nextDouble(0,canvas.getWidth())), -30, rnd.nextDouble(-97,-95), canvas));
+                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), canvas));
             }
 
             if(caseNumber == 2){ //bottom side
-                asteroidList.add(new Asteroid((rnd.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, rnd.nextDouble(-12,-10), canvas));
+                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), canvas));
             }
 
             if(caseNumber == 3){//left side
-                asteroidList.add(new Asteroid(-30, (rnd.nextDouble(0,canvas.getHeight())), rnd.nextDouble(24,26), canvas));
+                asteroidList.add(new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), canvas));
             }
 
             if(caseNumber == 4){//right side
-                asteroidList.add(new Asteroid(canvas.getWidth() + 30, (rnd.nextDouble(0,canvas.getHeight())),(rnd.nextDouble(-42,-40)), canvas));
+                asteroidList.add(new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), canvas));
                 
             }
             addAsteroids();
@@ -70,17 +70,15 @@ public class AsteroidManager {
             }
         }
         
-    
-
-    public void updateMeteors(){
+    public void updateAsteroids(){
         List<Asteroid> updateList = new ArrayList<>(asteroidList);
         for (int i = 0; i < updateList.size(); i++){ 
             updateList.get(i).updatePosition();
         }
     }
 
-    public void removeAllAsteroids(){
-        asteroidList.clear();
-        canvas.removeAll();
+    public void removeAsteroid(Asteroid asteroid){
+        asteroid.removeFromCanvas(canvas);
+        asteroidList.remove(asteroid);
     }
 }

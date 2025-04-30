@@ -46,6 +46,16 @@ public class BeamProjectile implements Projectile {
         return true;
     }
 
+    public boolean intersects(Asteroid asteroid){ //TODO: Kian, get help for this version with Bret tomorow
+       
+        double distance = Math.hypot(initialX  - asteroid.getCenterX(), initialY - asteroid.getCenterY());
+            
+        if (distance <=  beamWidth + asteroid.getRadius()) {
+            return true;
+        }
+            return false;
+    }
+    
     public void addToCanvas(){
         canvas.add(beamShape);
     }

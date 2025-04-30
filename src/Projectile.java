@@ -7,4 +7,5 @@ public interface Projectile {
     public double getCenterX();
     public double getCenterY();
     public GraphicsObject getProjectileShape();
+    public boolean intersects(Asteroid asteroid);
 }
