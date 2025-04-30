@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsObject;
@@ -27,11 +26,19 @@ public class BulletProjectile implements Projectile {
         addToCanvas();
     }
 
+    /*
+     * We both update the bullets position and return a boolean to mark for list/canvas removal if a bullet
+     * is out of bounds.
+     */
     public boolean updatePosition() {
       bulletShape.setX(initialX += VELOCITY * Math.cos(angle));
       bulletShape.setY(initialY -= VELOCITY * Math.sin(angle));
       return boundsCheck();
     }
+    
+    /*
+     * Modeled after HW2's CannonBall intersects method. Very similar logic.
+     */
     public boolean intersects(Asteroid asteroid) {
         double distance = Math.hypot(getCenterX()  - asteroid.getCenterX(), getCenterY()- asteroid.getCenterY());
         

@@ -1,5 +1,8 @@
 
+import java.awt.Color;
+
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.Ellipse;
 
 /*
  * This subclass provides bounds logic along with the math behind movement.
@@ -10,15 +13,19 @@ public class PlayerShip extends RocketShip{
     private final long BEAM_DELAY = 2000;
     private final double THRUST = 0.1; //for a slow build up instead of instant speed
     private final double DRAG = 0.99; //for 1% reduction in speed 
+    private final double HITCIRCLE_RADIUS = getSideLength()/2;
     private long time = System.currentTimeMillis(); 
     private CanvasWindow canvas;
     private ProjectileManager projectileManager;
+    private Ellipse hitCircle;
   
    
     /*
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
      * for the triangle. We also have a rotation angle variable (initially 90 for the ship to travel in the correct direction) that tracks
-     * left/right rotation of the ship.
+     * left/right rotation of the ship. Finally, we have an invisible hit circle (that was not so at first... had it in red for a while
+     * to figure out what a good size would be for collisions) that is used to determine if a asteroid collision
+     * has occured.
      */
     public PlayerShip(double initialX, double initialY, CanvasWindow canvas, ProjectileManager projectileManager){
         super(initialX, initialY);
@@ -26,6 +33,8 @@ public class PlayerShip extends RocketShip{
         this.projectileManager = projectileManager;
         rotationAngle = Math.toRadians(90);
         setRocketSize(1.3);
+        hitCircle = new Ellipse(getCenterX(),getCenterY(), HITCIRCLE_RADIUS * 2 , HITCIRCLE_RADIUS * 2);
+        addToCanvas(canvas);
     }
     
     /*
@@ -53,6 +62,7 @@ public class PlayerShip extends RocketShip{
     public void rotateLeft(){
         rotationAngle += Math.toRadians(rotationSpeed);
         getShape().rotateBy(-rotationSpeed);
+        hitCircle.rotateBy(-rotationSpeed);
     }
     
      /*
@@ -62,6 +72,7 @@ public class PlayerShip extends RocketShip{
     public void rotateRight(){
         rotationAngle -= Math.toRadians(rotationSpeed);
         getShape().rotateBy(rotationSpeed);
+        hitCircle.rotateBy(rotationSpeed);
     }
     
     /*
@@ -75,6 +86,7 @@ public class PlayerShip extends RocketShip{
         
         getShape().setX(x += xVel);
         getShape().setY(y += yVel);
+        hitCircle.setCenter(getCenterX(), getCenterY());
     }
     
     /*
@@ -113,6 +125,18 @@ public class PlayerShip extends RocketShip{
         if(getCenterX() > canvas.getWidth() + 30){
             setCenter(xVel, getCenterY());
         }
+    }
+
+    /*
+     * We use that hit circle, along with more HW2 style logic to determine if a collision has occured.
+     */
+    public boolean intersectsAsteroid(Asteroid asteroid){
+        double distance = Math.hypot(getCenterX()  - asteroid.getCenterX(), getCenterY()- asteroid.getCenterY());
+        
+        if (distance <=  HITCIRCLE_RADIUS + asteroid.getRadius()) {
+            return true;
+        }
+        return false;
     }
 
     /*

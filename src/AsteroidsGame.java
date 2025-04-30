@@ -19,13 +19,8 @@ public class AsteroidsGame {
         projectileManager = new ProjectileManager(canvas);
         asteroidManager = new AsteroidManager(canvas);
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
-    }
-    
-    public void run() {
-        canvas.removeAll();
-        playerShip.addToCanvas(canvas); 
-        UI ui = new UI(canvas);
-        collisionManager = new CollisionManager(asteroidManager, projectileManager, ui);
+        ui = new UI(canvas, playerShip);
+        collisionManager = new CollisionManager(asteroidManager, projectileManager, playerShip, ui, canvas);
         animateObjects();
     }
 
@@ -35,9 +30,9 @@ public class AsteroidsGame {
         canvas.animate(event ->{
             playerShip.updatePosition();
             projectileManager.updateProjectiles();
-            asteroidManager.updateAsteroids();
             asteroidManager.populateAsteroids();
-            collisionManager.checkBulletCollisions();
+            asteroidManager.updateAsteroids();
+            collisionManager.checkAllCollisions();
 
             if(keyHandler.upKey()){
                 playerShip.forward();
@@ -65,7 +60,6 @@ public class AsteroidsGame {
     }
 
     public static void main(String[] args) {
-        AsteroidsGame game = new AsteroidsGame();
-        game.run();
+        new AsteroidsGame();
     }
 }

@@ -14,14 +14,12 @@ public class UI {
    private GraphicsText gameOverText;
    private int score = 0;
    private CanvasWindow canvas;
+   private PlayerShip playerShip;
 
-   public UI(CanvasWindow canvas){
+   public UI(CanvasWindow canvas, PlayerShip playerShip){
       this.canvas = canvas;
-      createRockets();
-      addRockets();
-      scoreText = new GraphicsText();
-      setScoreText();
-      canvas.add(scoreText);
+      this.playerShip = playerShip;
+      createUI();
    }
 
    public void createRockets(){
@@ -44,12 +42,23 @@ public class UI {
    }
    
    public void setScoreText(){
+      scoreText = new GraphicsText();
       scoreText.setText(String.valueOf("Score:  " + score));
       scoreText.setCenter(140,30);
       scoreText.setFillColor(Color.GREEN);
-      
       scoreText.setFontStyle(FontStyle.BOLD_ITALIC);
       scoreText.setScale(3);
+      canvas.add(scoreText);
+   }
+
+   public void setGameOverText(){
+      gameOverText = new GraphicsText();
+      gameOverText.setText("GAME OVER");
+      gameOverText.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
+      gameOverText.setFillColor(Color.RED);
+      gameOverText.setFontStyle(FontStyle.BOLD_ITALIC);
+      gameOverText.setScale(5);
+      canvas.add(gameOverText);
    }
 
    public void addPoints(){
@@ -57,15 +66,31 @@ public class UI {
       scoreText.setText(String.valueOf("Score:  " + score));
    }
 
+   /*
+    * We use this method to first check if the user has lost all lives-if so, throw up the game over text and then
+    remove the player from the canvas before (first waiting a couple seconds) closing the window. Otherwise, we
+    take a ship from the 3 up top, along with the actual list.
+    */
    public void removeLife(){
-      //TODO: Once we get collision working, change this method so that the implementation works.
-      RocketShip lifeLost = rocketList.get(rocketList.size()-1);
-      rocketList.remove(rocketList.size()-1);
-      lifeLost.removeFromCanvas(canvas);
+      if(rocketList.size() == 0){
+         setGameOverText();
+         playerShip.removeFromCanvas(canvas);
+         canvas.draw();
+         canvas.pause(5000);
+         canvas.closeWindow();
+      }
+      RocketShip uiShip = rocketList.get(rocketList.size()-1);
+      rocketList.remove(uiShip);
+      uiShip.removeFromCanvas(canvas);
    }
 
-   public int getLives(){
-      return rocketList.size() - 1;
+   /*
+    * Nice utility method for a clean call in the constructor.
+    */
+   public void createUI(){
+      createRockets();
+      addRockets();
+      setScoreText();
    }
-
+   
 }

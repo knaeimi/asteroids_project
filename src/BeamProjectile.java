@@ -46,7 +46,7 @@ public class BeamProjectile implements Projectile {
         return true;
     }
 
-    public boolean intersects(Asteroid asteroid){ //TODO: Kian, get help for this version with Bret tomorow
+    public boolean intersects(Asteroid asteroid){ //TODO: Last thing: Get help from Bret for this
        
         double distance = Math.hypot(initialX  - asteroid.getCenterX(), initialY - asteroid.getCenterY());
             

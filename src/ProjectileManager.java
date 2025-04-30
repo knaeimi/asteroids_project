@@ -4,7 +4,7 @@ import java.util.Iterator;
 import edu.macalester.graphics.CanvasWindow;
 
 /*
- * This class handles (currently only the BulletProjectile) the management of bullets on the screen. 
+ * This class handles the management of bullets and beams on the screen. 
  */
 public class ProjectileManager {
     private ArrayList<Projectile> projectileList = new ArrayList<Projectile>();
@@ -16,7 +16,8 @@ public class ProjectileManager {
 
     /*
      * This method handles the removal of projectiles from the list of projectiles on the screen if update returns false (meaning a bullet is out of
-     * bounds)
+     * bounds), or in the case of the beam that enough time has ellapsed for removal. Thank you Marvin and
+     * Lewis for teaching me how to use iterators (concurrent modifications were happening without them)
      */
     public void updateProjectiles(){
         Iterator<Projectile> iterator = projectileList.listIterator();
@@ -35,7 +36,7 @@ public class ProjectileManager {
     }
 
     /*
-     * Not sure if we'll need this method but here just in case.
+     * Used in CollisionManager.
      */
     public void removeProjectile(Projectile projectile){
         canvas.remove(projectile.getProjectileShape());
@@ -52,7 +53,7 @@ public class ProjectileManager {
     }
     
     /*
-     * Same as above- the implementation of beam is just different. Polymorphism!
+     * Same as above- the implementation of beam is just different.
      */
     public void addBeamProjectile(double x, double y, double angle){
         BeamProjectile beamProjectile = new BeamProjectile(x, y, angle, canvas);

@@ -1,5 +1,8 @@
 import edu.macalester.graphics.GraphicsObject;
 
+/*
+ * Interface for polymorphic behavior.
+ */
 public interface Projectile {
     public boolean updatePosition();
     public void addToCanvas();

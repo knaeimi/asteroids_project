@@ -1,17 +1,20 @@
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
-
 import edu.macalester.graphics.*;
 
+/*
+ * This class handles asteroid instantiation/creation, updating all asteroids, and also provides a 
+ * remove asteroid method for collision manager to use.
+ */
 public class AsteroidManager {
-
-    private int caseNumber;
-    private long time = System.currentTimeMillis();
     private final long SPAWN_DELAY = 1000;
+    private int side;
+    private long time = System.currentTimeMillis();
     private CanvasWindow canvas;
     private ArrayList<Asteroid> asteroidList = new ArrayList<>();
     Random random = new Random();
+    Asteroid asteroid;
     
     public AsteroidManager(CanvasWindow canvas) {
         this.canvas = canvas;
@@ -21,64 +24,66 @@ public class AsteroidManager {
         return new ArrayList<>(asteroidList);
     }
 
-    /**
-     *  This method uses a Timer that calls the TimerTask in the spawnMeteor() method, spawning Meteor objects within the game.
+    /*
+     * We randomly choose from the 4 sides (top, bottom, left, and right respectively), and add an asteroid
+     * at that position (which is also random, along with a random angle... had to fiddle around to find 
+     * nice looking angles).
      */
-    public void addAsteroids() {
-        List<Asteroid> generateList = new ArrayList<>(asteroidList);
-        
-        for (Asteroid asteroid : generateList) {
-            asteroid.addToCanvas(canvas);
-        }
-    }
-
-    public void generateAsteroids(){ 
-            
-        caseNumber = random.nextInt(1,5);
-                
-            if(caseNumber == 1){ //top side
-                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
+    public void generateAsteroids(){    
+        side = random.nextInt(1,5);
+            if(side == 1){ //top side
+                asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
             }
 
-            if(caseNumber == 2){ //bottom side
-                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), random.nextDouble(50,80), canvas));
+            else if (side == 2){ //bottom side
+                asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), random.nextDouble(50,80), canvas));
             }
 
-            if(caseNumber == 3){//left side
-                asteroidList.add(new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), random.nextDouble(50,80), canvas));
+            else if(side == 3){//left side
+                asteroid = (new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), random.nextDouble(50,80), canvas));
             }
 
-            if(caseNumber == 4){//right side
-                asteroidList.add(new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), random.nextDouble(50,80), canvas));
-                
+            else if (side == 4){//right side
+                asteroid = (new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), random.nextDouble(50,80), canvas));
             }
-            addAsteroids();
+            asteroid.addToCanvas();
+            asteroidList.add(asteroid);
         }
 
+        /*
+         * This method just handles generating asteroids at a given amount, along with maintaining a delay
+         * so as to not overwhelm the user.
+         */
         public void populateAsteroids(){
             long currentTime = System.currentTimeMillis();
-            
             if(currentTime - time > SPAWN_DELAY){
-                if(getAsteroidList().size() < 50){ //limits the amount we can spawn; 50 for now.
+                if(getAsteroidList().size() < 5){ //Where we choose the amount of asteroids for a given wave.
                     generateAsteroids();
                     
-                    if(getAsteroidList().isEmpty()) { 
-                    generateAsteroids(); // if player shot (removed from the list) all meteors, then run it again. won't work for now.
+                    if(getAsteroidList().isEmpty()){ 
+                        generateAsteroids(); // if player has shot (and retroactively removed from the list) every asteroid, then respawn them.
                     }
                 }
                 time = currentTime;  
             }
         }
-        
+    
+        /*
+         * Where updating/wrap arounds happen.
+         */
     public void updateAsteroids(){
         List<Asteroid> updateList = new ArrayList<>(asteroidList);
         for (int i = 0; i < updateList.size(); i++){ 
             updateList.get(i).updatePosition();
+            updateList.get(i).wrapAround();
         }
     }
 
+    /*
+     * For asteroid removal logic in CollisionManager.
+     */
     public void removeAsteroid(Asteroid asteroid){
-        asteroid.removeFromCanvas(canvas);
+        asteroid.removeFromCanvas();
         asteroidList.remove(asteroid);
     }
 }

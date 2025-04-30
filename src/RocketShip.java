@@ -9,7 +9,7 @@ import edu.macalester.graphics.Path;
 public class RocketShip {
     private static final double SIDE_LENGTH = 20;
     private Path rocketShape;
-   
+
     /*
      * To construct our RocketShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
      * for the triangle.

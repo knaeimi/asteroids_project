@@ -1,15 +1,20 @@
 import java.awt.Color;
 import edu.macalester.graphics.*;
 
+/*
+ * This class handles the creation of the asteroid objects, as well as movement/wrap around math.
+ */
 public class Asteroid {
+    private static final double ASTEROID_SPEED = 5;
     private double centerX;
     private double centerY;
     private double angle;
     private double radius;
     private Ellipse asteroidShape;
-    private static final double ASTEROID_SPEED = 5;
+    private CanvasWindow canvas;
     
     public Asteroid(double centerX, double centerY, double angle, double radius, CanvasWindow canvas) {
+        this.canvas = canvas;
         this.centerX = centerX;
         this.centerY = centerY;
         this.angle = angle;
@@ -27,27 +32,46 @@ public class Asteroid {
         return asteroidShape.getCenter().getY();
     }
 
-    public void setPosition(double newX, double newY){
-        asteroidShape.setCenter(newX, newY);
-    }
-
     public GraphicsObject getShape() {
         return asteroidShape;
     }
 
-    public void addToCanvas(CanvasWindow canvas){
+    public void addToCanvas(){
         canvas.add(asteroidShape);
     }
 
-    public void removeFromCanvas(CanvasWindow canvas){
+    public void removeFromCanvas(){
         canvas.remove(asteroidShape);
     }
   
     public void updatePosition() {
-        asteroidShape.setX(centerX += ASTEROID_SPEED * Math.cos(angle));
-        asteroidShape.setY(centerY -= ASTEROID_SPEED * Math.sin(angle));
+        centerX += ASTEROID_SPEED * Math.cos(angle);
+        centerY -= ASTEROID_SPEED * Math.sin(angle);
+        setCenter(centerX, centerY);
     }
-   
+    
+    /*
+     * For that nice respawning behavior that happens in the actual game. Very similar to boundsCheck
+     * in PlayerShip.
+     */
+    public void wrapAround(){
+        double x = asteroidShape.getCenter().getX();
+        double y = asteroidShape.getCenter().getY();
+
+        if(y < -30){
+            centerY = canvas.getHeight();
+        }
+        if(y > canvas.getHeight() + 30){
+            centerY = ASTEROID_SPEED;
+        }
+        if(x < -30){
+            centerX = canvas.getWidth();
+        }
+        if(x > canvas.getWidth() + 30){
+           centerX = ASTEROID_SPEED;
+        }
+    }
+
     public void setCenter(double newX, double newY){
         asteroidShape.setCenter(newX, newY);
     }
