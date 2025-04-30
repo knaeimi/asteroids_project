@@ -12,6 +12,7 @@ public class UI {
    private RocketShip rocket1, rocket2, rocket3;
    private GraphicsText scoreText;
    private GraphicsText gameOverText;
+   private GraphicsText noLivesText;
    private int score = 0;
    private CanvasWindow canvas;
    private PlayerShip playerShip;
@@ -37,6 +38,17 @@ public class UI {
          rocket.setStroke(Color.GREEN);
          rocket.getShape().rotateBy(-15);
          rocket.setRocketSize(2);
+         rocket.addToCanvas(canvas);
+      }
+   }
+
+   /*
+    * Used in the updateRocketStatus method.
+    */
+   public void updateColors(Color color){
+      for(RocketShip rocket : rocketList){
+         rocket.removeFromCanvas(canvas);
+         rocket.setStroke(color);
          rocket.addToCanvas(canvas);
       }
    }
@@ -67,21 +79,12 @@ public class UI {
    }
 
    /*
-    * We use this method to first check if the user has lost all lives-if so, throw up the game over text and then
-    remove the player from the canvas before (first waiting a couple seconds) closing the window. Otherwise, we
-    take a ship from the 3 up top, along with the actual list.
+    * Utility method to accomplish all life checks in CollisionManager.
     */
    public void removeLife(){
-      if(rocketList.size() == 0){
-         setGameOverText();
-         playerShip.removeFromCanvas(canvas);
-         canvas.draw();
-         canvas.pause(5000);
-         canvas.closeWindow();
-      }
-      RocketShip uiShip = rocketList.get(rocketList.size()-1);
-      rocketList.remove(uiShip);
-      uiShip.removeFromCanvas(canvas);
+      checkForGameOver();
+      updateRocketStatus();
+      removeShipFromUI();
    }
 
    /*
@@ -92,5 +95,42 @@ public class UI {
       addRockets();
       setScoreText();
    }
-   
+
+   /*
+    * A way to indicate to the user visually to be careful as lives are lost.
+    */
+   public void updateRocketStatus(){
+      if(rocketList.size() - 1  == 2){
+         updateColors(Color.ORANGE);
+      }
+
+      if(rocketList.size() - 1 == 1 ){
+         updateColors(Color.RED);
+      }
+
+      if(rocketList.size() - 1 == 0){
+         noLivesText = new GraphicsText();
+         noLivesText.setText("NO LIVES REMAINING");
+         noLivesText.setFillColor(Color.RED);
+         noLivesText.setPosition(88,90);
+         noLivesText.setScale(2);
+         canvas.add(noLivesText);
+      }
+   }
+
+   public void checkForGameOver(){
+      if(rocketList.size() == 0){
+         setGameOverText();
+         playerShip.removeFromCanvas(canvas);
+         canvas.draw();
+         canvas.pause(5000);
+         canvas.closeWindow();
+      }
+   }
+
+   public void removeShipFromUI(){
+      RocketShip uiShip = rocketList.get(rocketList.size()-1);
+      rocketList.remove(uiShip);
+      uiShip.removeFromCanvas(canvas);
+   }
 }

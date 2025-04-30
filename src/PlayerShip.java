@@ -1,6 +1,4 @@
 
-import java.awt.Color;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 
@@ -8,7 +6,7 @@ import edu.macalester.graphics.Ellipse;
  * This subclass provides bounds logic along with the math behind movement.
  */
 public class PlayerShip extends RocketShip{
-    private double rotationAngle, xVel, yVel, rotationSpeed = 5; 
+    private double rotationAngle, xVel, yVel, rotationSpeed = 7; 
     private final long SHOT_DELAY = 500; 
     private final long BEAM_DELAY = 2000;
     private final double THRUST = 0.1; //for a slow build up instead of instant speed
@@ -18,7 +16,6 @@ public class PlayerShip extends RocketShip{
     private CanvasWindow canvas;
     private ProjectileManager projectileManager;
     private Ellipse hitCircle;
-  
    
     /*
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
@@ -34,7 +31,7 @@ public class PlayerShip extends RocketShip{
         rotationAngle = Math.toRadians(90);
         setRocketSize(1.3);
         hitCircle = new Ellipse(getCenterX(),getCenterY(), HITCIRCLE_RADIUS * 2 , HITCIRCLE_RADIUS * 2);
-        addToCanvas(canvas);
+        addToCanvas(canvas); 
     }
     
     /*
@@ -87,7 +84,7 @@ public class PlayerShip extends RocketShip{
         getShape().setX(x += xVel);
         getShape().setY(y += yVel);
         hitCircle.setCenter(getCenterX(), getCenterY());
-    }
+    }   
     
     /*
      * Here, we just add thrust (which is a small number for proper speed increase. Without this thrust constant we go like all the way across the screen
