@@ -31,12 +31,15 @@ public class ProjectileManager {
         }
     }
 
+    /*
+     * Used in CollisionManager for marking projectiles for removal after collisions.
+     */
     public ArrayList<Projectile> getProjectileList() {
         return new ArrayList<>(projectileList);
     }
 
     /*
-     * Used in CollisionManager.
+     * Used in CollisionManager for projectile removal.
      */
     public void removeProjectile(Projectile projectile){
         canvas.remove(projectile.getProjectileShape());

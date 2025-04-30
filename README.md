@@ -37,11 +37,9 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
     
     Outside rescources we used: Youtube for movement and key ideas/logic, StackOverflow for bullet/meteor delay ideas.
 
-    Preceptors that helped us: Lewis with initial bullet projectile logic/debugging, Marvin with the hundreds of 
-    ConcurrentModificationExceptions we ran into (along with debugging other types of crashes).
+    Preceptors that helped us: Lewis with initial bullet projectile logic/debugging, Marvin with the hundreds of ConcurrentModificationExceptions we ran into (along with debugging other types of crashes).
     
-    Help from Professor Bret Jackson with meteor spawning and collisions (on Wednesday). 
-    Help from Professor Getiria Onsongo with animation ideas. 
+    Help from Professor Bret Jackson with linear algebra concepts for beam collision. 
     
     This project would be nowhere near where it is now without these people (In real life or in decade old StackOverflow threads/YouTube videos). All thanks goes to them for tireless help with debugging, ideas, and tolerating countless rubber-duck style debugging conversations. 
 

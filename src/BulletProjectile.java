@@ -35,6 +35,14 @@ public class BulletProjectile implements Projectile {
       bulletShape.setY(initialY -= VELOCITY * Math.sin(angle));
       return boundsCheck();
     }
+
+     /*
+     * This returns a boolean value verifying whether the bullet has gone out of bounds or not. We use this to then verify we can update the position
+     * in updatePosition, which is then used as a conditional in the main class for animation.
+     */
+    public boolean boundsCheck(){
+        return (initialX < canvas.getWidth() && initialX > 0 && initialY < canvas.getHeight() && initialY > 0);
+    }
     
     /*
      * Modeled after HW2's CannonBall intersects method. Very similar logic.
@@ -54,14 +62,6 @@ public class BulletProjectile implements Projectile {
 
     public void removeFromCanvas() {
         canvas.remove(bulletShape);
-    }
-
-    /*
-     * This returns a boolean value verifying whether the bullet has gone out of bounds or not. We use this to then verify we can update the position
-     * in updatePosition, which is then used as a conditional in the main class for animation.
-     */
-    public boolean boundsCheck(){
-        return (initialX < canvas.getWidth() && initialX > 0 && initialY < canvas.getHeight() && initialY > 0);
     }
 
     public double getCenterX() {

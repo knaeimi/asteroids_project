@@ -10,14 +10,15 @@ import java.util.ArrayList;
  * We check for ship/asteroid collisions in this class, and use the methods here in the main class's
  * animation loop.
  */
-public class CollisionManager { 
+public class CollisionManager {
     private AsteroidManager asteroidManager;
     private ProjectileManager projectileManager;
     private PlayerShip playerShip;
     private UI ui;
     private CanvasWindow canvas;
 
-    public CollisionManager(AsteroidManager asteroidManager, ProjectileManager projectileManager, PlayerShip playerShip, UI ui, CanvasWindow canvas) {
+    public CollisionManager(AsteroidManager asteroidManager, ProjectileManager projectileManager, PlayerShip playerShip,
+        UI ui, CanvasWindow canvas) {
         this.asteroidManager = asteroidManager;
         this.projectileManager = projectileManager;
         this.playerShip = playerShip;
@@ -27,46 +28,50 @@ public class CollisionManager {
 
     /*
      * We check for if the user has hit a asteroid with this method. First, we create two new removal
-     * lists to add the asteroids/projectiles to for removal (after the inital loop has executed). 
+     * lists to add the asteroids/projectiles to for removal (after the inital loop has executed).
      * Before then, we check for intersections, and also add points to the score. We break so a given
-     * projectile is only marked for removal once (otherwise... no such element errors). Finally,
-     * we use two for-each loops to delete elements from the removal lists.
+     * projectile is only marked for removal once (otherwise... no such element errors). Finally, we use
+     * two for-each loops to delete elements from the removal lists.
      * 
      * 
      */
-    public void checkBulletCollisions(){
-        //using this format of removal lists so we dont get annoying concurrent modification errors
-        List <Asteroid> asteroidsToRemove = new ArrayList<>(); 
+    public void checkProjectileCollisions() {
+        List<Asteroid> asteroidsToRemove = new ArrayList<>();
         List<Projectile> projectilesToRemove = new ArrayList<>();
 
-        for(Projectile projectile : projectileManager.getProjectileList()){
-            for(Asteroid asteroid: asteroidManager.getAsteroidList()){
-                if(projectile.intersects(asteroid)){
+        for (Projectile projectile : projectileManager.getProjectileList()) {
+            for (Asteroid asteroid : asteroidManager.getAsteroidList()) {
+                if (projectile.intersects(asteroid)) {
+
                     asteroidsToRemove.add(asteroid);
-                    projectilesToRemove.add(projectile);
                     ui.addPoints();
-                    break; //breaking so a projectile and asteroid are only added once to the list
+
+
+                    if (!(projectile instanceof BeamProjectile)) {
+                        projectilesToRemove.add(projectile);
+                        break; 
+                    }
                 }
             }
         }
 
-        for(Projectile projectile : projectilesToRemove){
+        for (Projectile projectile : projectilesToRemove) {
             projectileManager.removeProjectile(projectile);
         }
 
-        for(Asteroid asteroid: asteroidsToRemove){
+        for (Asteroid asteroid : asteroidsToRemove) {
             asteroidManager.removeAsteroid(asteroid);
         }
     }
 
     /*
-     * We check every asteroid in the (COPY for list safety) asteroid list for ship collisions. If 
-     * a collision is detected, we call the removeLife method from the UI class, remove the asteroid,
-     * and call this blink method to tell the user very obviously that they've taken damage.
+     * We check every asteroid in the (COPY for list safety) asteroid list for ship collisions. If a
+     * collision is detected, we call the removeLife method from the UI class, remove the asteroid, and
+     * call this blink method to tell the user very obviously that they've taken damage.
      */
-    public void checkShipCollisions(){
-        for(Asteroid asteroid : new ArrayList<>(asteroidManager.getAsteroidList())){
-            if (playerShip.intersectsAsteroid(asteroid)){
+    public void checkShipCollisions() {
+        for (Asteroid asteroid : new ArrayList<>(asteroidManager.getAsteroidList())) {
+            if (playerShip.intersectsAsteroid(asteroid)) {
                 ui.removeLife();
                 asteroidManager.removeAsteroid(asteroid);
                 blink();
@@ -77,16 +82,16 @@ public class CollisionManager {
     /*
      * Utility method for a clean call in the main class.
      */
-    public void checkAllCollisions(){
-        checkBulletCollisions();
+    public void checkAllCollisions() {
+        checkProjectileCollisions();
         checkShipCollisions();
     }
 
     /*
-     * Neat way to indicate to the player that they've lost a life. 
+     * Neat way to indicate to the player that they've lost a life.
      */
-    public void blink(){
-        for(int i = 0; i <5; i ++){
+    public void blink() {
+        for (int i = 0; i < 5; i++) {
             playerShip.setStroke(Color.BLACK);
             canvas.draw();
             canvas.pause(500);

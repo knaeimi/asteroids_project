@@ -24,33 +24,13 @@ public class Asteroid {
         asteroidShape.setFillColor(Color.gray);
     }
 
-    public double getCenterX() {
-        return asteroidShape.getCenter().getX();
-    }
-
-    public double getCenterY() {
-        return asteroidShape.getCenter().getY();
-    }
-
-    public GraphicsObject getShape() {
-        return asteroidShape;
-    }
-
-    public void addToCanvas(){
-        canvas.add(asteroidShape);
-    }
-
-    public void removeFromCanvas(){
-        canvas.remove(asteroidShape);
-    }
-  
     public void updatePosition() {
         centerX += ASTEROID_SPEED * Math.cos(angle);
         centerY -= ASTEROID_SPEED * Math.sin(angle);
         setCenter(centerX, centerY);
     }
-    
-    /*
+
+       /*
      * For that nice respawning behavior that happens in the actual game. Very similar to boundsCheck
      * in PlayerShip.
      */
@@ -70,6 +50,25 @@ public class Asteroid {
         if(x > canvas.getWidth() + 30){
            centerX = ASTEROID_SPEED;
         }
+    }
+    public double getCenterX() {
+        return asteroidShape.getCenter().getX();
+    }
+
+    public double getCenterY() {
+        return asteroidShape.getCenter().getY();
+    }
+
+    public GraphicsObject getShape() {
+        return asteroidShape;
+    }
+
+    public void addToCanvas(){
+        canvas.add(asteroidShape);
+    }
+
+    public void removeFromCanvas(){
+        canvas.remove(asteroidShape);
     }
 
     public void setCenter(double newX, double newY){
