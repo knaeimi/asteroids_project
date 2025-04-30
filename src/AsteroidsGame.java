@@ -8,7 +8,7 @@ public class AsteroidsGame {
     private CanvasWindow canvas;
     private KeyHandler keyHandler;
     private ProjectileManager projectileManager;
-    private MeteorManager meteorManager;
+    private AsteroidManager asteroidManager;
     private CollisionManager collisionManager;
     private UI ui;
 
@@ -18,7 +18,7 @@ public class AsteroidsGame {
         canvas.setBackground(Color.BLACK); 
         keyHandler = new KeyHandler();
         projectileManager = new ProjectileManager(canvas);
-        meteorManager = new MeteorManager(canvas);
+        asteroidManager = new AsteroidManager(canvas);
         collisionManager = new CollisionManager(canvas);
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
     }
@@ -36,8 +36,8 @@ public class AsteroidsGame {
         canvas.animate(event ->{
             playerShip.updatePosition();
             projectileManager.updateProjectiles();
-            meteorManager.updateMeteors();
-            meteorManager.populateMeteors();
+            asteroidManager.updateMeteors();
+            asteroidManager.populateAsteroids();();
             //TODO: Get correct meteor spawning/movement behavior ironed out before collision
             // collisionManager.shipCollision(playerShip, meteorManager, ui);
             //collisionManager.projectileCollision(projectileManager, meteorManager);
