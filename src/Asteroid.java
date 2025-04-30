@@ -1,35 +1,30 @@
 import java.awt.Color;
-import java.util.Random;
-
 import edu.macalester.graphics.*;
 
 public class Asteroid {
     private double centerX;
     private double centerY;
     private double angle;
+    private double radius;
     private Ellipse asteroidShape;
-    private Random random = new Random();
-    private CanvasWindow canvas;
-    private static final double ASTEROID_SPEED = 2;
-    private static final double ASTEROID_RADIUS = 15;
-
-    public Asteroid(double centerX, double centerY, double angle, CanvasWindow canvas) {
+    private static final double ASTEROID_SPEED = 5;
+    
+    public Asteroid(double centerX, double centerY, double angle, double radius, CanvasWindow canvas) {
         this.centerX = centerX;
         this.centerY = centerY;
         this.angle = angle;
-        this.canvas = canvas;
+        this.radius = radius;
     
-        asteroidShape = new Ellipse(centerX, centerY, ASTEROID_RADIUS * 2, ASTEROID_RADIUS * 2);
-        asteroidShape.setScale(random.nextDouble(2,3));
+        asteroidShape = new Ellipse(centerX, centerY, radius* 2, radius * 2);
         asteroidShape.setFillColor(Color.gray);
     }
 
     public double getCenterX() {
-        return centerX;
+        return asteroidShape.getCenter().getX();
     }
 
     public double getCenterY() {
-        return centerY;
+        return asteroidShape.getCenter().getY();
     }
 
     public void setPosition(double newX, double newY){
@@ -52,8 +47,12 @@ public class Asteroid {
         asteroidShape.setX(centerX += ASTEROID_SPEED * Math.cos(angle));
         asteroidShape.setY(centerY -= ASTEROID_SPEED * Math.sin(angle));
     }
+   
+    public void setCenter(double newX, double newY){
+        asteroidShape.setCenter(newX, newY);
+    }
 
     public double getRadius(){
-        return ASTEROID_RADIUS;
+        return radius;
     }
 }

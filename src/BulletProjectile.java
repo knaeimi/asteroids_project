@@ -33,9 +33,9 @@ public class BulletProjectile implements Projectile {
       return boundsCheck();
     }
     public boolean intersects(Asteroid asteroid) {
-        double distance = Math.hypot(initialX  - asteroid.getCenterX(), initialY - asteroid.getCenterY());
+        double distance = Math.hypot(getCenterX()  - asteroid.getCenterX(), getCenterY()- asteroid.getCenterY());
         
-        if (distance <=  BULLET_RADIUS + asteroid.getRadius()) {
+        if (distance <=  getRadius() + asteroid.getRadius()) {
             return true;
         }
         return false;

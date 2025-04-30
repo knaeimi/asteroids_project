@@ -19,6 +19,9 @@ public class UI {
       this.canvas = canvas;
       createRockets();
       addRockets();
+      scoreText = new GraphicsText();
+      setScoreText();
+      canvas.add(scoreText);
    }
 
    public void createRockets(){
@@ -36,18 +39,10 @@ public class UI {
          rocket.setStroke(Color.GREEN);
          rocket.getShape().rotateBy(-15);
          rocket.setRocketSize(2);
-      }
-      addToCanvas(canvas);
-      scoreText = new GraphicsText();
-      setScoreText();
-
-   }
-   public void addToCanvas(CanvasWindow canvas){
-      for (RocketShip rocket: rocketList){
          rocket.addToCanvas(canvas);
       }
    }
-
+   
    public void setScoreText(){
       scoreText.setText(String.valueOf("Score:  " + score));
       scoreText.setCenter(140,30);
@@ -55,12 +50,11 @@ public class UI {
       
       scoreText.setFontStyle(FontStyle.BOLD_ITALIC);
       scoreText.setScale(3);
-      canvas.add(scoreText);
    }
 
    public void addPoints(){
       score += 20;
-      setScoreText();
+      scoreText.setText(String.valueOf("Score:  " + score));
    }
 
    public void removeLife(){

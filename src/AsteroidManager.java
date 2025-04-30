@@ -32,24 +32,24 @@ public class AsteroidManager {
         }
     }
 
-    public void generateAsteroids(){ //TODO: Kian, go to Bret's office hours for help with meteor spawning/collisions on Wednesday
+    public void generateAsteroids(){ 
             
         caseNumber = random.nextInt(1,5);
                 
             if(caseNumber == 1){ //top side
-                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), canvas));
+                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
             }
 
             if(caseNumber == 2){ //bottom side
-                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), canvas));
+                asteroidList.add(new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), random.nextDouble(50,80), canvas));
             }
 
             if(caseNumber == 3){//left side
-                asteroidList.add(new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), canvas));
+                asteroidList.add(new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), random.nextDouble(50,80), canvas));
             }
 
             if(caseNumber == 4){//right side
-                asteroidList.add(new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), canvas));
+                asteroidList.add(new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), random.nextDouble(50,80), canvas));
                 
             }
             addAsteroids();

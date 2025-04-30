@@ -10,7 +10,6 @@ public class PlayerShip extends RocketShip{
     private final long BEAM_DELAY = 2000;
     private final double THRUST = 0.1; //for a slow build up instead of instant speed
     private final double DRAG = 0.99; //for 1% reduction in speed 
-    private final double SHIP_RADIUS = 20;
     private long time = System.currentTimeMillis(); 
     private CanvasWindow canvas;
     private ProjectileManager projectileManager;

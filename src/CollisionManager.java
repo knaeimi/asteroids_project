@@ -2,19 +2,17 @@
 import java.util.List;
 import java.util.ArrayList;
 
-import edu.macalester.graphics.CanvasWindow;
 
 
 public class CollisionManager { 
-
-    private CanvasWindow canvas;
     private AsteroidManager asteroidManager;
     private ProjectileManager projectileManager;
+    private UI ui;
 
-    public CollisionManager(AsteroidManager asteroidManager, ProjectileManager projectileManager, CanvasWindow canvas) {
-        this.canvas = canvas;
+    public CollisionManager(AsteroidManager asteroidManager, ProjectileManager projectileManager, UI ui) {
         this.asteroidManager = asteroidManager;
         this.projectileManager = projectileManager;
+        this.ui = ui;
     }
 
     public void checkBulletCollisions(){
@@ -27,6 +25,7 @@ public class CollisionManager {
                 if(projectile.intersects(asteroid)){
                     asteroidsToRemove.add(asteroid);
                     projectilesToRemove.add(projectile);
+                    ui.addPoints();
                     break; //breaking so a projectile and asteroid are only added once to the list
                 }
             }
@@ -39,6 +38,5 @@ public class CollisionManager {
         for(Asteroid asteroid: asteroidsToRemove){
             asteroidManager.removeAsteroid(asteroid);
         }
-        
     }
 }
