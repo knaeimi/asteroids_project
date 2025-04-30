@@ -20,9 +20,11 @@ public class ProjectileManager {
      */
     public void updateProjectiles(){
         Iterator<Projectile> iterator = projList.listIterator();
-        
-        while(iterator.hasNext()){ 
-            if(!iterator.next().updatePosition()){
+    
+        while(iterator.hasNext()){
+            Projectile currentProj = iterator.next();
+            if(!currentProj.updatePosition()){
+                canvas.remove(currentProj.getProjectileShape());
                 iterator.remove();
             }
         }

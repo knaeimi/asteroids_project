@@ -40,7 +40,6 @@ public class BeamProjectile implements Projectile {
        long currentTime = System.currentTimeMillis();
 
        if(currentTime - timeSinceSpawn > BEAM_DURATION){
-            removeFromCanvas();
             timeSinceSpawn = currentTime;
             return false;
         }

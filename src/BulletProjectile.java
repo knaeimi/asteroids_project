@@ -46,7 +46,7 @@ public class BulletProjectile implements Projectile {
      * in updatePosition, which is then used as a conditional in the main class for animation.
      */
     public boolean boundsCheck(){
-        return (initialX < canvas.getWidth() || initialX > 0 || initialY < canvas.getHeight() || initialY > 0);
+        return (initialX < canvas.getWidth() && initialX > 0 && initialY < canvas.getHeight() && initialY > 0);
     }
 
     public double getCenterX() {
