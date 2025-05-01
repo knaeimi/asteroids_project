@@ -9,7 +9,7 @@ public class PlayerShip extends RocketShip{
     private double rotationAngle, xVel, yVel, rotationSpeed = 7; 
     private final long SHOT_DELAY = 500; 
     private final long BEAM_DELAY = 2000;
-    private final double THRUST = 0.1; //for a slow build up instead of instant speed
+    private final double THRUST = 0.15; //for a slow build up instead of instant speed
     private final double DRAG = 0.99; //for 1% reduction in speed 
     private final double HITCIRCLE_RADIUS = getSideLength()/2;
     private long time = System.currentTimeMillis(); 

@@ -12,6 +12,11 @@ public class BeamProjectile implements Projectile {
     private double initialX, initialY, angle;
     private long timeSinceSpawn = System.currentTimeMillis(); 
     
+
+    /*
+     * The constructor method which takes in the x and y value of the rocketship as well as the angle it is facing,
+     * and assigns those values to already present variables. Calls the createBeam method.
+     */
     public BeamProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;
@@ -109,26 +114,44 @@ public class BeamProjectile implements Projectile {
         addToCanvas();
     }
     
+    /*
+     * Adds the beam to the canvas.
+     */
     public void addToCanvas(){
         canvas.add(beamShape);
     }
 
+    /*
+     * Removes the beam from the canvas.
+     */
     public void removeFromCanvas(){
         canvas.remove(beamShape);
     }
 
+    /*
+     * Returns the length of the beam.
+     */
     public double getBeamLength(){
         return beamLength;
     }
 
+    /*
+     * Returns the beam shape in order to manage collisions.
+     */
     public GraphicsObject getProjectileShape(){
         return beamShape;
     }
 
+    /*
+     * Returns the center x position of the beam.
+     */
     public double getCenterX(){
         return beamShape.getCenter().getX();
     }
 
+    /*
+     * Returns the center y position of the beam.
+     */
     public double getCenterY(){
         return beamShape.getCenter().getY();
     }

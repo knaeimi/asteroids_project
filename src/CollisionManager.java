@@ -42,12 +42,13 @@ public class CollisionManager {
         for (Projectile projectile : projectileManager.getProjectileList()) {
             for (Asteroid asteroid : asteroidManager.getAsteroidList()) {
                 if (projectile.intersects(asteroid)) {
-
+                    playerShip.setStroke(Color.MAGENTA);
                     asteroidsToRemove.add(asteroid);
+                    asteroidManager.split(asteroid);
                     ui.addPoints();
 
-
                     if (!(projectile instanceof BeamProjectile)) {
+                        playerShip.setStroke(new Color(150,0,255));
                         projectilesToRemove.add(projectile);
                         break; 
                     }

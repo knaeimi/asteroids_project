@@ -31,23 +31,42 @@ public class AsteroidManager {
      */
     public void generateAsteroids(){    
         side = random.nextInt(1,5);
-            if(side == 1){ //top side
+            if(side == 1){ 
                 asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
             }
 
-            else if (side == 2){ //bottom side
+            else if (side == 2){ 
                 asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), random.nextDouble(50,80), canvas));
             }
 
-            else if(side == 3){//left side
+            else if(side == 3){
                 asteroid = (new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), random.nextDouble(50,80), canvas));
             }
 
-            else if (side == 4){//right side
+            else if (side == 4){
                 asteroid = (new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), random.nextDouble(50,80), canvas));
             }
             asteroid.addToCanvas();
             asteroidList.add(asteroid);
+        }
+
+        /*
+         * This method provides the classic splitting behavior present in the original game. We create a random new radius
+         * for both the split asteroids to share, and make sure first that the radius of the asteroid we're splitting is big
+         * enough for splitting (so splitting wil occur once).
+         */
+        public void split(Asteroid asteroid){
+            double newRadius = random.nextDouble(20,40);
+            Asteroid leftAsteroid;
+            Asteroid rightAsteroid;
+            if (asteroid.getRadius() >= 40){
+                leftAsteroid = new Asteroid(asteroid.getCenterX(), asteroid.getCenterY(),random.nextDouble(0,20), newRadius, canvas);
+                rightAsteroid = new Asteroid(asteroid.getCenterX(), asteroid.getCenterY(), random.nextDouble(0,20),newRadius,canvas);
+                leftAsteroid.addToCanvas();
+                rightAsteroid.addToCanvas();
+                asteroidList.add(leftAsteroid);
+                asteroidList.add(rightAsteroid);
+            }
         }
 
         /*
@@ -59,10 +78,6 @@ public class AsteroidManager {
             if(currentTime - time > SPAWN_DELAY){
                 if(getAsteroidList().size() < 5){ //Where we choose the amount of asteroids for a given wave.
                     generateAsteroids();
-                    
-                    if(getAsteroidList().isEmpty()){ 
-                        generateAsteroids(); // if player has shot (and retroactively removed from the list) every asteroid, then respawn them.
-                    }
                 }
                 time = currentTime;  
             }

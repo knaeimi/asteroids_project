@@ -17,12 +17,19 @@ public class UI {
    private CanvasWindow canvas;
    private PlayerShip playerShip;
 
+   /*
+    * Constructor for the UI which takes in the canvas and the playership object which is will be used in
+    another method to put ships in the top left to count lives.
+    */
    public UI(CanvasWindow canvas, PlayerShip playerShip){
       this.canvas = canvas;
       this.playerShip = playerShip;
       createUI();
    }
 
+   /*
+    * Creates 3 rocketships which each represent one life in the game. They are each added to a list which manages lives.
+    */
    public void createRockets(){
       rocket1 = new RocketShip(50, 125);
       rocket2 = new RocketShip(125, 125);
@@ -33,6 +40,9 @@ public class UI {
       rocketList.add(rocket3);
    }
 
+   /*
+    * Orients the rockets and adds them to the canvas.
+    */
    public void addRockets(){
       for (RocketShip rocket: rocketList){
          rocket.setStroke(Color.GREEN);
@@ -53,6 +63,9 @@ public class UI {
       }
    }
    
+   /*
+    * Adds the score text to the top left of the screen.
+    */
    public void setScoreText(){
       scoreText = new GraphicsText();
       scoreText.setText(String.valueOf("Score:  " + score));
@@ -63,6 +76,9 @@ public class UI {
       canvas.add(scoreText);
    }
 
+   /*
+    * Very similar to setScoreText but is called when all three lives are lost and the text appears in the middle of the screen.
+    */
    public void setGameOverText(){
       gameOverText = new GraphicsText();
       gameOverText.setText("GAME OVER");
@@ -73,6 +89,9 @@ public class UI {
       canvas.add(gameOverText);
    }
 
+   /*
+    * This method adds points to the score updates the score on screen.
+    */
    public void addPoints(){
       score += 20;
       scoreText.setText(String.valueOf("Score:  " + score));
@@ -118,6 +137,10 @@ public class UI {
       }
    }
 
+   /*
+    * Checks to see if there are any lives left by checking the size of the rocketList. If there are no lives left,
+     setGameOverText is called and the window closes after 5 seconds.
+    */
    public void checkForGameOver(){
       if(rocketList.size() == 0){
          setGameOverText();
@@ -128,6 +151,9 @@ public class UI {
       }
    }
 
+   /*
+    * Removes the ship from the top left of the screen and removes it from the list for the future.
+    */
    public void removeShipFromUI(){
       RocketShip uiShip = rocketList.get(rocketList.size()-1);
       rocketList.remove(uiShip);
