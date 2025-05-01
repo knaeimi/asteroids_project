@@ -31,19 +31,19 @@ public class AsteroidManager {
      */
     public void generateAsteroids(){    
         side = random.nextInt(1,5);
-            if(side == 1){ //top side
+            if(side == 1){ 
                 asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
             }
 
-            else if (side == 2){ //bottom side
+            else if (side == 2){ 
                 asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), canvas.getHeight() + 30, random.nextDouble(-12,-10), random.nextDouble(50,80), canvas));
             }
 
-            else if(side == 3){//left side
+            else if(side == 3){
                 asteroid = (new Asteroid(-30, (random.nextDouble(0,canvas.getHeight())), random.nextDouble(24,26), random.nextDouble(50,80), canvas));
             }
 
-            else if (side == 4){//right side
+            else if (side == 4){
                 asteroid = (new Asteroid(canvas.getWidth() + 30, (random.nextDouble(0,canvas.getHeight())),(random.nextDouble(-42,-40)), random.nextDouble(50,80), canvas));
             }
             asteroid.addToCanvas();
@@ -78,10 +78,6 @@ public class AsteroidManager {
             if(currentTime - time > SPAWN_DELAY){
                 if(getAsteroidList().size() < 5){ //Where we choose the amount of asteroids for a given wave.
                     generateAsteroids();
-                    
-                    if(getAsteroidList().isEmpty()){ 
-                        generateAsteroids(); // if player has shot (and retroactively removed from the list) every asteroid, then respawn them.
-                    }
                 }
                 time = currentTime;  
             }
