@@ -44,6 +44,7 @@ public class CollisionManager {
                 if (projectile.intersects(asteroid)) {
 
                     asteroidsToRemove.add(asteroid);
+                    asteroidManager.split(asteroid);
                     ui.addPoints();
 
 

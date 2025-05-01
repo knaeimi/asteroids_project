@@ -51,6 +51,25 @@ public class AsteroidManager {
         }
 
         /*
+         * This method provides the classic splitting behavior present in the original game. We create a random new radius
+         * for both the split asteroids to share, and make sure first that the radius of the asteroid we're splitting is big
+         * enough for splitting (so splitting wil occur once).
+         */
+        public void split(Asteroid asteroid){
+            double newRadius = random.nextDouble(20,40);
+            Asteroid leftAsteroid;
+            Asteroid rightAsteroid;
+            if (asteroid.getRadius() >= 40){
+                leftAsteroid = new Asteroid(asteroid.getCenterX(), asteroid.getCenterY(),random.nextDouble(0,20), newRadius, canvas);
+                rightAsteroid = new Asteroid(asteroid.getCenterX(), asteroid.getCenterY(), random.nextDouble(0,20),newRadius,canvas);
+                leftAsteroid.addToCanvas();
+                rightAsteroid.addToCanvas();
+                asteroidList.add(leftAsteroid);
+                asteroidList.add(rightAsteroid);
+            }
+        }
+
+        /*
          * This method just handles generating asteroids at a given amount, along with maintaining a delay
          * so as to not overwhelm the user.
          */
