@@ -4,6 +4,9 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 
+/*
+ * This class creates a beam object from the point of the ship, and implements the projectile interface to do so.
+ */
 public class BeamProjectile implements Projectile {
     private final long BEAM_DURATION = 100; 
     private double beamWidth, beamLength;

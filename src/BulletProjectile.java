@@ -15,6 +15,9 @@ public class BulletProjectile implements Projectile {
     private double initialY;
     private double angle;
  
+    /*
+     * This constructor takes in the rocketship x and y values and uses them to assign a location to the bullet.
+     */
     public BulletProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;
@@ -56,26 +59,44 @@ public class BulletProjectile implements Projectile {
         return false;
     }
 
+    /*
+     * Adds the bullet object to the canvas.
+     */
     public void addToCanvas() {
         canvas.add(bulletShape);
     }
 
+    /*
+     * Removes the bullet object from the canvas.
+     */
     public void removeFromCanvas() {
         canvas.remove(bulletShape);
     }
 
+    /*
+     * Returns the center X value of the bullet object ellipse.
+     */
     public double getCenterX() {
         return bulletShape.getCenter().getX();
     }
 
+    /*
+     * Returns the center Y value of the bullet object ellipse.
+     */
     public double getCenterY() {
         return bulletShape.getCenter().getY();
     }
 
+    /*
+     * Returns the shape of the bullet for collision management.
+     */
     public GraphicsObject getProjectileShape(){
         return bulletShape;
     }
 
+    /*
+     * Returns the radius of the bullet object ellipse which is a constant variable.
+     */
     public double getRadius(){
         return BULLET_RADIUS;
     }
