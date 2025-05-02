@@ -21,7 +21,7 @@ public class GameRuleTest {
     @Test
     void lifeCanBeRemoved() {
         ui.removeLife();
-        assertEquals(3, ui.getLives());  
+        assertEquals(2, ui.getLives());  
     }
 
     /*
@@ -29,7 +29,6 @@ public class GameRuleTest {
      */
     @Test
     void multipleLivesCanBeRemoved() {
-        ui.removeLife();
         ui.removeLife();
         ui.removeLife();
         ui.removeLife();
@@ -61,7 +60,6 @@ public class GameRuleTest {
      */
     @Test
     void loseAllLivesEndsGame() {
-        ui.removeLife();
         ui.removeLife();
         ui.removeLife();
         ui.removeLife();
