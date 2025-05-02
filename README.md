@@ -10,7 +10,7 @@ Graphics: Integrated graphics or better,
 RAM: ~1 GB for the JVM, 
 Storage: 50-100 MB free,
 
-you'll be golden. 
+You'll be golden. 
 
 
 
