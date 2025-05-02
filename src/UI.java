@@ -17,7 +17,7 @@ public class UI {
    private int score = 0;
    private CanvasWindow canvas;
    private PlayerShip playerShip;
-   private int lives = 4;
+   private int lives = 3;
 
    public UI(CanvasWindow canvas, PlayerShip playerShip){
       this.canvas = canvas;
@@ -70,7 +70,7 @@ public class UI {
    }
 
    /*
-    * Used in CollisionManager to decrement lives until 0, in which case the game closes.
+    * For CollisionManager to use with ship collisions
     */
    public boolean removeLife(){
       lives--;
@@ -105,10 +105,6 @@ public class UI {
       canvas.add(gameStartText);
    }
 
-   public void removeStartText(){
-      canvas.remove(gameStartText);
-   }
-
      /*
     * Adds the score text to the top left of the screen.
     */
@@ -123,10 +119,10 @@ public class UI {
    }
 
    /*
-    * Creates the game over text and ends the game after five seconds.
+    * Creates the game over text and ends the game.
     */
    public void gameOver(){
-         if(gameOverText == null){
+      if(gameOverText == null){
          gameOverText = new GraphicsText();
          gameOverText.setText("GAME OVER");
          gameOverText.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
@@ -135,23 +131,21 @@ public class UI {
          gameOverText.setScale(5);
          canvas.add(gameOverText);
          playerShip.removeFromCanvas(canvas);
-         
          canvas.draw();
+
          canvas.pause(5000);
          canvas.closeWindow();
       }
    }
-
-  
    
    /*
-    * We start at 4 lives total, and every time we lose a life we change the UI's health rockets
+    * We start at 3 lives total, and every time we lose a life we change the UI's health rockets
     * colors to reflect the increasing severity. We protect against index-out-of bounds exceptions
     * with the first conditional, so that when we reach 0 lives, we don't try to remove a rocket at
     * index -1.
     */ 
    public void updateStatus(){
-      if(lives < rocketList.size()){
+      if(lives <= rocketList.size()){
       RocketShip lostUIShip = rocketList.remove(lives);
       lostUIShip.removeFromCanvas(canvas);
       }
@@ -171,5 +165,12 @@ public class UI {
          noLivesText.setScale(2);
          canvas.add(noLivesText);
       }
+   }
+
+   /*
+    * Used in the main class after the start button is clicked.
+    */
+   public void removeStartText(){
+      canvas.remove(gameStartText);
    }
 }
