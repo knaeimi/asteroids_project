@@ -1,7 +1,6 @@
 # Asteroids Remake
 Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
-    ![Class Diagram](./FinalClassDiagram.png)
-## System requirements
+
     This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications:
         Java: 17/21 installed
         OS: Windows 7 (64-bit) or newer, macOS 10.10 or newer, any mainstream Linux distro
@@ -10,6 +9,10 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
         RAM: ~1 GB for the JVM 
         Storage: 50-100 MB free
     You should be golden. 
+    
+    ![Class Diagram](./FinalClassDiagram.png)
+## System requirements
+
 
 ## Running the program
     To launch the game, navigate to AsteroidsGame.java and run the main method by hitting the 'Run Java' button in the top right corner of the
