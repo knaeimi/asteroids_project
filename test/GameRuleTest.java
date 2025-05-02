@@ -7,6 +7,7 @@ public class GameRuleTest {
     private CanvasWindow canvas = new CanvasWindow("Test Window", 600, 600);
     private BulletProjectile bulletProjectile;
     private ProjectileManager projectileManager;
+    private AsteroidManager asteroidManager = new AsteroidManager(canvas);
     private Asteroid asteroid;
     private PlayerShip playerShip = new PlayerShip(0, 0, canvas, projectileManager);
     private UI ui = new UI(canvas, playerShip);
@@ -30,7 +31,6 @@ public class GameRuleTest {
         ui.removeLife();
         assertEquals(0, ui.getLives());  
     }
-
 
     /*
      * Tests that ui.addPoints() adds points to the player's score.
@@ -62,5 +62,38 @@ public class GameRuleTest {
         assertThrows(NoSuchElementException.class, () -> {
             ui.removeLife();
         });
+    }
+
+    /*
+     * Tests that asteroid.updatePosition() actually changes the asteroid's position.
+     */
+    @Test
+    void asteroidUpdatePositionWorks() {
+        asteroid = new Asteroid(100, 100, 45, 5, canvas);
+        asteroid.updatePosition();
+        assertNotEquals(100, asteroid.getCenterX());
+        assertNotEquals(100, asteroid.getCenterY());
+    }
+
+    /*
+     * Tests that Asteroid objects can "split" using asteroidManager.split()
+     */
+    @Test
+    void asteroidCanSplit() {
+        asteroidManager.generateAsteroids();
+        int initialSize = asteroidManager.getAsteroidList().size();
+        asteroidManager.split(asteroidManager.getAsteroidList().get(0));
+        assertNotEquals(initialSize, asteroidManager.getAsteroidList().size());
+    }
+
+    /*
+     * Tests that bulletProjectile.updatePosition() actually changes the bullet's position.
+     */
+    @Test
+    void bulletProjectileUpdatePositionWorks() {
+        bulletProjectile = new BulletProjectile(100, 100, 45, canvas);
+        bulletProjectile.updatePosition();
+        assertNotEquals(100, bulletProjectile.getCenterX());
+        assertNotEquals(100, bulletProjectile.getCenterY());
     }
 }
