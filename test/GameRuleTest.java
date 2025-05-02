@@ -1,10 +1,6 @@
 import org.junit.jupiter.api.Test;
-
 import edu.macalester.graphics.CanvasWindow;
-
 import static org.junit.jupiter.api.Assertions.*;
-
-
 import java.util.NoSuchElementException;
 
 public class GameRuleTest {
@@ -25,7 +21,7 @@ public class GameRuleTest {
     }
 
     /*
-     * Tests if ui.removeLine() can be used to remove multiple lives.
+     * Tests if ui.removeLife() can be used to remove multiple lives.
      */
     @Test
     void multipleLivesCanBeRemoved() {
@@ -67,5 +63,4 @@ public class GameRuleTest {
             ui.removeLife();
         });
     }
-
 }

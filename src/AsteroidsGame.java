@@ -2,6 +2,9 @@ import java.awt.Color;
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.ui.Button;
 
+/*
+ * Our main class. This is where we animate objects and also create the start button.
+ */
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 1920;
     private static final int CANVAS_HEIGHT = 1080;
@@ -23,6 +26,7 @@ public class AsteroidsGame {
         keyHandler = new KeyHandler();
         collisionManager = new CollisionManager(asteroidManager, projectileManager, playerShip, ui, canvas);
         createStartButton();
+        animateObjects();
     }
 
     /*
@@ -74,10 +78,9 @@ public class AsteroidsGame {
         Button startButton = new Button("S T A R T  G A M E");
         canvas.add(startButton,canvas.getWidth()/2.1,canvas.getHeight()/1.7);
         startButton.onClick(() -> {
-            animateObjects();
             playerShip.addToCanvas(canvas);
             ui.removeStartText();
-            canvas.remove(startButton);
+            canvas.remove(startButton);    
         });
     }
 

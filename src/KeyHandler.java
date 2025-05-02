@@ -4,7 +4,8 @@ import edu.macalester.graphics.events.KeyboardEvent;
 
 /*
  * This class handles taking in inputs for keys. We use booleans to represent whether a key is currently pressed or not.
- * Thank you StackOverflow for the concept. 
+ * Thank you StackOverflow for the concept. We have getters for the state of each key along with methods
+ * to change their state on keyPress/keyRelease.
  */
 public class KeyHandler{
     private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed;
@@ -30,6 +31,9 @@ public class KeyHandler{
         return fPressed;
     }
 
+    /*
+     * We change the state of each key to true on keyPress.
+     */
     public void keyPressed(KeyboardEvent event) {
         pressedKey = event.getKey();
         if (pressedKey == Key.UP_ARROW){
@@ -49,6 +53,9 @@ public class KeyHandler{
         }
     }
 
+    /*
+     * We similarly change the state of each key, this time to false when a key is released.
+     */
     public void keyReleased(KeyboardEvent event) {
         releasedKey = event.getKey();
         if (releasedKey == Key.UP_ARROW){

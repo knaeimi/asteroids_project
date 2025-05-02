@@ -62,7 +62,7 @@ public class UI {
    }
    
    /*
-    * This method adds points to the score updates the score on screen.
+    * Adds 20 points on every succesful shot.
     */
    public void addPoints(){
       score += 20;
@@ -146,10 +146,7 @@ public class UI {
          gameOverText.setScale(5);
          canvas.add(gameOverText);
          playerShip.removeFromCanvas(canvas);
-         canvas.draw();
-
-         canvas.pause(5000);
-         canvas.closeWindow();
+         canvas.draw(); 
       }
    }
    
