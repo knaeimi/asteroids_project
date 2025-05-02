@@ -31,7 +31,6 @@ public class PlayerShip extends RocketShip{
         rotationAngle = Math.toRadians(90);
         setRocketSize(1.3);
         hitCircle = new Ellipse(getCenterX(),getCenterY(), HITCIRCLE_RADIUS * 2 , HITCIRCLE_RADIUS * 2);
-        addToCanvas(canvas); 
     }
     
     /*

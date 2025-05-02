@@ -13,14 +13,12 @@ public class UI {
    private GraphicsText scoreText;
    private GraphicsText gameOverText;
    private GraphicsText noLivesText;
+   private GraphicsText gameStartText;
    private int score = 0;
    private CanvasWindow canvas;
    private PlayerShip playerShip;
+   private int lives = 4;
 
-   /*
-    * Constructor for the UI which takes in the canvas and the playership object which is will be used in
-    another method to put ships in the top left to count lives.
-    */
    public UI(CanvasWindow canvas, PlayerShip playerShip){
       this.canvas = canvas;
       this.playerShip = playerShip;
@@ -64,9 +62,57 @@ public class UI {
    }
    
    /*
+    * This method adds points to the score updates the score on screen.
+    */
+   public void addPoints(){
+      score += 20;
+      scoreText.setText(String.valueOf("Score:  " + score));
+   }
+
+   /*
+    * Used in CollisionManager to decrement lives until 0, in which case the game closes.
+    */
+   public boolean removeLife(){
+      lives--;
+      if(lives < 0){
+         gameOver();
+         return false;
+      }
+      updateStatus();
+      return true;
+   }
+
+   /*
+    * Nice utility method for a clean call in the constructor.
+    */
+   public void createUI(){
+      createRockets();
+      addRockets();
+      setScoreText();
+      setGameStartText();
+   }
+
+   /*
+    * Creates the big asteroids text before you play the game.
+    */
+   public void setGameStartText(){
+      gameStartText = new GraphicsText();
+      gameStartText.setText("ASTEROIDS");
+      gameStartText.setStrokeWidth(0.2);
+      gameStartText.setStrokeColor(new Color(150,0,255));
+      gameStartText.setPosition(canvas.getWidth()/2,canvas.getHeight()/2);
+      gameStartText.setScale(8);
+      canvas.add(gameStartText);
+   }
+
+   public void removeStartText(){
+      canvas.remove(gameStartText);
+   }
+
+     /*
     * Adds the score text to the top left of the screen.
     */
-   public void setScoreText(){
+    public void setScoreText(){
       scoreText = new GraphicsText();
       scoreText.setText(String.valueOf("Score:  " + score));
       scoreText.setCenter(140,30);
@@ -77,57 +123,47 @@ public class UI {
    }
 
    /*
-    * Very similar to setScoreText but is called when all three lives are lost and the text appears in the middle of the screen.
+    * Creates the game over text and ends the game after five seconds.
     */
-   public void setGameOverText(){
-      gameOverText = new GraphicsText();
-      gameOverText.setText("GAME OVER");
-      gameOverText.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
-      gameOverText.setFillColor(Color.RED);
-      gameOverText.setFontStyle(FontStyle.BOLD_ITALIC);
-      gameOverText.setScale(5);
-      canvas.add(gameOverText);
+   public void gameOver(){
+         if(gameOverText == null){
+         gameOverText = new GraphicsText();
+         gameOverText.setText("GAME OVER");
+         gameOverText.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
+         gameOverText.setFillColor(Color.RED);
+         gameOverText.setFontStyle(FontStyle.BOLD_ITALIC);
+         gameOverText.setScale(5);
+         canvas.add(gameOverText);
+         playerShip.removeFromCanvas(canvas);
+         
+         canvas.draw();
+         canvas.pause(5000);
+         canvas.closeWindow();
+      }
    }
 
+  
+   
    /*
-    * This method adds points to the score updates the score on screen.
-    */
-   public void addPoints(){
-      score += 20;
-      scoreText.setText(String.valueOf("Score:  " + score));
-   }
-
-   /*
-    * Utility method to accomplish all life checks in CollisionManager.
-    */
-   public void removeLife(){
-      checkForGameOver();
-      updateRocketStatus();
-      removeShipFromUI();
-   }
-
-   /*
-    * Nice utility method for a clean call in the constructor.
-    */
-   public void createUI(){
-      createRockets();
-      addRockets();
-      setScoreText();
-   }
-
-   /*
-    * A way to indicate to the user visually to be careful as lives are lost.
-    */
-   public void updateRocketStatus(){
-      if(rocketList.size() - 1  == 2){
-         updateColors(Color.ORANGE);
+    * We start at 4 lives total, and every time we lose a life we change the UI's health rockets
+    * colors to reflect the increasing severity. We protect against index-out-of bounds exceptions
+    * with the first conditional, so that when we reach 0 lives, we don't try to remove a rocket at
+    * index -1.
+    */ 
+   public void updateStatus(){
+      if(lives < rocketList.size()){
+      RocketShip lostUIShip = rocketList.remove(lives);
+      lostUIShip.removeFromCanvas(canvas);
       }
 
-      if(rocketList.size() - 1 == 1 ){
+      if(lives == 2){
+         updateColors(Color.ORANGE);
+      }
+      if(lives == 1 ){
          updateColors(Color.RED);
       }
 
-      if(rocketList.size() - 1 == 0){
+      if(lives == 0){
          noLivesText = new GraphicsText();
          noLivesText.setText("NO LIVES REMAINING");
          noLivesText.setFillColor(Color.RED);
@@ -135,28 +171,5 @@ public class UI {
          noLivesText.setScale(2);
          canvas.add(noLivesText);
       }
-   }
-
-   /*
-    * Checks to see if there are any lives left by checking the size of the rocketList. If there are no lives left,
-     setGameOverText is called and the window closes after 5 seconds.
-    */
-   public void checkForGameOver(){
-      if(rocketList.size() == 0){
-         setGameOverText();
-         playerShip.removeFromCanvas(canvas);
-         canvas.draw();
-         canvas.pause(5000);
-         canvas.closeWindow();
-      }
-   }
-
-   /*
-    * Removes the ship from the top left of the screen and removes it from the list for the future.
-    */
-   public void removeShipFromUI(){
-      RocketShip uiShip = rocketList.get(rocketList.size()-1);
-      rocketList.remove(uiShip);
-      uiShip.removeFromCanvas(canvas);
    }
 }

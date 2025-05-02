@@ -2,6 +2,7 @@
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsObject;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -73,9 +74,13 @@ public class CollisionManager {
     public void checkShipCollisions() {
         for (Asteroid asteroid : new ArrayList<>(asteroidManager.getAsteroidList())) {
             if (playerShip.intersectsAsteroid(asteroid)) {
-                ui.removeLife();
-                asteroidManager.removeAsteroid(asteroid);
-                blink();
+                if(ui.removeLife()){
+                    asteroidManager.removeAsteroid(asteroid);
+                    blink();
+                }
+                else{
+                    ui.gameOver();
+                }
             }
         }
     }
