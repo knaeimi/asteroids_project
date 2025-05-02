@@ -70,7 +70,22 @@ public class UI {
    }
 
    /*
+    * Getter method that returns number of lives.
+    */
+   public int getLives() {
+      return lives;
+   }
+
+   /*
+    * Getter method that returns the score number.
+    */
+    public int getScore() {
+      return score;
+   }
+
+   /*
     * For CollisionManager to use with ship collisions
+    * Used in CollisionManager to decrement lives until 0, in which case the game closes.
     */
    public boolean removeLife(){
       lives--;
