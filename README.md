@@ -1,6 +1,7 @@
 # Asteroids Remake
 Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
 
+## System requirements
     This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications:
         Java: 17/21 installed
         OS: Windows 7 (64-bit) or newer, macOS 10.10 or newer, any mainstream Linux distro
@@ -9,9 +10,7 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
         RAM: ~1 GB for the JVM 
         Storage: 50-100 MB free
     You should be golden. 
-    
-    ![Class Diagram](./FinalClassDiagram.png)
-## System requirements
+
 
 
 ## Running the program
@@ -33,6 +32,8 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
     by running the main method in AsteroidsGame again.
 
     Score: Every time you hit a meteor (of any size), your score will go up by 20. Try to see how high you can get!
+    
+![Class Diagram](./FinalClassDiagram.png)
     
 
 
