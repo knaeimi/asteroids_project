@@ -2,15 +2,15 @@
 Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
 
 ## System requirements
-This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications: < br / >
-Java: 17/21 installed < br / >
-OS: Windows 7 (64-bit) or newer, macOS 10.10 or newer, any mainstream Linux distro < br / >
-CPU: Dual core @ 1.6 GHz or newer < br / >
-Graphics: Integrated graphics or better < br / >
-RAM: ~1 GB for the JVM < br / >
-Storage: 50-100 MB free < br / >
+This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications:
+Java: 17/21 installed,
+OS: Windows 7 (64-bit) or newer, macOS 10.10 or newer, any mainstream Linux distro,
+CPU: Dual core @ 1.6 GHz or newer,
+Graphics: Integrated graphics or better,
+RAM: ~1 GB for the JVM, 
+Storage: 50-100 MB free,
 
-You should be golden. 
+you'll be golden. 
 
 
 
