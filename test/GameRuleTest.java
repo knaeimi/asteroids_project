@@ -56,7 +56,7 @@ public class GameRuleTest {
     }
 
     /*
-     * Tests that the program ends once the player loses four lives.
+     * Tests that the program ends once the player loses three lives.
      */
     @Test
     void loseAllLivesEndsGame() {
