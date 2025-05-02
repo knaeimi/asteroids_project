@@ -30,6 +30,8 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
     by running the main method in AsteroidsGame again.
 
     Score: Every time you hit a meteor (of any size), your score will go up by 20. Try to see how high you can get!
+    
+    ![Class Diagram](./FinalClassDiagram.png)
 
 ## Acknowledgements
     This program was inspired by two versions of Asteroids: First, the original Atari game (1979, Lyle Rains/Ed Logg). And secondly,
@@ -37,17 +39,18 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
     
     Outside rescources we used: Youtube for movement and key ideas/logic, StackOverflow for bullet/meteor delay ideas.
 
-    Preceptors that helped us: Lewis with initial bullet projectile logic/debugging, Marvin with the hundreds of ConcurrentModificationExceptions we ran into (along with debugging other types of crashes).
+    Preceptors that helped us: Lewis with initial bullet projectile logic/debugging, Marvin with the  ConcurrentModificationExceptions we ran into.
     
-    Help from Professor Bret Jackson with linear algebra concepts for beam collision. 
+    Help from Professor Bret Jackson with Linear Algebra concepts for beam collision. 
     
-    This project would be nowhere near where it is now without these people (In real life or in decade old StackOverflow threads/YouTube videos). All thanks goes to them for tireless help with debugging, ideas, and tolerating countless rubber-duck style debugging conversations. 
+    This project would be nowhere near where it is now without these people (In real life or in decade old StackOverflow threads/YouTube videos). All thanks goes to them for tireless help with debugging and ideas.
 
 ## Known issues
     Are there fundamental design limitations that users should be aware of?
-    Will add if found before due.
+    Currently no restart button functionality- users will have to click play from the IDE again.
     Are there specific bugs, glitches, or shortcomings that users should be aware of?
-    Will add if found before due.
+    Currently there is no safeguarding against asteroids at the respawn point- so if you lose a life, 
+    and there's an asteroid at the respawn position, you will lose another life.
 
 ## Societal impact
     Our game is currently inaccessible to visually-impaired or blind players.

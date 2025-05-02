@@ -147,6 +147,8 @@ public class UI {
          canvas.add(gameOverText);
          playerShip.removeFromCanvas(canvas);
          canvas.draw(); 
+         canvas.pause(5000);
+         canvas.closeWindow();
       }
    }
    

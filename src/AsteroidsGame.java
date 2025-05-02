@@ -26,7 +26,6 @@ public class AsteroidsGame {
         keyHandler = new KeyHandler();
         collisionManager = new CollisionManager(asteroidManager, projectileManager, playerShip, ui, canvas);
         createStartButton();
-        animateObjects();
     }
 
     /*
@@ -78,6 +77,7 @@ public class AsteroidsGame {
         Button startButton = new Button("S T A R T  G A M E");
         canvas.add(startButton,canvas.getWidth()/2.1,canvas.getHeight()/1.7);
         startButton.onClick(() -> {
+            animateObjects();
             playerShip.addToCanvas(canvas);
             ui.removeStartText();
             canvas.remove(startButton);    
