@@ -1,6 +1,6 @@
 # Asteroids Remake
 Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
-
+    ![Class Diagram](./FinalClassDiagram.png)
 ## System requirements
     This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications:
         Java: 17/21 installed
@@ -31,7 +31,7 @@ Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
 
     Score: Every time you hit a meteor (of any size), your score will go up by 20. Try to see how high you can get!
     
-    ![Class Diagram](./FinalClassDiagram.png)
+
 
 ## Acknowledgements
     This program was inspired by two versions of Asteroids: First, the original Atari game (1979, Lyle Rains/Ed Logg). And secondly,
