@@ -3,7 +3,7 @@ import edu.macalester.graphics.*;
 import edu.macalester.graphics.ui.Button;
 
 /*
- * Our main class. This is where we animate objects and also create the start button.
+ * Our main class. This is where we animate objects and create the start button.
  */
 public class AsteroidsGame {
     private static final int CANVAS_WIDTH = 1920;
@@ -23,7 +23,7 @@ public class AsteroidsGame {
         asteroidManager = new AsteroidManager(canvas);
         playerShip = new PlayerShip(canvas.getWidth()/2, canvas.getHeight()/2, canvas, projectileManager); 
         ui = new UI(canvas, playerShip);
-        keyHandler = new KeyHandler();
+        keyHandler = new KeyHandler(playerShip);
         collisionManager = new CollisionManager(asteroidManager, projectileManager, playerShip, ui, canvas);
         createStartButton();
     }
@@ -42,29 +42,7 @@ public class AsteroidsGame {
             asteroidManager.populateAsteroids();
             asteroidManager.updateAsteroids();
             collisionManager.checkAllCollisions();
-
-            if(keyHandler.upKey()){
-                playerShip.forward();
-            }
-
-            if (!keyHandler.upKey()){
-                playerShip.deaccelerate();
-            }
-
-            if(keyHandler.leftKey()){
-                playerShip.rotateLeft();
-            }
-            if(keyHandler.rightKey()){
-                playerShip.rotateRight();
-            }
-           
-            if(keyHandler.spaceKey()){ 
-                playerShip.fireBulletProjectile();
-            }
-
-            if(keyHandler.fKey()){ 
-                playerShip.fireBeamProjectile();
-            }
+            keyHandler.checkKeyPresses();
         });
     }
 

@@ -9,7 +9,6 @@ import edu.macalester.graphics.*;
  */
 public class AsteroidManager {
     private final long SPAWN_DELAY = 1000;
-    private int side;
     private long time = System.currentTimeMillis();
     private CanvasWindow canvas;
     private ArrayList<Asteroid> asteroidList = new ArrayList<>();
@@ -30,7 +29,7 @@ public class AsteroidManager {
      * nice looking angles).
      */
     public void generateAsteroids(){    
-        side = random.nextInt(1,5);
+        int side = random.nextInt(1,5);
             if(side == 1){ 
                 asteroid = (new Asteroid((random.nextDouble(0,canvas.getWidth())), -30, random.nextDouble(-97,-95), random.nextDouble(50,80), canvas));
             }
@@ -71,7 +70,7 @@ public class AsteroidManager {
 
         /*
          * This method just handles generating asteroids at a given amount, along with maintaining a delay
-         * so as to not overwhelm the user.
+         * so as to not overwhelm the user. Currently a wave of asteroids is 5.
          */
         public void populateAsteroids(){
             long currentTime = System.currentTimeMillis();

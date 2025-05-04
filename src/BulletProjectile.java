@@ -15,9 +15,6 @@ public class BulletProjectile implements Projectile {
     private double initialY;
     private double angle;
  
-    /*
-     * This constructor takes in the rocketship x and y values and uses them to assign a location to the bullet.
-     */
     public BulletProjectile(double initialX, double initialY, double angle, CanvasWindow canvas){
         this.canvas = canvas;
         this.initialX = initialX;

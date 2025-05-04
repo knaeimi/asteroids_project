@@ -8,15 +8,15 @@ import edu.macalester.graphics.GraphicsText;
  * Sets UI and manages score/game over text.
  */
 public class UI {
+   private CanvasWindow canvas;
    private ArrayList<RocketShip> rocketList;
    private RocketShip rocket1, rocket2, rocket3;
+   private PlayerShip playerShip;
    private GraphicsText scoreText;
    private GraphicsText gameOverText;
    private GraphicsText noLivesText;
    private GraphicsText gameStartText;
    private int score = 0;
-   private CanvasWindow canvas;
-   private PlayerShip playerShip;
    private int lives = 3;
 
    public UI(CanvasWindow canvas, PlayerShip playerShip){
@@ -70,20 +70,6 @@ public class UI {
    }
 
    /*
-    * Getter method that returns number of lives.
-    */
-   public int getLives() {
-      return lives;
-   }
-
-   /*
-    * Getter method that returns the score number.
-    */
-    public int getScore() {
-      return score;
-   }
-
-   /*
     * For CollisionManager to use with ship collisions
     * Used in CollisionManager to decrement lives until 0, in which case the game closes.
     */
@@ -105,6 +91,20 @@ public class UI {
       addRockets();
       setScoreText();
       setGameStartText();
+   }
+
+   /*
+    * Getter for tests.
+    */
+    public int getLives() {
+      return lives;
+   }
+
+   /*
+    * Another getter for tests.
+    */
+    public int getScore() {
+      return score;
    }
 
    /*

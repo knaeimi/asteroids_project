@@ -4,31 +4,45 @@ import edu.macalester.graphics.events.KeyboardEvent;
 
 /*
  * This class handles taking in inputs for keys. We use booleans to represent whether a key is currently pressed or not.
- * Thank you StackOverflow for the concept. We have getters for the state of each key along with methods
- * to change their state on keyPress/keyRelease.
+ * Thank you StackOverflow for the concept. We have methods for each key
+ * to change state on keyPress/keyRelease.
  */
 public class KeyHandler{
     private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed;
     private Key pressedKey, releasedKey;
-    
-    public boolean upKey(){
-        return upPressed;
+    private PlayerShip playerShip;
+
+    public KeyHandler(PlayerShip playerShip){
+        this.playerShip = playerShip;
     }
 
-    public boolean leftKey(){
-        return leftPressed;
-    }
+    /*
+     * Called in the main class's animation loop to constantly check for user input.
+     */
+    public void checkKeyPresses(){
+        if(upPressed){
+            playerShip.forward();
+        }
 
-    public boolean rightKey(){
-        return rightPressed;
-    }
+        if (!upPressed){
+            playerShip.deaccelerate();
+        }
 
-    public boolean spaceKey(){
-        return spacePressed;
-    }
+        if(leftPressed){
+            playerShip.rotateLeft();
+        }
+        if(rightPressed){
+            playerShip.rotateRight();
+        }
+       
+        if(spacePressed){ 
+            playerShip.fireBulletProjectile();
+        }
 
-    public boolean fKey(){
-        return fPressed;
+        if(fPressed){ 
+            playerShip.fireBeamProjectile();
+        }
+
     }
 
     /*

@@ -21,7 +21,7 @@ public class PlayerShip extends RocketShip{
      * For our PlayerShip, we take in an initial x and y position for the ship, and use them to calculate the other two points 
      * for the triangle. We also have a rotation angle variable (initially 90 for the ship to travel in the correct direction) that tracks
      * left/right rotation of the ship. Finally, we have an invisible hit circle (that was not so at first... had it in red for a while
-     * to figure out what a good size would be for collisions) that is used to determine if a asteroid collision
+     * to figure out what a good size would be for collisions) that is used to determine if an asteroid collision
      * has occured.
      */
     public PlayerShip(double initialX, double initialY, CanvasWindow canvas, ProjectileManager projectileManager){

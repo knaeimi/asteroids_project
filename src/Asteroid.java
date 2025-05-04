@@ -26,7 +26,7 @@ public class Asteroid {
 
     /*
      * Updates position of asteroid by modifying centerX and centerY 
-     * and using new values with the Asteroid.setCenter() method
+     * and then setting the new center point.
      */
     public void updatePosition() {
         centerX += ASTEROID_SPEED * Math.cos(angle);
