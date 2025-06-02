@@ -1,20 +1,9 @@
 # Asteroids Remake
-Created by Kian Naeimi, Sean Sweeney, and Sam Kennedy
+Created by Kian Naeimi with help from Sean Sweeney and Sam Kennedy.
 
 ## Brief Description
  We recreated the classic arcade game Asteroids with a few changes. The goal of the game is simple: Utilize beams (F Key), bullets (Space-Bar), and physics-based traversal (Up-Key to apply a forward vector, Left/Right keys to change the direction of that vector) 
  to survive endless asteroids.
-
-## System requirements
-This game was designed with a standard 1920 by 1080 pixel screen in mind, but feel free to adjust the canvas dimensions to your liking. It's also not graphically intensive by any metric, so if you meet these minimum specifications:
-Java: 17/21 installed,
-OS: Windows 7 (64-bit) or newer, macOS 10.10 or newer, any mainstream Linux distro,
-CPU: Dual core @ 1.6 GHz or newer,
-Graphics: Integrated graphics or better,
-RAM: ~1 GB for the JVM, 
-Storage: 50-100 MB free,
-
-You'll be golden. 
 
 ## Running the program
 To launch the game, navigate to AsteroidsGame.java and run the main method by hitting the 'Run Java' button in the top right corner of the
@@ -55,9 +44,4 @@ a short period of time.
 Currently no restart button functionality- users will have to click play from the IDE again.
 There is also no safeguarding against asteroids at the respawn point- so if you lose a life, 
 and there's an asteroid at the respawn position, you will lose another life.
-
-## Societal impact
-Our game is currently inaccessible to visually-impaired or blind players.
-This is because it does not use sound effects and is designed around the player's ability to see what is happening onscreen.
-Our game also requires keyboard input, so those unable to press keys will require an accessibility aid to play.
 

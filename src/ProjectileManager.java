@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import edu.macalester.graphics.CanvasWindow;
 
 /*

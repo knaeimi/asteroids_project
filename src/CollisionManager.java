@@ -1,4 +1,3 @@
-
 import java.util.List;
 import edu.macalester.graphics.CanvasWindow;
 import java.awt.Color;
