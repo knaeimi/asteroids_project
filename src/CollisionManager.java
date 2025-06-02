@@ -1,8 +1,6 @@
 
 import java.util.List;
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.ui.Button;
-
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -32,7 +30,6 @@ public class CollisionManager {
      * Before then, we check for intersections, and also add points to the score. We break so a given
      * projectile is only marked for removal once (otherwise... no such element errors). Finally, we use
      * two for-each loops to delete elements from the removal lists.
-     * 
      * 
      */
     public void checkProjectileCollisions() {

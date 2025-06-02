@@ -49,7 +49,7 @@ public class BeamProjectile implements Projectile {
      * We create points from the Asteroid/Beam to use our beam collision check method. 
      */
     public boolean intersects(Asteroid asteroid){ 
-       Point P0 = new Point(initialX, initialY);
+       Point P0 =  new Point(initialX, initialY);
        double endX = initialX + Math.cos(angle) * beamLength;
        double endY = initialY - Math.sin(angle) * beamLength;
        Point P1 = new Point(endX, endY);
@@ -159,5 +159,3 @@ public class BeamProjectile implements Projectile {
         return beamShape.getCenter().getY();
     }
 }
-
- 

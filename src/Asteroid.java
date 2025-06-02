@@ -5,7 +5,7 @@ import edu.macalester.graphics.*;
  * This class handles the creation of the asteroid objects, as well as movement/wrap around math.
  */
 public class Asteroid {
-    private static final double ASTEROID_SPEED = 4;
+    private static final double ASTEROID_SPEED = 5;
     private double centerX;
     private double centerY;
     private double angle;
