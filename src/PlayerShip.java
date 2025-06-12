@@ -160,4 +160,23 @@ public class PlayerShip extends RocketShip{
             time = currentTime;
         }
     }
+
+    public void fireSpreadProjectile(){
+        long currentTime = System.currentTimeMillis();
+            if (currentTime - time > SHOT_DELAY){
+                projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
+                rotationAngle);
+                
+                for(int i = 0; i < 4; i++){
+                   projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
+                rotationAngle - (100 * i));
+                }
+
+                 for(int i = 0; i < 4; i++){
+                   projectileManager.addBulletProjectile(getCenterX(), getCenterY() - getSideLength()/2, 
+                rotationAngle + (100 * i));
+                }
+                time = currentTime;
+            }
+    }
 }

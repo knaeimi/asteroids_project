@@ -7,7 +7,7 @@ import edu.macalester.graphics.events.KeyboardEvent;
  * to change state on keyPress/keyRelease.
  */
 public class KeyHandler{
-    private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed;
+    private boolean upPressed, leftPressed, rightPressed, spacePressed, fPressed, qPressed;
     private Key pressedKey, releasedKey;
     private PlayerShip playerShip;
 
@@ -41,6 +41,9 @@ public class KeyHandler{
         if(fPressed){ 
             playerShip.fireBeamProjectile();
         }
+        if(qPressed){
+            playerShip.fireSpreadProjectile();
+        }
 
     }
 
@@ -64,6 +67,9 @@ public class KeyHandler{
         if (pressedKey == Key.F){
             fPressed = true;
         }
+        if (pressedKey == Key.Q){
+            qPressed = true;
+        }
     }
 
     /*
@@ -85,6 +91,9 @@ public class KeyHandler{
         }  
         if (releasedKey == Key.F){
             fPressed = false;
+        }
+        if (releasedKey == Key.Q){
+            qPressed = false;
         }
     }
 }

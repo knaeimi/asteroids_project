@@ -58,6 +58,7 @@ public class CollisionManager {
 
         for (Asteroid asteroid : asteroidsToRemove) {
             asteroidManager.removeAsteroid(asteroid);
+            break; //Without the break statement, the spread shot will add one asteroid to the list multiple times and cause a NoSuchElementException.
         }
     }
 
