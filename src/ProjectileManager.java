@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import edu.macalester.graphics.CanvasWindow;
 
 /*
@@ -15,18 +14,24 @@ public class ProjectileManager {
 
     /*
      * This method handles the removal of projectiles from the list of projectiles on the screen if update returns false (meaning a bullet is out of
-     * bounds), or in the case of the beam that enough time has ellapsed for removal. Thank you Marvin and
-     * Lewis for teaching me how to use iterators (concurrent modifications were happening without them)
+     * bounds), or in the case of the beam that enough time has ellapsed for removal. To avoid ConcurrentModificationExceptions, we 
+     * simply loop like normal through projectileList. But instead of removing elements from a list we're
+     * currently looping through... we just add the projectiles that are out of bounds to a list...
+     * and then loop through the removalList instead. This way we can always continue iterating through
+     * the list of projectiles (the elements in the list grow and aren't interrupted).
      */
     public void updateProjectiles(){
-        Iterator<Projectile> iterator = projectileList.listIterator();
-    
-        while(iterator.hasNext()){
-            Projectile currentProj = iterator.next();
-            if(!currentProj.updatePosition()){
-                canvas.remove(currentProj.getProjectileShape());
-                iterator.remove();
+       
+        ArrayList<Projectile> removalList = new ArrayList<Projectile>();
+        
+        for(Projectile projectile : projectileList){
+            if (!projectile.updatePosition()){
+                removalList.add(projectile);
             }
+        }
+                
+        for(Projectile markedProjectile : removalList){
+            removeProjectile(markedProjectile);
         }
     }
 
